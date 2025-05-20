@@ -20,6 +20,14 @@ image_list = [
     "https://paw.princeton.edu/sites/default/files/styles/hero_half/public/images/content/Einstein_ledeNew.jpg?h=94b2eb50&itok=UfyyS9zB",
 ]
 
+def random_quote():
+    quote = random.choice(quote_list)
+    return quote
+
+def random_image():
+    image = random.choice(image_list)
+    return image
+
 # Create your views here.
 def home_page(request):
     '''
@@ -32,6 +40,8 @@ def home_page(request):
     # a dict of key/value pairs, to be available for use in template
     context = {
         'current_time': time.ctime(),
+        'chosen_quote': random_quote(),
+        'chosen_image': random_image(),
     }
 
     return render(request, template, context)
@@ -47,6 +57,8 @@ def quote(request):
     # a dict of key/value pairs, to be available for use in template
     context = {
         'current_time': time.ctime(),
+        'chosen_quote': random_quote(),
+        'chosen_image': random_image(),
     }
 
     return render(request, template, context)
@@ -77,6 +89,8 @@ def show_all(request):
     # a dict of key/value pairs, to be available for use in template
     context = {
         'current_time': time.ctime(),
+        'all_quotes': quote_list,
+        'all_images': image_list,
     }
 
     return render(request, template, context)
