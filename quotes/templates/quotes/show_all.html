@@ -4,6 +4,16 @@
     <h1>All of The Quotes</h1>
     
     <p>This is where all of the quotes will appear</p>
+
+    <ul>
+        {% for quote in all_quotes %}
+        <li>{{quote}}</li>
+        {% endfor %}
+    </ul>
+
+    {% for image in all_images %}
+    <img src={{image}}>
+    {% endfor %}
 </div>
 
 {% endblock %}
