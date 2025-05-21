@@ -1,9 +1,19 @@
+# File: quotes/views.py
+# Author: Steven Phung (sphung01@bu.edu), 5/20/2025
+# Description: This file handles web requests for the
+# 'quotes' app. Each function returns/renders a template
+# along with the current time and the random quote/image
+# of Albert Einstein
+
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 
 import time
 import random
 
+"""
+Contains a list of Albert Einstein's quotes
+"""
 quote_list = [
     "Life is like riding a bicycle. To keep your balance, you must keep moving.",
     "Look deep into nature, then you will understand everything better.",
@@ -12,6 +22,9 @@ quote_list = [
     "The hardest thing to understand in the world is the income tax",
 ]
 
+"""
+Contains a list of Albert Einstein's images
+"""
 image_list = [
     "https://hips.hearstapps.com/hmg-prod/images/albert-einstein-sticks-out-his-tongue-when-asked-by-news-photo-1681316749.jpg?crop=1.00xw:0.956xh;0,0.0437xh&resize=980:*",
     "https://see-sciencecenter.org/wp-content/uploads/2022/11/Einstein.jpg",
@@ -21,10 +34,18 @@ image_list = [
 ]
 
 def random_quote():
+    """
+        This function randomly chooses one quote from the 'quote_list'
+        and returns that quote to display to the user.
+    """
     quote = random.choice(quote_list)
     return quote
 
 def random_image():
+    """
+        This function randomly chooses one image from the 'image_list'
+        and returns that image to display to the user.
+    """
     image = random.choice(image_list)
     return image
 
@@ -32,6 +53,14 @@ def random_image():
 def home_page(request):
     '''
         Defines a view to show the 'home.html'
+
+        Return:
+            - A render function that will return the response to the user
+              that contains the finalized rendered HTML:
+                - The template of the 'home.html'
+                - The current time
+                - A randomly chosen quote
+                - A randomly chosen image
     '''
 
     # the template to which we will delegate the work
@@ -49,6 +78,14 @@ def home_page(request):
 def quote(request):
     '''
         Defines a view to show the 'quote.html'
+
+        Return:
+            - A render function that will return the response to the user
+              that contains the finalized rendered HTML:
+                - The template of the 'quote.html'
+                - The current time
+                - A randomly chosen quote
+                - A randomly chosen image
     '''
 
     # the template to which we will delegate the work
@@ -66,6 +103,12 @@ def quote(request):
 def about(request):
     '''
         Defines a view to show the 'about.html'
+
+        Return:
+            - A render function that will return the response to the user
+              that contains the finalized rendered HTML:
+                - The template of the 'about.html'
+                - The current time
     '''
 
     # the template to which we will delegate the work
@@ -81,6 +124,14 @@ def about(request):
 def show_all(request):
     '''
         Defines a view to show the 'show_all.html'
+
+        Return:
+            - A render function that will return the response to the user
+              that contains the finalized rendered HTML:
+                - The template of the 'show_all.html'
+                - The current time
+                - A list of quotes
+                - A list of images
     '''
 
     # the template to which we will delegate the work

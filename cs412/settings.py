@@ -1,6 +1,6 @@
 # File: cs412/settings.py
 # Author: Steven Phung (sphung01@bu.edu), 5/20/2025
-# Description: Django settings file for cs412 projects. Configures installed apps, 
+# Description: The Django settings file is responsible for installed apps, 
 # database (SQLite), static and media file handling, and deployment behavior for both 
 # local development and the BU CS webapps server.
 
@@ -131,17 +131,28 @@ USE_TZ = True
 This part configures how static and media files are handled.
 """
 
+# A URL to access the static files
 STATIC_URL = '/static/'
+
+# A path to where the static files will be collected if we use 'django manage.py collectstatic'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Directories where Django will look for static files
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+# A path to uploaded media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# A URL to access the media files 
 MEDIA_URL= "/media/"
 
+# The hostname used when deploying to the CS department's web server
 CS_DEPLOYMENT_HOSTNAME = 'cs-webapps.bu.edu'
 
+# If running on the CS department's deployment server,
+# adjust the STATIC_URL and MEDIA_URL to include my BU username
 if socket.gethostname() == CS_DEPLOYMENT_HOSTNAME:
     STATIC_URL = '/sphung01/static/'
     MEDIA_URL = '/sphung01/media/'

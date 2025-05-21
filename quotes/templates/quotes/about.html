@@ -1,9 +1,20 @@
+<!--
+    File: quotes/templates/quotes/about.html
+    Author: Steven Phung (sphung01@bu.edu), 5/20/2025
+    Description: An 'About Page' that displays brief
+    descriptions about the website.
+-->
+
+<!-- Will have the layout from base.html -->
 {% extends 'quotes/base.html' %}
 {% block content %}
-<main class="about_page">
+<div class="about_page">
+    <!-- Title of the page -->
     <h1>About Page</h1>
 
+    <!-- A container that wraps the contents of the page -->
     <div class="about-container">
+        <!-- Each content has their own container for styling purposes-->
         <div class="about-content">
             <h1>Welcome!</h1>
             <p>
@@ -39,5 +50,5 @@
         </div>
     </div>
 
-</main>
+</div>
 {% endblock %}

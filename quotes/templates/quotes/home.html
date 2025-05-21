@@ -1,9 +1,22 @@
+<!--
+    File: quotes/templates/quotes/home.html
+    Author: Steven Phung (sphung01@bu.edu), 5/20/2025
+    Description: A home page that displays a random quote
+    and a random picture of Albert Einstein.
+-->
+
+<!-- Will have the layout from base.html -->
 {% extends 'quotes/base.html' %}
 {% block content %}
-<main class="quote_page">
+<div class="quote_page">
+
+    <!-- Title of the page -->
     <h1>Albert Einstein's Quote of The Day</h1>
 
+    <!-- Wraps the quote and image -->
     <div class="quote_container">
+
+        <!-- Displays a quote from Albert Einstein -->
         <div class="quote_content">
             <h2>
                 Quote:
@@ -11,9 +24,12 @@
             <p>{{chosen_quote}}</p>
         </div>
     
+        <!-- Displays an image of Albert Einstein -->
         <div>
             <img src={{chosen_image}} alt="Picture of Albert Einstein">
         </div>
+
     </div>
-</main>
+
+</div>
 {% endblock %}

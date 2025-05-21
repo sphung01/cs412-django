@@ -1,7 +1,8 @@
 # File: cs412/urls.py
 # Author: Steven Phung (sphung01@bu.edu), 5/20/2025
 # Description: This file is responsible for creating routes
-# for the website. 
+# in the URL. The "urlpatterns" contain paths that leads
+# to different projects.
 
 """
 URL configuration for cs412 project.
@@ -24,6 +25,14 @@ from django.urls import path, include
 import hw
 import quotes
 
+"""
+URL configuration
+
+Routes:
+- /admin/   -> Paths to the "admin" interface
+- /hw/      -> Paths to the "hw" example with URLs included
+- /quotes/  -> Paths to the "quotes" website with URLs included
+"""
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("hw/", include("hw.urls")),

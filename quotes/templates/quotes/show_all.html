@@ -1,10 +1,26 @@
+<!--
+    File: quotes/templates/quotes/show_all.html
+    Author: Steven Phung (sphung01@bu.edu), 5/20/2025
+    Description: A page that displays all of the quotes and 
+    images based on Albert Einstein.
+-->
+
+<!-- Will have the layout from base.html -->
 {% extends 'quotes/base.html' %}
 {% block content %}
-<main class="all_quotes_page">
+<div class="all_quotes_page">
+
+    <!-- Title of the page -->
     <h1>All of The Quotes</h1>
     
+    <!-- Wrapper for all quotes that exists in the list -->
     <div class="all_quotes_container">
         <h2>List of Quotes</h2>
+
+        <!-- 
+            Uses Django script to loop through all the quotes in the
+            'all_quotes' list. Then shows the list of them.
+        -->
         <ul class="all_quotes">
             {% for quote in all_quotes %}
             <li class="quote">"{{quote}}"</li>
@@ -12,13 +28,21 @@
         </ul>
     </div>
 
+    <!-- Wrapper for all of the images -->
     <div>
         <h2>List of Images</h2>
+
+        <!-- 
+            Uses Django script to loop through all the images
+            of Albert Einsteing in the 'all_images' list. 
+            Then shows the list of them.
+        -->
         <div>
             {% for image in all_images %}
             <img src={{image}} alt="Picture of Albert Einstein" class="all_images">
             {% endfor %}
         </div>
     </div>
-</main>
+
+</div>
 {% endblock %}

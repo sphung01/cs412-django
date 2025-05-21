@@ -1,16 +1,26 @@
+<!--
+    File: quotes/templates/quotes/base.html
+    Author: Steven Phung (sphung01@bu.edu), 5/20/2025
+    Description: A base/layout for every existing page in the 'quotes' app.
+-->
+
 {% load static %}
 <html>
     <head>
-        <title>Quote of The Day</title>
-        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <title>Albert Einstein Quote Website</title>
+        <link rel="stylesheet" href="{% static 'quotes_styles.css' %}">
     </head>
+
     <body>
 
         <div class="page_wrapper">
+
+            <!-- Header/Title of the website -->
             <header>
                 <h1>Albert Einstein Quote Website</h1>
             </header>
     
+            <!-- A navigation bar -->
             <nav>
                 <ul>
                     <li><a href="{% url 'quote' %}">Quote of The Day</a></li>
@@ -19,11 +29,14 @@
                 </ul>
             </nav>
 
+            <!-- The main content in each page -->
             <main>
+                <!-- The block content will contain all of the HTML files and then display to user -->
                 {% block content %}
                 {% endblock %}
             </main>
 
+            <!-- A footer at the bottom of the page -->
             <footer>
                 Page was created by sphung01@bu.edu (The current time is {{current_time}}).
             </footer>
