@@ -1,3 +1,9 @@
+# File: cs412/settings.py
+# Author: Steven Phung (sphung01@bu.edu), 5/20/2025
+# Description: Django settings file for cs412 projects. Configures installed apps, 
+# database (SQLite), static and media file handling, and deployment behavior for both 
+# local development and the BU CS webapps server.
+
 """
 Django settings for cs412 project.
 
@@ -39,8 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'hw', #NEW
-    'quotes', #NEW
+    'hw', # Installed an app of the example
+    'quotes', # Installed an app of the "Quote of The Day" website
 ]
 
 MIDDLEWARE = [
@@ -61,6 +67,8 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
+            # 'string_if_invalid' displays a warning on website 
+            # if the variable in the {{%s}} is missing
             'string_if_invalid' : 'WARNING: {{%s}} not a valid context variable.',
             'context_processors': [
                 'django.template.context_processors.request',
@@ -119,6 +127,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+"""
+This part configures how static and media files are handled.
+"""
+
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
@@ -126,7 +138,7 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-MEDIA_URL= "/media/"  # note: no leading slash!
+MEDIA_URL= "/media/"
 
 CS_DEPLOYMENT_HOSTNAME = 'cs-webapps.bu.edu'
 

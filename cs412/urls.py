@@ -1,3 +1,8 @@
+# File: cs412/urls.py
+# Author: Steven Phung (sphung01@bu.edu), 5/20/2025
+# Description: This file is responsible for creating routes
+# for the website. 
+
 """
 URL configuration for cs412 project.
 
@@ -20,7 +25,7 @@ import hw
 import quotes
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("sphung01/", admin.site.urls),
     path("hw/", include("hw.urls")),
     path("quotes/", include("quotes.urls")),
 ]
