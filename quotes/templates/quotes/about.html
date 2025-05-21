@@ -1,8 +1,43 @@
 {% extends 'quotes/base.html' %}
 {% block content %}
-<div>
+<main class="about_page">
     <h1>About Page</h1>
 
-    <p>This page will talk about what the website is about</p>
-</div>
+    <div class="about-container">
+        <div class="about-content">
+            <h1>Welcome!</h1>
+            <p>
+                Welcome to Albert Einstein's Quote of The Day Website
+            </p>
+        </div>
+    
+        <div class="about-content">
+            <h1>What is the website even about?</h1>
+            <p>
+                Well that part is obvious! Each time you enter this website, you will be given
+                a quote and image from Albert Einstein himself! If you want, you can check the
+                "All Quotes From Albert Einstein" page. It'll show you all the images and quotes!
+            </p>
+        </div>
+
+        <div class="about-content">
+            <h1>How was this website made?</h1>
+            <p>
+                This website was made with Django, HTML, and CSS.
+            </p>
+        </div>
+
+        <div class="about-content">
+            <h1>Who is Albert Einstein?</h1>
+            <p>
+                Albert Einstein was a German-born theoretical physicist who revolutionized physics with 
+                his theory of relativity and contributions to quantum mechanics. 
+                His famous equation, E = mc2, derived from special relativity, expresses the equivalence of mass and energy. 
+                Einstein's work helped scientists understand the universe and how it works. 
+                He also contributed to the development of cosmology, believing the universe could expand and contract. 
+            </p>
+        </div>
+    </div>
+
+</main>
 {% endblock %}

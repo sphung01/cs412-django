@@ -1,12 +1,19 @@
 {% extends 'quotes/base.html' %}
 {% block content %}
-<div>
+<main class="quote_page">
     <h1>Albert Einstein's Quote of The Day</h1>
 
-    <p>This page is where his quotes will be</p>
-
-    <p>{{chosen_quote}}</p>
-
-    <img src={{chosen_image}} alt="Picture of Albert Einstein">
-</div>
+    <div class="quote_container">
+        <div class="quote_content">
+            <h2>
+                Quote:
+            </h2>
+            <p>{{chosen_quote}}</p>
+        </div>
+    
+        <div>
+            <img src={{chosen_image}} alt="Picture of Albert Einstein">
+        </div>
+    </div>
+</main>
 {% endblock %}

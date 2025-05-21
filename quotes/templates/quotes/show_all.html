@@ -1,18 +1,24 @@
 {% extends 'quotes/base.html' %}
 {% block content %}
-<div>
+<main class="all_quotes_page">
     <h1>All of The Quotes</h1>
     
-    <p>This is where all of the quotes will appear</p>
+    <div class="all_quotes_container">
+        <h2>List of Quotes</h2>
+        <ul class="all_quotes">
+            {% for quote in all_quotes %}
+            <li class="quote">"{{quote}}"</li>
+            {% endfor %}
+        </ul>
+    </div>
 
-    <ul>
-        {% for quote in all_quotes %}
-        <li>{{quote}}</li>
-        {% endfor %}
-    </ul>
-
-    {% for image in all_images %}
-    <img src={{image}} alt="Picture of Albert Einstein">
-    {% endfor %}
-</div>
+    <div>
+        <h2>List of Images</h2>
+        <div>
+            {% for image in all_images %}
+            <img src={{image}} alt="Picture of Albert Einstein" class="all_images">
+            {% endfor %}
+        </div>
+    </div>
+</main>
 {% endblock %}

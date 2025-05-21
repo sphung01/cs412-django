@@ -5,21 +5,30 @@
         <link rel="stylesheet" href="{% static 'styles.css' %}">
     </head>
     <body>
-        <h1>Albert Einstein Quote Website</h1>
 
-        <nav>
-            <ul>
-                <li><a href="{% url 'quote' %}">Quote of The Day</a></li>
-                <li><a href="{% url 'about' %}">About</a></li>
-                <li><a href="{% url 'show_all' %}">All Quotes From Albert Einstein</a></li>
-            </ul>
-        </nav>
-            
-        {% block content %}
-        {% endblock %}
-        
-        <hr>
-        The current time is {{current_time}}.
+        <div class="page_wrapper">
+            <header>
+                <h1>Albert Einstein Quote Website</h1>
+            </header>
+    
+            <nav>
+                <ul>
+                    <li><a href="{% url 'quote' %}">Quote of The Day</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'show_all' %}">All Quotes From Albert Einstein</a></li>
+                </ul>
+            </nav>
+
+            <main>
+                {% block content %}
+                {% endblock %}
+            </main>
+
+            <footer>
+                Page was created by sphung01@bu.edu (The current time is {{current_time}}).
+            </footer>
+
+        </div>
 
     </body>
 </html>
