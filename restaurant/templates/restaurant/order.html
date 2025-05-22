@@ -7,12 +7,10 @@
 {% extends 'restaurant/base.html' %}
 {% block content %}
 <div>
-    <!-- Title of the page -->
-    <h1>Galley Grub</h1>
 
     <!-- A form for the customer to give an order -->
     <!-- Once the client submits, they will be taken to a confirmation page-->
-    <form action="{% url 'restaurant:confirmation' %}" method="POST" class="order_form">
+    <form action="{% url 'restaurant:confirmation' %}" method="POST">
         
         <!-- 
             The token ensures that request is made by an
@@ -20,31 +18,97 @@
         -->
         {% csrf_token %}
 
-        <div>
-            <h2>Burgers/Combos</h2>
-            <div>
-                <input type="checkbox" name="combo" id="combo_1">
-                <label for="combo_1">Krabby Patty</label>
+
+        <table>
+            <tr>
+                <th>
+                    <h1>Burgers/Combos</h1>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <label for="combo_1">Krabby Patty $2.00</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="combo" id="combo_1">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="combo_2">Krusty Combo $3.99</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="combo" id="combo_2">
+                </td>
+            </tr>
+                <td>
+                    <label for="combo_3">Krusty Deluxe $3.00</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="combo" id="combo_3">
+                </td>
+            </tr>
+        </table>
+
+        <div class="order_form">
+            <!-- Title of the page/menu -->
+            <h1>Galley Grub</h1>
+
+
+
+            <div class="combos">
+                <h2>Burgers/Combos</h2>
+                <div>
+                    <input type="checkbox" name="combo" id="combo_1">
+                    <label for="combo_1">Krabby Patty $2.00</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" name="combo" id="combo_2">
+                    <label for="combo_2">Krusty Combo $3.99</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" name="combo" id="combo_3">
+                    <label for="combo_3">Krusty Deluxe $3.00</label>
+                </div>
             </div>
 
-            <div>
-                <input type="checkbox" name="combo" id="combo_2">
-                <label for="combo_2">Krusty Combo</label>
+            <div class="sides">
+                <h2>Sides</h2>
+                <div>
+                    <input type="checkbox" name="side" id="side_1">
+                    <label for="side_1">Seaweed Salad $1.50</label>
+                </div>
+
+                <div>
+                    <input type="checkbox" name="side" id="side_2">
+                    <label for="side_2">Coral Bits $1.95</label>
+                </div>
             </div>
 
+
             <div>
-                <input type="checkbox" name="combo" id="combo_3">
-                <label for="combo_3">Krusty Deluxe</label>
+                <h2>Information</h2>
+
+                <div>
+                    <label for="name">*Name: </label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div>
+                    <label for="email">Email: </label>
+                    <input type="text" id="email" name="email">
+                </div>
+
+                <div>
+                    <label for="phone_number">Phone Number: </label>
+                    <input type="text" id="phone_number" name="phone_number">
+                </div>
             </div>
+
+            <input type="submit">
         </div>
-
-
-        <div>
-            <label for="name">Name: </label>
-            <input type="text" id="name" name="name" required>
-        </div>
-
-        <input type="submit">
     </form>
 </div>
 {% endblock %}
