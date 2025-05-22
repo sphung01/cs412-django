@@ -1,0 +1,53 @@
+<!--
+    File: restaurant/templates/restaurant/base.html
+    Author: Steven Phung (sphung01@bu.edu), 5/22/2025
+    Description: A base/layout for every existing page in the 'restaurant' app.
+-->
+
+{% load static %}
+<html>
+    <head>
+        <title>Krusty Krab</title>
+        <!-- Has access to the restaurant_styles.css file -->
+        <link rel="stylesheet" href="{% static 'restaurant_styles.css' %}">
+    </head>
+
+    <body>
+
+        <div class="page_wrapper">
+
+            <!-- Header/Title of the website -->
+            <header>
+                <h1>Main Page</h1>
+            </header>
+    
+            <!-- A navigation bar -->
+            <nav>
+                <ul>
+                    <!-- 
+                        After adding the 'app_name' in 'restaurant/urls.py',
+                        we can do 'quotes:(page name)' to keep the paths
+                        from colliding with other apps.
+                    -->
+                    <li><a href="{% url 'quotes:quote' %}">Home Page</a></li>
+                    <li><a href="{% url 'quotes:about' %}">About</a></li>
+                    <li><a href="{% url 'quotes:show_all' %}">All Quotes From Albert Einstein</a></li>
+                </ul>
+            </nav>
+
+            <!-- The main content in each page -->
+            <main>
+                <!-- The block content will contain all of the HTML files and then display to user -->
+                {% block content %}
+                {% endblock %}
+            </main>
+
+            <!-- A footer at the bottom of the page -->
+            <footer>
+                Page was created by sphung01@bu.edu (The current time is {{current_time}}).
+            </footer>
+
+        </div>
+
+    </body>
+</html>

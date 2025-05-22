@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'hw', # Installed an app for example 1
     'formdata', #Installed the 'formdata' app for example 2
     'quotes', # Installed an app of the "Quote of The Day" website (assignment 1)
+    'restaurant', #Installed an app for the "Krusty Krab" website (assignment 2)
 ]
 
 MIDDLEWARE = [

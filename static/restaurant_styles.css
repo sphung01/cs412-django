@@ -1,0 +1,16 @@
+/* 
+    File: static/restaurant_styles.css
+    Author: Steven Phung (sphung01@bu.edu), 5/22/2025
+    Description: This file is responsible for styling
+    the website to increase user experience for the 
+*/
+
+/* 
+    A universal selector that removes all margin
+    and adds box-sizing to avoid unexpected sizing issues
+*/
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
