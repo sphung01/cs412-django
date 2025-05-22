@@ -45,8 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'hw', # Installed an app of the example
-    'quotes', # Installed an app of the "Quote of The Day" website
+    'hw', # Installed an app for example 1
+    'formdata', #Installed the 'formdata' app for example 2
+    'quotes', # Installed an app of the "Quote of The Day" website (assignment 1)
 ]
 
 MIDDLEWARE = [

@@ -29,12 +29,14 @@ import quotes
 URL configuration
 
 Routes:
-- /admin/   -> Paths to the "admin" interface
-- /hw/      -> Paths to the "hw" example with URLs included
-- /quotes/  -> Paths to the "quotes" website with URLs included
+- /admin/    -> Paths to the "admin" interface
+- /hw/       -> Paths to the "hw" example with URLs included
+- /formdata/ -> Paths to the "formdata" example with URLs included
+- /quotes/   -> Paths to the "quotes" website with URLs included
 """
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("hw/", include("hw.urls")),
+    path("formdata/", include("formdata.urls")), 
     path("quotes/", include("quotes.urls")),
 ]
