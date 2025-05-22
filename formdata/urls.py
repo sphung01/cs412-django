@@ -6,4 +6,5 @@ app_name = 'formdata'
 
 urlpatterns = [ 
     path(r'', views.show_form, name="show_form"),
+    path(r'submit', views.submit, name="submit"), ## new
 ]
