@@ -1,0 +1,32 @@
+<!--
+    File: restaurant/templates/restaurant/main.html
+    Author: Steven Phung (sphung01@bu.edu), 5/22/2025
+    Description: A page that displays a picture of Mr. Krabs and 
+    his quote
+-->
+
+{% extends 'restaurant/base.html' %}
+{% block content %}
+<div>
+
+    <!-- Title of the page -->
+    <h1>
+        Welcome To The Krusty Krab!
+    </h1>
+    <!-- Title of the page (END) -->
+
+    <!-- Image of Mr. Krabs -->
+    <div>
+        <img src="{{mr_krabs_image}}" alt="Picture of Mr. Krabs" class="mr_krabs">
+    </div>
+    <!-- Image of Mr. Krabs (END) -->
+
+    <!-- Paragraph of what Mr. Krabs would say -->
+    <p class="mr_krabs_quote">
+        Hello! I'm Eugene Krabs! And I like money! Come and eat at the Krusty Krab,
+        where we serve the best Krabby Patties in Bikini Bottom! 
+    </p>
+    <!-- Paragraph of what Mr. Krabs would say (END)-->
+
+</div>
+{% endblock %}

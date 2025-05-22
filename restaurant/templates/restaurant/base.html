@@ -16,24 +16,25 @@
 
         <div class="page_wrapper">
 
-            <!-- Header/Title of the website -->
+            <!-- Header of the website -->
             <header>
-                <h1>Main Page</h1>
+                <h1>Krusty Krab</h1>
             </header>
+            <!-- Header/Title of the website (END) -->
     
             <!-- A navigation bar -->
             <nav>
                 <ul>
                     <!-- 
                         After adding the 'app_name' in 'restaurant/urls.py',
-                        we can do 'quotes:(page name)' to keep the paths
+                        we can do 'restaurant:(page name)' to keep the paths
                         from colliding with other apps.
                     -->
-                    <li><a href="{% url 'quotes:quote' %}">Home Page</a></li>
-                    <li><a href="{% url 'quotes:about' %}">About</a></li>
-                    <li><a href="{% url 'quotes:show_all' %}">All Quotes From Albert Einstein</a></li>
+                    <li><a href="{% url 'restaurant:main' %}">Home Page</a></li>
+                    <li><a href="{% url 'restaurant:order' %}">Order/Menu</a></li>
                 </ul>
             </nav>
+            <!-- A navigation bar (END) -->
 
             <!-- The main content in each page -->
             <main>
@@ -41,11 +42,13 @@
                 {% block content %}
                 {% endblock %}
             </main>
+            <!-- The main content in each page (END) -->
 
             <!-- A footer at the bottom of the page -->
             <footer>
                 Page was created by sphung01@bu.edu (The current time is {{current_time}}).
             </footer>
+            <!-- A footer at the bottom of the page (END) -->
 
         </div>
 

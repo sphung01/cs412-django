@@ -1,0 +1,50 @@
+<!--
+    File: restaurant/templates/restaurant/order.html
+    Author: Steven Phung (sphung01@bu.edu), 5/22/2025
+    Description: A page that displays a picture of M.
+-->
+
+{% extends 'restaurant/base.html' %}
+{% block content %}
+<div>
+    <!-- Title of the page -->
+    <h1>Galley Grub</h1>
+
+    <!-- A form for the customer to give an order -->
+    <!-- Once the client submits, they will be taken to a confirmation page-->
+    <form action="{% url 'restaurant:confirmation' %}" method="POST" class="order_form">
+        
+        <!-- 
+            The token ensures that request is made by an
+            actual user and avoids malicious scripts.
+        -->
+        {% csrf_token %}
+
+        <div>
+            <h2>Burgers/Combos</h2>
+            <div>
+                <input type="checkbox" name="combo" id="combo_1">
+                <label for="combo_1">Krabby Patty</label>
+            </div>
+
+            <div>
+                <input type="checkbox" name="combo" id="combo_2">
+                <label for="combo_2">Krusty Combo</label>
+            </div>
+
+            <div>
+                <input type="checkbox" name="combo" id="combo_3">
+                <label for="combo_3">Krusty Deluxe</label>
+            </div>
+        </div>
+
+
+        <div>
+            <label for="name">Name: </label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <input type="submit">
+    </form>
+</div>
+{% endblock %}

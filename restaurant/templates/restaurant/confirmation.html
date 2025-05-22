@@ -1,0 +1,21 @@
+<!--
+    File: restaurant/templates/restaurant/confirmation.html
+    Author: Steven Phung (sphung01@bu.edu), 5/22/2025
+    Description: After the client has placed their order,
+    they will be sent to a 'confirmation' page with the chosen
+    items, information, and ready time
+-->
+
+{% extends 'restaurant/base.html' %}
+{% block content %}
+<div>
+    <p>This is where the confirmation page goes</p>
+
+    <p>
+        <strong>Name: </strong> {{name}}
+    </p>
+    <p>
+        <strong>Your order will be ready by: </strong> {{expected_time}}
+    </p>
+</div>
+{% endblock %}
