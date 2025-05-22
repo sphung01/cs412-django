@@ -23,6 +23,11 @@
             <!-- A navigation bar -->
             <nav>
                 <ul>
+                    <!-- 
+                        After adding the 'app_name' in 'quotes/urls.py',
+                        we can do 'quotes:(page name)' to keep the paths
+                        from colliding with other apps.
+                    -->
                     <li><a href="{% url 'quotes:quote' %}">Quote of The Day</a></li>
                     <li><a href="{% url 'quotes:about' %}">About</a></li>
                     <li><a href="{% url 'quotes:show_all' %}">All Quotes From Albert Einstein</a></li>

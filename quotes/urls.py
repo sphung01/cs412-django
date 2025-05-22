@@ -23,6 +23,11 @@ This line serves all of the static files (CSS, Javascript, Images) to the projec
 during the deployment.
 """
 
+# This 'app_name' is helpful and avoids user from
+# navigating to a different app and built into Django's
+# namespaced URL routing system. Due to both 'hw' and 'quotes'
+# app that have same name of the HTML files, the user will accidentally
+# go to another app. Common issue when using Django.
 app_name = 'quotes'
 
 urlpatterns = [
