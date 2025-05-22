@@ -22,6 +22,9 @@ Routes:
 This line serves all of the static files (CSS, Javascript, Images) to the project
 during the deployment.
 """
+
+app_name = 'quotes'
+
 urlpatterns = [
     path(r'', views.home_page, name="home"),
     path(r'quote', views.quote, name="quote"),
