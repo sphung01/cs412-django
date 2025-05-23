@@ -11,49 +11,86 @@
 <div>
 
     <div class="order-container">
+
+        <!-- Title of the page -->
         <h1>Confirmation</h1>
+        <!-- Title of the page (END) -->
+
+
+        <!-- Name of the customer -->
         <div class="order-info">
             <strong>Name: </strong> {{name}}
         </div>
+        <!-- Name of the customer (END) -->
 
+        <!-- Customer's Email -->
         <div class="order-info">
+
+            <!-- If the customer inputted a string in 'email', display it -->
             {% if email %}
                 <strong>Email: </strong> {{email}}
+            <!-- Otherwise, display 'N/A' if empty string -->
             {% else %}
                 <strong>Email: </strong> N/A
+            <!-- End of the if-statement -->
             {% endif %}
-        </div>
 
+        </div>
+        <!-- Customer's Email (END) -->
+
+        <!-- Customer's Phone Number -->
         <div class="order-info">
+
+            <!-- If the customer inputted a string in 'phone_number', display it -->
             {% if phone_number %}
                 <strong>Phone Number: </strong> {{phone_number}}
+            <!-- Otherwise, display 'N/A' if empty string -->
             {% else %}
                 <strong>Phone Number: </strong> N/A
+            <!-- End of the if-statement -->
             {% endif %}
-        </div>
 
+        </div>
+        <!-- Customer's Phone Number (END) -->
+
+        <!-- All items the customer has chose -->
         <div class="order-info">
+
+            <!-- Loops through every item in 'chosen_items' list. -->
+            <!-- Then displays all of it. -->
             <strong>Confirmed Orders: </strong>
             {% for item in chosen_items %}
             <div><p>{{item}}</p></div>
+            <!-- End of the for loop -->
             {% endfor %}
-        </div>
 
+        </div>
+        <!-- All items the customer has chose (END) -->
+
+        <!-- Customer's special instructions -->
         <div class="order-info">
+            <!-- If the customer inputted a string in 'special_instructions', display it -->
             {% if special_instructions %}
                 <strong>Special Instructions: </strong> {{special_instructions}}
+            <!-- Otherwise, display 'N/A' if empty string -->
             {% else %}
                 <strong>Special Instructions: </strong> N/A
+            <!-- End of the if-statement -->
             {% endif %}
         </div>
+        <!-- Customer's special instructions (END) -->
 
+        <!-- Displays the total cost of all selected items -->
         <div class="order-info">
             <strong>Total cost: </strong> {{total_cost}}
         </div>
+        <!-- Displays the total cost of all selected items (END) -->
 
+        <!-- Displays expected time when the order is ready -->
         <div class="order-info">
             <strong>Your order will be ready by: </strong> {{expected_time}}
         </div>
+        <!-- Displays expected time when the order is ready (END) -->
 
     </div>
 

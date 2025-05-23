@@ -18,9 +18,6 @@ daily_special_list = [
     "Neptune's Feast",
 ]
 
-# This will keep track of the orders that the client gave
-order_list = []
-
 def get_daily_special():
     """
         This function will randomize the 'daily_special_list'
