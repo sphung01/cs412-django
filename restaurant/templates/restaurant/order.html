@@ -19,94 +19,139 @@
         {% csrf_token %}
 
 
-        <table>
-            <tr>
-                <th>
-                    <h1>Burgers/Combos</h1>
-                </th>
-            </tr>
-            <tr>
-                <td>
-                    <label for="combo_1">Krabby Patty $2.00</label>
-                </td>
-                <td>
-                    <input type="checkbox" name="combo" id="combo_1">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="combo_2">Krusty Combo $3.99</label>
-                </td>
-                <td>
-                    <input type="checkbox" name="combo" id="combo_2">
-                </td>
-            </tr>
-                <td>
-                    <label for="combo_3">Krusty Deluxe $3.00</label>
-                </td>
-                <td>
-                    <input type="checkbox" name="combo" id="combo_3">
-                </td>
-            </tr>
-        </table>
+        <div class="order-form">
 
-        <div class="order_form">
             <!-- Title of the page/menu -->
             <h1>Galley Grub</h1>
+            <!-- Title of the page/menu (END) -->
+
+            <!-- 'Burgers/Combo' Section -->
+            <table>
+
+                <h2 class="category">Burgers/Combos</h2>
+    
+                <tr>
+                    <td>
+                        <label for="combo_1">Krabby Patty $2.00</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="combo" id="combo_1" value="Krabby Patty|2.00">
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <label for="combo_2">Krusty Combo $3.99</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="combo" id="combo_2" value="Krusty Combo|3.99">
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <label for="combo_3">Krusty Deluxe $3.00</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="combo" id="combo_3" value="Krusty Deluxe|3.00">
+                    </td>
+                </tr>
+
+            </table>
+            <!-- 'Burgers/Combo' Section (END) -->
 
 
+            <!-- 'Sides' Section -->
+            <table>
 
-            <div class="combos">
-                <h2>Burgers/Combos</h2>
-                <div>
-                    <input type="checkbox" name="combo" id="combo_1">
-                    <label for="combo_1">Krabby Patty $2.00</label>
-                </div>
+                <h2 class="category">Sides</h2>
+    
+                <tr>
+                    <td>
+                        <label for="side_1">Seaweed Salad $1.50</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="side" id="side_1" value="Seaweed Salad|1.50">
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <label for="side_2">Coral Bits $1.95</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="side" id="side_2" value="Coral Bits|1.95">
+                    </td>
+                </tr>
 
-                <div>
-                    <input type="checkbox" name="combo" id="combo_2">
-                    <label for="combo_2">Krusty Combo $3.99</label>
-                </div>
+            </table>
+            <!-- 'Sides' Section (END) -->
 
-                <div>
-                    <input type="checkbox" name="combo" id="combo_3">
-                    <label for="combo_3">Krusty Deluxe $3.00</label>
-                </div>
-            </div>
+            <!-- 'Daily Special Item' Section -->
+            <table>
 
-            <div class="sides">
-                <h2>Sides</h2>
-                <div>
-                    <input type="checkbox" name="side" id="side_1">
-                    <label for="side_1">Seaweed Salad $1.50</label>
-                </div>
+                <h2 class="category">Daily Special Item</h2>
+    
+                <tr>
+                    <td>
+                        <label for="daily_item">{{daily_special_item}} $10.00</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" name="daily_item" id="daily_item" value="{{daily_special_item}}|10.00">
+                    </td>
+                </tr>
 
-                <div>
-                    <input type="checkbox" name="side" id="side_2">
-                    <label for="side_2">Coral Bits $1.95</label>
-                </div>
-            </div>
+            </table>
+            <!-- 'Daily Special Item' Section (END) -->
 
 
+            <!-- 'Special Instructions' Section -->
             <div>
-                <h2>Information</h2>
 
-                <div>
-                    <label for="name">*Name: </label>
-                    <input type="text" id="name" name="name" required>
-                </div>
+                <h2 class="category">Special Instructions</h2>
+                <textarea name="special_instructions"></textarea>
 
-                <div>
-                    <label for="email">Email: </label>
-                    <input type="text" id="email" name="email">
-                </div>
-
-                <div>
-                    <label for="phone_number">Phone Number: </label>
-                    <input type="text" id="phone_number" name="phone_number">
-                </div>
             </div>
+            <!-- 'Special Instructions' Section (END) -->
 
+    
+            <!-- 'Information' Section -->
+            <table>
+    
+                <h2 class="category">Information</h2>
+    
+                <tr>
+                    <td>
+                        <label for="name">*Name: </label>
+                    </td>
+                    <td>
+                        <input type="text" id="name" name="name" required>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <label for="email">Email: </label>
+                    </td>
+                    <td>
+                        <input type="text" id="email" name="email">
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        <label for="phone_number">Phone Number: </label>
+                    </td>
+                    <td>
+                        <input type="text" id="phone_number" name="phone_number">
+                    </td>
+                </tr>
+    
+            </table>
+            <!-- 'Information' Section (END) -->
+
+            <!-- Submission button here -->
+            <strong>Please submit your order!</strong>
             <input type="submit">
         </div>
     </form>

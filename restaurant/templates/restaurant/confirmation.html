@@ -9,13 +9,53 @@
 {% extends 'restaurant/base.html' %}
 {% block content %}
 <div>
-    <p>This is where the confirmation page goes</p>
 
-    <p>
-        <strong>Name: </strong> {{name}}
-    </p>
-    <p>
-        <strong>Your order will be ready by: </strong> {{expected_time}}
-    </p>
+    <div class="order-container">
+        <h1>Confirmation</h1>
+        <div class="order-info">
+            <strong>Name: </strong> {{name}}
+        </div>
+
+        <div class="order-info">
+            {% if email %}
+                <strong>Email: </strong> {{email}}
+            {% else %}
+                <strong>Email: </strong> N/A
+            {% endif %}
+        </div>
+
+        <div class="order-info">
+            {% if phone_number %}
+                <strong>Phone Number: </strong> {{phone_number}}
+            {% else %}
+                <strong>Phone Number: </strong> N/A
+            {% endif %}
+        </div>
+
+        <div class="order-info">
+            <strong>Confirmed Orders: </strong>
+            {% for item in chosen_items %}
+            <div><p>{{item}}</p></div>
+            {% endfor %}
+        </div>
+
+        <div class="order-info">
+            {% if special_instructions %}
+                <strong>Special Instructions: </strong> {{special_instructions}}
+            {% else %}
+                <strong>Special Instructions: </strong> N/A
+            {% endif %}
+        </div>
+
+        <div class="order-info">
+            <strong>Total cost: </strong> {{total_cost}}
+        </div>
+
+        <div class="order-info">
+            <strong>Your order will be ready by: </strong> {{expected_time}}
+        </div>
+
+    </div>
+
 </div>
 {% endblock %}
