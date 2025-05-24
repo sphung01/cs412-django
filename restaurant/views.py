@@ -89,7 +89,8 @@ def order(request):
     template = 'restaurant/order.html'
 
     context = {
-        'daily_special_item': get_daily_special() # Calls for the random daily item
+        'daily_special_item': get_daily_special(), # Calls for the random daily item
+        'current_time': time.ctime(),
     }
 
     return render(request, template, context)
@@ -186,6 +187,7 @@ def confirmation(request):
             'total_cost': f"{total_cost:.2f}",
             'chosen_items': chosen_items,
             'special_instructions': special_instructions,
+            'current_time': time.ctime(),
         }
 
     return render(request, template, context)
