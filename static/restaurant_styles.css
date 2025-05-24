@@ -24,7 +24,7 @@ main {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 110vh;
+    height: 130vh;
     font-size: (1px + 1.5vw);
     text-align: center;
 }

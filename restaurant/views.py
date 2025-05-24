@@ -114,9 +114,10 @@ def confirmation(request):
         # Initializing the lists and total_cost of the order.
 
         # Both combo_items and side_items create a list on inputs
-        # that have the same name, either 'combo' or 'side', 
+        # that have the same name, either 'combo', 'topping', or 'side', 
         # by using request.POST.getlist().
         combo_items = request.POST.getlist('combo') 
+        topping_items = request.POST.getlist('topping')
         side_items = request.POST.getlist('side')
 
         # We will for loop and add the price to the total
@@ -146,6 +147,13 @@ def confirmation(request):
             name, price = appetizer.split('|')
             appetizer_price = float(price)
             total_cost += appetizer_price
+            chosen_items.append(name)
+
+        # Just like the 'combo_items' and 'side_items' for loop, it is the same concept
+        for topping in topping_items:
+            name, price = topping.split('|')
+            topping_price = float(price)
+            total_cost += topping_price
             chosen_items.append(name)
 
         # We use request.POST.get() to avoid the error.
