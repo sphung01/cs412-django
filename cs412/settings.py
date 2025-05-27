@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'blog', #Installed the 'blog' app for example 3
     'quotes', # Installed an app of the "Quote of The Day" website (assignment 1)
     'restaurant', #Installed an app for the "Krusty Krab" website (assignment 2)
+    'mini_fb', #Installed an app for the Mini Facebook website (assignment 3)
 ]
 
 MIDDLEWARE = [

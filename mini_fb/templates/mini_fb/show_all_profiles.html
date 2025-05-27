@@ -1,0 +1,26 @@
+<!--
+    File: mini_fb/templates/mini_fb/show_all_profiles.html
+    Author: Steven Phung (sphung01@bu.edu), 5/27/2025
+    Description: A page that display all of the profiles on Facebook.
+-->
+
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+<main>
+    {% for profile in profiles %}
+    <article>
+        {% if profile.profile_image_url %}
+            <a href="{% url 'mini_fb:profile' profile.pk %}">
+                <img src="{{profile.profile_image_url}}" alt="{{profile.profile_image_url}}">
+            </a>
+        {% endif %}
+        
+        <div>
+            <h2>{{profile.first_name}} {{profile.last_name}}</h2>
+            <p>{{profile.city}}</p>
+            <p>{{profile.email_address}}</p>
+        </div>
+    </article>
+    {% endfor %}
+</main>
+{% endblock %}

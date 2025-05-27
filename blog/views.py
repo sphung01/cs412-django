@@ -6,8 +6,6 @@ from .models import Article
 from django.views.generic import ListView, DetailView
 import random
 
-app_name = 'blog'
-
 class ShowAllView(ListView):
     '''Create a subclass of ListView to display all blog articles.'''
 

@@ -3,6 +3,8 @@
 from django.urls import path
 from .views import ShowAllView, ArticleView, RandomArticleView
 
+app_name = 'blog'
+
 urlpatterns = [
     path('', RandomArticleView.as_view(), name="random"),
     path('show_all', ShowAllView.as_view(), name="show_all"), # modified

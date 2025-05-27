@@ -35,6 +35,7 @@ Routes:
 - /blog/       -> Paths to the "blog" example with URLs included
 - /quotes/     -> Paths to the "quotes" website with URLs included
 - /restaurant/ -> Paths to the "restaurant" app with URLs included
+- /mini_fb/    -> Paths to the "mini_fb" app with URLs included
 """
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -43,4 +44,5 @@ urlpatterns = [
     path("blog/", include("blog.urls")),
     path("quotes/", include("quotes.urls")),
     path("restaurant/", include("restaurant.urls")),
+    path("mini_fb/", include("mini_fb.urls")),
 ]

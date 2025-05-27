@@ -1,0 +1,23 @@
+<!--
+    File: mini_fb/templates/mini_fb/profile.html
+    Author: Steven Phung (sphung01@bu.edu), 5/27/2025
+    Description: A page that displays a specific profile
+    after the user clicks on the image.
+-->
+
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+<main>
+    <article class="featured">
+        {% if profile.profile_image_url %}
+            <img src="{{profile.profile_image_url}}" alt="{{profile.profile_image_url}}">
+        {% endif %}
+        
+        <div>
+            <h2>{{profile.first_name}} {{profile.last_name}}</h2>
+            <p>{{profile.city}}</p>
+            <p>{{profile.email_address}}</p>
+        </div>
+    </article>
+</main>
+{% endblock %}
