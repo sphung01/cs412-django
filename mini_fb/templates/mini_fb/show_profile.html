@@ -7,7 +7,7 @@
 
 {% extends 'mini_fb/base.html' %}
 {% block content %}
-<main>
+<main class="grid-container">
     <article class="featured">
         {% if profile.profile_image_url %}
             <img src="{{profile.profile_image_url}}" alt="{{profile.profile_image_url}}">
