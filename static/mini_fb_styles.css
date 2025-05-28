@@ -1,3 +1,10 @@
+/* 
+    File: mini_fb_styles.css
+    Author: Steven Phung (sphung01@bu.edu), 5/27/2025
+    Description: This file is responsible for styling
+    the website to increase user experience
+*/
+
 /* This CSS was derived from NetNinja's multi-column grid example. */
 
 body {
@@ -59,6 +66,12 @@ nav li {
 }
 
 /* responsive styles: adapt to smaller screen sizes */
+/* 
+    So if the screen were to shrink, anything that's 980px
+    or 760px will trigger the styling below.
+    Since we are using max-width for example,
+    980px or below will trigger.
+*/
 @media screen and (max-width: 980px) {
 
     article {

@@ -1,7 +1,7 @@
-# File: quotes/urls.py
-# Author: Steven Phung (sphung01@bu.edu), 5/20/2025
+# File: mini_fb/urls.py
+# Author: Steven Phung (sphung01@bu.edu), 5/27/2025
 # Description: This creates pathing to different pages
-# within the quotes folder.
+# within the mini_fb folder.
 
 from django.urls import path
 from .views import ShowAllProfilesView, ShowProfilePageView
@@ -13,7 +13,8 @@ from django.conf import settings
 Configures URLs for the 'mini_fb' app
 
 Routes:
-
+- /mini_fb/                 -> Takes the user to a page with all profiles showing
+- /mini_fb/profile/<int:pk> -> A page that shows a specific profile with their own primary key
 
 "static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)"
 This line serves all of the static files (CSS, Javascript, Images) to the project

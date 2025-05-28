@@ -25,6 +25,8 @@ class ShowAllProfilesView(ListView):
     # A context name we'll use to find data in the template
     context_object_name = 'profiles'
 
+    # When using a subclass to pass contexts,
+    # we have to create a function within it.
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
 
@@ -46,6 +48,8 @@ class ShowProfilePageView(DetailView):
     # A context name we'll use to find data in the template
     context_object_name = 'profile'
 
+    # When using a subclass to pass contexts,
+    # we have to create a function within it.
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
 

@@ -8,16 +8,22 @@
 {% extends 'mini_fb/base.html' %}
 {% block content %}
 <main class="grid-container">
+
     <article class="featured">
+        <!-- If a profile does have an image in the database, display it -->
         {% if profile.profile_image_url %}
             <img src="{{profile.profile_image_url}}" alt="{{profile.profile_image_url}}">
         {% endif %}
+        <!-- If a profile does have an image in the database, display it (END) -->
         
+        <!-- This container displays first name, last name, city, and email -->
         <div>
             <h2>{{profile.first_name}} {{profile.last_name}}</h2>
             <p>{{profile.city}}</p>
             <p>{{profile.email_address}}</p>
         </div>
+        <!-- This container displays first name, last name, city, and email (END) -->
+
     </article>
 </main>
 {% endblock %}
