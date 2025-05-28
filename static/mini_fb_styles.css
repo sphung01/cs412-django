@@ -41,6 +41,8 @@ header {
     max-width: 1200px;
     margin: 20px auto;
     text-align: center; /* Centered all profiles for good look */
+    align-items: center;
+    justify-content: center;
 }
 
 article.featured {
