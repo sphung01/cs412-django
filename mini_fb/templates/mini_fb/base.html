@@ -18,7 +18,12 @@
 
             <!-- Header of the website -->
             <header>
-                <h1>Mini Facebook</h1>
+
+                <!-- This gives users a way to get back to the homepage when title is clicked -->
+                <a href="{% url 'mini_fb:show_all_profiles' %}">
+                    <h1>Mini Facebook</h1>
+                </a>
+
             </header>
             <!-- Header/Title of the website (END) -->
 
