@@ -10,11 +10,13 @@
 <main class="grid-container">
 
     <article class="featured">
+
         <!-- If a profile does have an image in the database, display it -->
         {% if profile.profile_image_url %}
             <img src="{{profile.profile_image_url}}" alt="{{profile.profile_image_url}}">
         {% endif %}
         <!-- If a profile does have an image in the database, display it (END) -->
+
         
         <!-- This container displays first name, last name, city, and email -->
         <div>
@@ -23,6 +25,18 @@
             <p><strong>Email: </strong>{{profile.email_address}}</p>
         </div>
         <!-- This container displays first name, last name, city, and email (END) -->
+        
+
+        <!-- This container displays all comments on this profile -->
+        <div>
+            <h2>Comments: </h2>
+            <!-- Performs a for loop on all messages -->
+            {% for text in profile.get_status_message %}
+            <!-- Displays the message and timestamp message was sent -->
+            <p>{{text.message}} (Sent: {{text.timestamp}})</p>
+            {% endfor %}
+        </div>
+        <!-- This container displays all comments on this profile (END) -->
 
     </article>
 </main>

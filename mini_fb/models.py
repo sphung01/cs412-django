@@ -27,4 +27,29 @@ class Profile(models.Model):
             Returns a string representation of this Profile object
         """
         return f'{self.first_name} {self.last_name}'
+    
+    def get_status_message(self):
+        """
+            Returns all comments on a specific Profile
+        """
+        messages = StatusMessage.objects.filter(profile=self)
+        return messages
+    
+class StatusMessage(models.Model):
+    """
+        Creates attributes that a Comment object should have.
+        The comments will also connect to a specific
+        profile we are looking into.
+    """
+
+    # Here are the attributes of the Comment object
+    timestamp = models.DateTimeField(auto_now=True)
+    message = models.TextField(blank=False)
+    profile = models.ForeignKey("Profile", on_delete=models.CASCADE)
+
+    def __str__(self):
+        """
+            Returns a string representation of the Comment object.
+        """
+        return f'{self.message} (Sent at {self.timestamp})'
 

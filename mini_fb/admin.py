@@ -5,5 +5,6 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Profile
-admin.site.register(Profile)
+from .models import Profile, StatusMessage
+admin.site.register(Profile) # Registers the Profile model
+admin.site.register(StatusMessage) # Registers the StatusMessage model
