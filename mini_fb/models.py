@@ -5,6 +5,7 @@
 # a model has been created
 
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Profile(models.Model):
@@ -34,6 +35,12 @@ class Profile(models.Model):
         """
         messages = StatusMessage.objects.filter(profile=self)
         return messages
+    
+    def get_absolute_url(self):
+        """
+            Return the URL to display one instance of this model.
+        """
+        return reverse('mini_fb:profile', kwargs={'pk':self.pk})
     
 class StatusMessage(models.Model):
     """

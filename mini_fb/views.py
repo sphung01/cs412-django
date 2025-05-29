@@ -5,8 +5,9 @@
 # displaying the appropriate template on the web
 
 from django.shortcuts import render
-from .models import Profile
-from django.views.generic import ListView, DetailView
+from .models import Profile 
+from .forms import CreateProfileForm
+from django.views.generic import ListView, DetailView, CreateView
 import random
 import time
 
@@ -48,8 +49,29 @@ class ShowProfilePageView(DetailView):
     # A context name we'll use to find data in the template
     context_object_name = 'profile'
 
-    # When using a subclass to pass contexts,
-    # we have to create a function within it.
+    # Get the current time for footer
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+
+        context['current_time'] = time.ctime()
+
+        return context
+    
+class CreateProfileView(CreateView):
+    """
+        This view will display a form where the user will submit their
+        Profile and it'll be saved to the database.   
+        (1) display the HTML form to user (GET)
+        (2) process the form submission and store the new Profile object (POST) 
+    """
+
+    # Retrieves a CreateProfileForm class
+    form_class = CreateProfileForm
+
+    # Find the template to create profile
+    template_name = 'mini_fb/create_profile_form.html'
+
+    # Get the current time for footer
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
 
