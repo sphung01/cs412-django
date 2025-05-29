@@ -1,0 +1,21 @@
+<!--
+    File: mini_fb/templates/mini_fb/create_status_form.html
+    Author: Steven Phung (sphung01@bu.edu), 5/29/2025
+    Description: A page that displays a form for the user
+    to submit their message to a profile
+-->
+
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+<h1>Create New Message</h1>
+
+<!-- display the HTML form -->
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+
+    <input type="submit">
+</form>
+{% endblock %}

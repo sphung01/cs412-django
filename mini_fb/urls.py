@@ -4,7 +4,7 @@
 # within the mini_fb folder.
 
 from django.urls import path
-from .views import ShowAllProfilesView, ShowProfilePageView, CreateProfileView
+from .views import * #Adds all the view functions that exist
 from django.conf.urls.static import static    ## add for static files
 from django.conf import settings
 
@@ -31,6 +31,7 @@ app_name = 'mini_fb'
 urlpatterns = [
     path('', ShowAllProfilesView.as_view(), name="show_all_profiles"),
     path('profile/<int:pk>', ShowProfilePageView.as_view(), name='profile'),
-    path('create_profile', CreateProfileView.as_view(), name='create_profile')
+    path('create_profile', CreateProfileView.as_view(), name='create_profile'),
+    path('profile/<int:pk>/create_status', CreateStatusMessageView.as_view(), name='create_status'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

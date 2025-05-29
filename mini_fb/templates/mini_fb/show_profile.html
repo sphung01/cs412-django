@@ -33,8 +33,11 @@
             <!-- Performs a for loop on all messages -->
             {% for text in profile.get_status_message %}
             <!-- Displays the message and timestamp message was sent -->
-            <p>{{text.message}} (Sent: {{text.timestamp}})</p>
+            <p>{{text.profile}}: {{text.message}} (Sent: {{text.timestamp}})</p>
             {% endfor %}
+            <h4>
+                <a href="{% url 'mini_fb:create_status' profile.pk %}">Add Message</a>
+            </h4>
         </div>
         <!-- This container displays all comments on this profile (END) -->
 
