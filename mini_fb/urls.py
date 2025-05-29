@@ -13,8 +13,10 @@ from django.conf import settings
 Configures URLs for the 'mini_fb' app
 
 Routes:
-- /mini_fb/                 -> Takes the user to a page with all profiles showing
-- /mini_fb/profile/<int:pk> -> A page that shows a specific profile with their own primary key
+- /mini_fb/                               -> Takes the user to a page with all profiles showing
+- /mini_fb/profile/<int:pk>               -> A page that shows a specific profile with their own primary key
+- /mini_fb/create_profile                 -> A page for the user to create new profile
+- /mini_fb/profile/<int:pk>/create_status -> A page to add new messages for specific profile
 
 "static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)"
 This line serves all of the static files (CSS, Javascript, Images) to the project
