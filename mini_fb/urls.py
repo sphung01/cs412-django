@@ -14,6 +14,7 @@ Configures URLs for the 'mini_fb' app
 
 Routes:
 - /mini_fb/                               -> Takes the user to a page with all profiles showing
+- /mini_fb/show_all                       -> Same as default link above
 - /mini_fb/profile/<int:pk>               -> A page that shows a specific profile with their own primary key
 - /mini_fb/create_profile                 -> A page for the user to create new profile
 - /mini_fb/profile/<int:pk>/create_status -> A page to add new messages for specific profile
@@ -32,6 +33,7 @@ app_name = 'mini_fb'
 
 urlpatterns = [
     path('', ShowAllProfilesView.as_view(), name="show_all_profiles"),
+    path('show_all', ShowAllProfilesView.as_view(), name="show_all_profiles"),
     path('profile/<int:pk>', ShowProfilePageView.as_view(), name='profile'),
     path('create_profile', CreateProfileView.as_view(), name='create_profile'),
     path('profile/<int:pk>/create_status', CreateStatusMessageView.as_view(), name='create_status'),

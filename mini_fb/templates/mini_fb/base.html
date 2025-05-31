@@ -24,6 +24,19 @@
                     <h1>Mini Facebook</h1>
                 </a>
 
+                <!-- Navigation Bar -->
+                <nav>
+                    <ul>
+                        <a href="{% url 'mini_fb:show_all_profiles' %}">
+                            <li>Show All</li>
+                        </a>
+                        <a href="{% url 'mini_fb:create_profile' %}">
+                            <li>Create Profile</li>
+                        </a>
+                    </ul>
+                </nav>
+                <!-- Navigation Bar (END) -->
+
             </header>
             <!-- Header/Title of the website (END) -->
 
@@ -35,7 +48,7 @@
 
             <!-- A footer at the bottom of the page -->
             <footer>
-                Page was created by sphung01@bu.edu (The current time is {{current_time}}).
+                <strong>Page was created by sphung01@bu.edu (The current time is {{current_time}}).</strong>
             </footer>
             <!-- A footer at the bottom of the page (END) -->
 
