@@ -1,6 +1,13 @@
+# File: mini_fb/forms.py
+# Author: Steven Phung (sphung01@bu.edu), 5/29/2025
+# Description: In this file, we create forms where they
+# handle user input and pass it over to the database
+# through Django's ModelForm.
+
 from django import forms
 from .models import Profile, StatusMessage
 
+# Created a CreateProfileForm class
 class CreateProfileForm(forms.ModelForm):
     """
         When a form is submitted, a new Profile object will
@@ -15,9 +22,14 @@ class CreateProfileForm(forms.ModelForm):
         """
             Associates this form with a model from database.
         """
+
+        # Focuses on a specific model
         model = Profile
+
+        # Which fields from model should we use
         fields = ['first_name', 'last_name', 'city', 'email_address', 'profile_image_url']
 
+# Created a CreateStatusMessageForm class
 class CreateStatusMessageForm(forms.ModelForm):
     """
         Similar to CreateProfileForm class, a form will be created
@@ -26,5 +38,8 @@ class CreateStatusMessageForm(forms.ModelForm):
 
     class Meta:
 
+        # Focuses on a specific model
         model = StatusMessage
-        fields = ['message']  # which fields from model should we use
+
+        # Which fields from model should we use
+        fields = ['message']
