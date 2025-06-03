@@ -59,4 +59,35 @@ class StatusMessage(models.Model):
             Returns a string representation of the Comment object.
         """
         return f'{self.message} (Sent at {self.timestamp})'
+    
+    def get_images(self):
+        images = Image.objects.filter(statusimage__status_message=self)
+        return images
+    
+class Image(models.Model):
+    """
+        Represents an image uploaded by a user and associated with their profile.
+    """
+
+    # Here are the attributes of the Image object
+    profile = models.ForeignKey("Profile", on_delete=models.CASCADE)
+    image_file = models.ImageField(blank=True)
+    timestamp = models.DateTimeField(auto_now=True)
+    caption = models.TextField(blank=True)
+
+    def __str__(self):
+        """
+            Returns a string representation of the Comment object.
+        """
+        return f'{self.image_file} (Caption: {self.caption})'
+
+class StatusImage(models.Model):
+    """
+        Links a status message to an image, allowing images to be attached to posts.
+    """
+
+    # Here are the attributes of the StatusImage object
+    status_message = models.ForeignKey("StatusMessage", on_delete=models.CASCADE)
+    image = models.ForeignKey("Image", on_delete=models.CASCADE)
+
 
