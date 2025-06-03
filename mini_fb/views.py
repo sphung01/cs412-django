@@ -6,8 +6,8 @@
 
 from django.shortcuts import render
 from .models import * 
-from .forms import CreateProfileForm, CreateStatusMessageForm
-from django.views.generic import ListView, DetailView, CreateView
+from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse
 import random
 import time
@@ -162,3 +162,13 @@ class CreateStatusMessageView(CreateView):
         pk = self.kwargs['pk']
         # Call reverse to generate the URL for this Profile
         return reverse('mini_fb:profile', kwargs={'pk':pk})
+    
+class UpdateProfileView(UpdateView):
+    """
+        This will allow a user to update the Profile with
+        the use of the PUT operation.
+    """
+
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = 'mini_fb/update_profile_form.html'

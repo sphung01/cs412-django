@@ -1,0 +1,27 @@
+<!--
+    File: mini_fb/templates/mini_fb/update_profile_form.html
+    Author: Steven Phung (sphung01@bu.edu), 6/3/2025
+    Description: A page that displays a form for the user
+    to submit their changes for the server update the
+    Profile instance
+-->
+
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+<h1>Update Profile</h1>
+
+<!-- display the HTML form -->
+<form action="{% url 'mini_fb:update_profile' profile.pk %}" method="POST" class="form-style">
+    {% csrf_token %}
+    <h2 class="form-title">Update your information</h2>
+    <table class="form-table">
+        {{form.as_table}}
+    </table>
+
+    <input type="submit">
+</form>
+
+<form action="{% url 'mini_fb:profile' profile.pk %}" method="GET">
+    <input type="submit" value="Cancel">
+</form>
+{% endblock %}

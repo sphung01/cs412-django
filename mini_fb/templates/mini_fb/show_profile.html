@@ -23,6 +23,9 @@
             <h2>{{profile.first_name}} {{profile.last_name}}</h2>
             <p><strong>City: </strong>{{profile.city}}</p>
             <p><strong>Email: </strong>{{profile.email_address}}</p>
+            <h4>
+                <a href="{% url 'mini_fb:update_profile' profile.pk %}">Update Profile</a>
+            </h4>
         </div>
         <!-- This container displays first name, last name, city, and email (END) -->
         
