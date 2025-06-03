@@ -150,7 +150,7 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # A URL to access the media files 
-MEDIA_URL= "/media/"
+MEDIA_URL= "media/"
 
 # The hostname used when deploying to the CS department's web server
 CS_DEPLOYMENT_HOSTNAME = 'cs-webapps.bu.edu'

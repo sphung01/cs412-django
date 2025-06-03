@@ -21,6 +21,12 @@ h2, h3 {
     color: #828b82;
 }
 
+.delete-message-box {
+    background-color: white;
+    width: 40%;
+    padding: 10px;
+}
+
 p {
     color: #828b82;
 }

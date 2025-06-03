@@ -18,6 +18,8 @@ Routes:
 - /mini_fb/profile/<int:pk>               -> A page that shows a specific profile with their own primary key
 - /mini_fb/create_profile                 -> A page for the user to create new profile
 - /mini_fb/profile/<int:pk>/create_status -> A page to add new messages for specific profile
+- /mini_fb/profile/<int:pk>/update        -> A page to update the Profile instance
+- /mini_fb/delete_message/<int:pk>        -> A page to delete a message
 
 "static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)"
 This line serves all of the static files (CSS, Javascript, Images) to the project
@@ -38,5 +40,6 @@ urlpatterns = [
     path('create_profile', CreateProfileView.as_view(), name='create_profile'),
     path('profile/<int:pk>/create_status', CreateStatusMessageView.as_view(), name='create_status'),
     path('profile/<int:pk>/update', UpdateProfileView.as_view(), name='update_profile'),
+    path('status/<int:pk>/delete', DeleteStatusMessageView.as_view(), name='delete_status')
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

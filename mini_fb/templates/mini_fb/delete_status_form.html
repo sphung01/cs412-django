@@ -1,0 +1,23 @@
+<!--
+    File: mini_fb/templates/mini_fb/delete_status_form.html
+    Author: Steven Phung (sphung01@bu.edu), 6/3/2025
+    Description: A page that displays a form for the user
+    to delete a message. The server will then remove that 
+    StatusMessage object from the database. User will be redirected
+    to Profile page once confirmed.
+-->
+
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+<h1>Are you sure you want to delete this meesage?</h1>
+<h4 class="delete-message-box">"{{message}}"</h4>
+
+<!-- display the HTML form -->
+<form method="POST">
+    {% csrf_token %}
+    <input type='submit' value="Yes">
+</form>
+<form action="{% url 'mini_fb:profile' message.profile.pk %}" method="GET">
+    <input type="submit" value="No">
+</form>
+{% endblock %}

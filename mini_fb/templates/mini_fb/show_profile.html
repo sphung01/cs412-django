@@ -35,18 +35,20 @@
             <h2>Comments: </h2>
             <!-- Performs a for loop on all messages -->
             {% for status in profile.get_status_message %}
-            <!-- Displays the message and timestamp message was sent -->
-            <p>{{status.profile}}: {{status.message}} (Sent: {{status.timestamp}})</p>
-                
-            <div>
-                {% for img_status in status.get_images %}
-                    {% if img_status.caption %}
-                        <p>{{img_status.caption}}</p>
-                    {% endif %}
-                    <img src='{{img_status.image_file.url}}' alt='{{img_status.image_file.url}}'>
-                {% endfor %}
-            </div>
-
+                <!-- Displays the message and timestamp message was sent -->
+                <p>{{status.profile}}: {{status.message}} (Sent: {{status.timestamp}})</p>
+                    
+                <div>
+                    {% for img_status in status.get_images %}
+                        {% if img_status.caption %}
+                            <p>{{img_status.caption}}</p>
+                        {% endif %}
+                        <img src='{{img_status.image_file.url}}' alt='{{img_status.image_file.url}}'>
+                    {% endfor %}
+                </div>
+                <h4>
+                    <a href="{% url 'mini_fb:delete_status' status.pk %}">Delete</a>
+                </h4>
             {% endfor %}
             <h4>
                 <a href="{% url 'mini_fb:create_status' profile.pk %}">Add Message</a>

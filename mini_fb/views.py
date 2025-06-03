@@ -7,7 +7,7 @@
 from django.shortcuts import render
 from .models import * 
 from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
 import random
 import time
@@ -172,3 +172,20 @@ class UpdateProfileView(UpdateView):
     model = Profile
     form_class = UpdateProfileForm
     template_name = 'mini_fb/update_profile_form.html'
+
+class DeleteStatusMessageView(DeleteView):
+    """
+        This will allow the user to delete the Message instance and
+        the server will remove from the database
+    """
+
+    model = StatusMessage
+    template_name = 'mini_fb/delete_status_form.html'
+    context_object_name = 'message'
+
+    def get_success_url(self):
+        """
+            Redirects user to a Profile page after
+            deleting the message.
+        """
+        return reverse('mini_fb:profile', kwargs={'pk': self.object.profile.pk})
