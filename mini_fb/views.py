@@ -5,7 +5,7 @@
 # displaying the appropriate template on the web
 
 from django.shortcuts import render
-from .models import Profile 
+from .models import * 
 from .forms import CreateProfileForm, CreateStatusMessageForm
 from django.views.generic import ListView, DetailView, CreateView
 from django.urls import reverse
@@ -132,6 +132,22 @@ class CreateStatusMessageView(CreateView):
         profile = Profile.objects.get(pk=pk)
         # Attach this profile to the comment
         form.instance.profile = profile # set the FK
+
+        # Save the status message to database
+        sm = form.save()
+
+        # Read the file from the form:
+        files = self.request.FILES.getlist('files')
+
+        # Now we will loop through the files
+        # since we assume there may bee more than one image file.
+        # This is to create Image and StatusImage objects.
+        for file in files:
+            img = Image(profile=sm.profile, image_file=file) # Creates Image object
+            img.save() # Saves this Image object to the database
+
+            status_img = StatusImage(status_message=sm, image=img) # Creates StatusImage object
+            status_img.save() # Saves this StatusImage object to the database
 
         # delegate the work to the superclass method form_valid:
         return super().form_valid(form)

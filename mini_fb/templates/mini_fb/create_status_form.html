@@ -10,10 +10,11 @@
 <h1>Create New Message</h1>
 
 <!-- display the HTML form -->
-<form method="POST" class="form-style">
+<form method="POST" class="form-style" enctype="multipart/form-data">
     {% csrf_token %}
     <h2 class="form-title">What's on your mind?</h2>
     <table class="form-table">
+        <input type="file" name = "files" multiple />
         {{form.as_table}}
     </table>
 
