@@ -64,6 +64,12 @@ class StatusMessage(models.Model):
         images = Image.objects.filter(statusimage__status_message=self)
         return images
     
+    def get_absolute_url(self):
+        """
+            Return the URL to display one instance of this model.
+        """
+        return reverse('mini_fb:profile', kwargs={'pk':self.profile.pk})
+    
 class Image(models.Model):
     """
         Represents an image uploaded by a user and associated with their profile.

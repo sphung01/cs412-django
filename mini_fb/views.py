@@ -6,7 +6,7 @@
 
 from django.shortcuts import render
 from .models import * 
-from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm
+from .forms import * 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
 import random
@@ -152,17 +152,6 @@ class CreateStatusMessageView(CreateView):
         # delegate the work to the superclass method form_valid:
         return super().form_valid(form)
     
-    ## show how the reverse function uses the urls.py to find the URL pattern
-    def get_success_url(self):
-        '''Provide a URL to redirect to after creating a new Comment.'''
-
-        # Create and return a URL:
-        # Return reverse('show_all') # not ideal; we will return to this
-        # Retrieve the PK from the URL pattern
-        pk = self.kwargs['pk']
-        # Call reverse to generate the URL for this Profile
-        return reverse('mini_fb:profile', kwargs={'pk':pk})
-    
 class UpdateProfileView(UpdateView):
     """
         This will allow a user to update the Profile with
@@ -189,3 +178,14 @@ class DeleteStatusMessageView(DeleteView):
             deleting the message.
         """
         return reverse('mini_fb:profile', kwargs={'pk': self.object.profile.pk})
+
+class UpdateStatusMessageView(UpdateView):
+    """
+        This will allow the user to delete the Message instance and
+        the server will remove from the database
+    """
+
+    model = StatusMessage
+    form_class = UpdateMessageForm
+    context_object_name = 'status'
+    template_name = 'mini_fb/update_status_form.html'

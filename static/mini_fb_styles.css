@@ -101,6 +101,15 @@ li:hover {
     color: black;
 }
 
+.update-or-delete {
+    display: flex;
+    flex-direction: row;
+    text-align: center; /* Centered all profiles for good look */
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
 footer {
     color: white;
 }

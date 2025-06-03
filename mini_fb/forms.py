@@ -61,3 +61,20 @@ class UpdateProfileForm(forms.ModelForm):
         # Fields that we should use from the Profile model
         fields = ['city', 'email_address', 'profile_image_file']
 
+class UpdateMessageForm(forms.ModelForm):
+    """
+        This class will have a form where we can
+        update a StatusMessage object.
+    """
+
+    class Meta:
+        """
+            Associates this form with the Profile model.
+        """
+
+        # Focuses on the Profile model
+        model = StatusMessage
+
+        # Fields that we should use from the Profile model
+        fields = ['message']
+
