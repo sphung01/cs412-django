@@ -12,8 +12,8 @@
     <article class="featured">
 
         <!-- If a profile does have an image in the database, display it -->
-        {% if profile.profile_image_url %}
-            <img src="{{profile.profile_image_url}}" alt="{{profile.profile_image_url}}">
+        {% if profile.profile_image_file %}
+            <img src="{{profile.profile_image_file.url}}" alt="{{profile.profile_image_file.url}}">
         {% endif %}
         <!-- If a profile does have an image in the database, display it (END) -->
 

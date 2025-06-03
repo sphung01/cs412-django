@@ -27,7 +27,7 @@ class CreateProfileForm(forms.ModelForm):
         model = Profile
 
         # Which fields from model should we use
-        fields = ['first_name', 'last_name', 'city', 'email_address', 'profile_image_url']
+        fields = ['first_name', 'last_name', 'city', 'email_address', 'profile_image_file']
 
 # Created a CreateStatusMessageForm class
 class CreateStatusMessageForm(forms.ModelForm):

@@ -18,7 +18,7 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=250, blank=False)
     city = models.CharField(max_length=250, blank=False)
     email_address = models.CharField(max_length=250, blank=False)
-    profile_image_url = models.URLField(blank=True)
+    profile_image_file = models.ImageField(blank=True)
 
     # On the 'admin' database, we create a string that
     # represents the Profile object
