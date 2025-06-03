@@ -95,24 +95,12 @@ class CreateStatusMessageView(CreateView):
     template_name = 'mini_fb/create_status_form.html'
 
     def get_context_data(self, **kwargs):
-        '''Return the dictionary of context variables for use in the template.'''
+        context = super().get_context_data(**kwargs)
 
-        # Calling the superclass method
-        context = super().get_context_data()
-
-        # Find/add the profile to the context data
-        # Retrieve the PK from the URL pattern
         pk = self.kwargs['pk']
         profile = Profile.objects.get(pk=pk)
 
-        # Add this profile into the context dictionary:
         context['profile'] = profile
-        return context
-    
-    # Get the current time for footer
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-
         context['current_time'] = time.ctime()
 
         return context
