@@ -37,7 +37,9 @@
                 
             <div>
                 {% for img_status in status.get_images %}
-                    <p>{{img_status.caption}}</p>
+                    {% if img_status.caption %}
+                        <p>{{img_status.caption}}</p>
+                    {% endif %}
                     <img src='{{img_status.image_file.url}}' alt='{{img_status.image_file.url}}'>
                 {% endfor %}
             </div>
