@@ -14,10 +14,13 @@
     {% csrf_token %}
     <h2 class="form-title">What's on your mind?</h2>
     <table class="form-table">
+
+        <!-- Allows user to add one OR multiple files -->
         <div>
             <input type="file" name = "files" multiple />
         </div>
 
+        <!-- Allows user add a caption -->
         <div>
             <textarea name="caption" placeholder="Enter caption" rows="3" cols="30"></textarea>
         </div>
