@@ -19,13 +19,17 @@
 
         
         <!-- This container displays first name, last name, city, and email -->
-        <div>
+        <div class="info-container">
             <h2>{{profile.first_name}} {{profile.last_name}}</h2>
             <p><strong>City: </strong>{{profile.city}}</p>
             <p><strong>Email: </strong>{{profile.email_address}}</p>
+
+            <!-- This will redirect user to a page where they can update/change info on this Profile -->
             <h4>
                 <a href="{% url 'mini_fb:update_profile' profile.pk %}">Update Profile</a>
             </h4>
+            <!-- This will redirect user to a page where they can update/change info on this Profile (END) -->
+
         </div>
         <!-- This container displays first name, last name, city, and email (END) -->
         
@@ -35,30 +39,43 @@
             <h2>Comments: </h2>
             <!-- Performs a for loop on all messages -->
             {% for status in profile.get_status_message %}
-                <!-- Displays the message and timestamp message was sent -->
-                <p>{{status.profile}}: {{status.message}} (Sent: {{status.timestamp}})</p>
-                    
-                <div>
-                    {% for img_status in status.get_images %}
-                        {% if img_status.caption %}
-                            <p>{{img_status.caption}}</p>
-                        {% endif %}
-                        <img src='{{img_status.image_file.url}}' alt='{{img_status.image_file.url}}'>
-                    {% endfor %}
-                </div>
+                <div class="comment-container">
+                    <!-- Displays the message and timestamp message was sent -->
+                    <p>{{status.profile}}: {{status.message}} (Sent: {{status.timestamp}})</p>
+                        
+                    <!-- Displays an image with the optional caption -->
+                    <div>
+                        {% for img_status in status.get_images %}
+                            {% if img_status.caption %}
+                                <p>{{img_status.caption}}</p>
+                            {% endif %}
+                            <img src='{{img_status.image_file.url}}' alt='{{img_status.image_file.url}}' class="img-caption">
+                        {% endfor %}
+                    </div>
 
-                <div class="update-or-delete">
-                    <h4>
-                        <a href="{% url 'mini_fb:update_status' status.pk %}">Update</a>
-                    </h4>
-                    <h4>
-                        <a href="{% url 'mini_fb:delete_status' status.pk %}">Delete</a>
-                    </h4>
+                    <!-- A container that has the update and delete button -->
+                    <div class="update-or-delete">
+
+                        <!-- Allows user to update the message -->
+                        <h4 class="update-button">
+                            <a href="{% url 'mini_fb:update_status' status.pk %}">Update</a>
+                        </h4>
+
+                        <!-- Allows user to delete the message -->
+                        <h4 class="delete-button">
+                            <a href="{% url 'mini_fb:delete_status' status.pk %}">Delete</a>
+                        </h4>
+
+                    </div>
                 </div>
             {% endfor %}
+            <!-- End of the loop -->
+
+            <!-- Redirects user to a page where they can add new messages -->
             <h4>
                 <a href="{% url 'mini_fb:create_status' profile.pk %}">Add Message</a>
             </h4>
+
         </div>
         <!-- This container displays all comments on this profile (END) -->
 

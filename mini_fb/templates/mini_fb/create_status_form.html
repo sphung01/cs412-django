@@ -9,18 +9,25 @@
 {% block content %}
 <h1>Create New Message</h1>
 
-<!-- display the HTML form -->
+<!-- Display the HTML form -->
 <form method="POST" class="form-style" enctype="multipart/form-data">
     {% csrf_token %}
     <h2 class="form-title">What's on your mind?</h2>
     <table class="form-table">
-        <input type="file" name = "files" multiple />
+        <div>
+            <input type="file" name = "files" multiple />
+        </div>
+
+        <div>
+            <textarea name="caption" placeholder="Enter caption" rows="3" cols="30"></textarea>
+        </div>
         {{form.as_table}}
     </table>
 
     <input type="submit">
 </form>
 
+<!-- A cancel button to send the user back to the Profile page -->
 <form action="{% url 'mini_fb:profile' profile.pk %}" method="GET">
     <input type="submit" value="Cancel">
 </form>

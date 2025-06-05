@@ -12,11 +12,13 @@
 <h1>Are you sure you want to delete this meesage?</h1>
 <h4 class="delete-message-box">"{{message}}"</h4>
 
-<!-- display the HTML form -->
+<!-- Display the HTML form -->
 <form method="POST">
     {% csrf_token %}
     <input type='submit' value="Yes">
 </form>
+
+<!-- A cancel button to send the user back to the Profile page -->
 <form action="{% url 'mini_fb:profile' message.profile.pk %}" method="GET">
     <input type="submit" value="No">
 </form>

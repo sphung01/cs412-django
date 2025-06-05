@@ -19,7 +19,9 @@ Routes:
 - /mini_fb/create_profile                 -> A page for the user to create new profile
 - /mini_fb/profile/<int:pk>/create_status -> A page to add new messages for specific profile
 - /mini_fb/profile/<int:pk>/update        -> A page to update the Profile instance
-- /mini_fb/delete_message/<int:pk>        -> A page to delete a message
+- /mini_fb/status/<int:pk>/delete         -> A page to delete the StatusMessage instance
+- /mini_fb/status/<int:pk>/update         -> A page to update the StatusMessage instance
+
 
 "static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)"
 This line serves all of the static files (CSS, Javascript, Images) to the project

@@ -44,6 +44,7 @@ class CreateStatusMessageForm(forms.ModelForm):
         # Which fields from model should we use
         fields = ['message']
 
+# Created a UpdateProfileForm class
 class UpdateProfileForm(forms.ModelForm):
     """
         This class will have a form where we can
@@ -61,6 +62,7 @@ class UpdateProfileForm(forms.ModelForm):
         # Fields that we should use from the Profile model
         fields = ['city', 'email_address', 'profile_image_file']
 
+# Created a UpdateMessageForm class
 class UpdateMessageForm(forms.ModelForm):
     """
         This class will have a form where we can

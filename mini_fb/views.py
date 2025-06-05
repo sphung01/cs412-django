@@ -30,6 +30,9 @@ class ShowAllProfilesView(ListView):
     # When using a subclass to pass contexts,
     # we have to create a function within it.
     def get_context_data(self, **kwargs):
+        """
+            Passes over one OR multiple contexts to the HTML template
+        """
         context = super().get_context_data()
 
         context['current_time'] = time.ctime()
@@ -52,6 +55,9 @@ class ShowProfilePageView(DetailView):
 
     # Get the current time for footer
     def get_context_data(self, **kwargs):
+        """
+            Passes over one OR multiple contexts to the HTML template
+        """
         context = super().get_context_data()
 
         context['current_time'] = time.ctime()
@@ -95,6 +101,9 @@ class CreateStatusMessageView(CreateView):
     template_name = 'mini_fb/create_status_form.html'
 
     def get_context_data(self, **kwargs):
+        """
+            Passes over one OR multiple contexts to the HTML template
+        """
         context = super().get_context_data(**kwargs)
 
         pk = self.kwargs['pk']
@@ -126,12 +135,13 @@ class CreateStatusMessageView(CreateView):
 
         # Read the file from the form:
         files = self.request.FILES.getlist('files')
+        caption = self.request.POST.get('caption')
 
         # Now we will loop through the files
         # since we assume there may bee more than one image file.
         # This is to create Image and StatusImage objects.
         for file in files:
-            img = Image(profile=sm.profile, image_file=file) # Creates Image object
+            img = Image(profile=sm.profile, image_file=file, caption=caption) # Creates Image object
             img.save() # Saves this Image object to the database
 
             status_img = StatusImage(status_message=sm, image=img) # Creates StatusImage object
@@ -146,9 +156,24 @@ class UpdateProfileView(UpdateView):
         the use of the PUT operation.
     """
 
+    # Retrieves the Profile model
     model = Profile
+
+    # Retrieves the UpdateProfileForm class
     form_class = UpdateProfileForm
+
+    # Find the template to update the Profile object
     template_name = 'mini_fb/update_profile_form.html'
+
+    def get_context_data(self, **kwargs):
+        """
+            Passes over one OR multiple contexts to the HTML template
+        """
+        context = super().get_context_data()
+
+        context['current_time'] = time.ctime()
+
+        return context
 
 class DeleteStatusMessageView(DeleteView):
     """
@@ -156,8 +181,13 @@ class DeleteStatusMessageView(DeleteView):
         the server will remove from the database
     """
 
+    # Retrieves the StatusMessage model
     model = StatusMessage
+
+    # Find the template to delete the StatusMessage object
     template_name = 'mini_fb/delete_status_form.html'
+
+    # Passes over the context to HTML
     context_object_name = 'message'
 
     def get_success_url(self):
@@ -166,14 +196,41 @@ class DeleteStatusMessageView(DeleteView):
             deleting the message.
         """
         return reverse('mini_fb:profile', kwargs={'pk': self.object.profile.pk})
+    
+    def get_context_data(self, **kwargs):
+        """
+            Passes over one OR multiple contexts to the HTML template
+        """
+        context = super().get_context_data()
+
+        context['current_time'] = time.ctime()
+
+        return context
 
 class UpdateStatusMessageView(UpdateView):
     """
-        This will allow the user to delete the Message instance and
+        This will allow the user to update the Message instance and
         the server will remove from the database
     """
 
+    # Retrieves the StatusMessage model
     model = StatusMessage
+
+    # Retrieves the UpdateMessageForm
     form_class = UpdateMessageForm
+
+    # Passes over the context to HTML
     context_object_name = 'status'
+
+    # Find the template to update the StatusMessage object
     template_name = 'mini_fb/update_status_form.html'
+
+    def get_context_data(self, **kwargs):
+        """
+            Passes over one OR multiple contexts to the HTML template
+        """
+        context = super().get_context_data()
+
+        context['current_time'] = time.ctime()
+
+        return context

@@ -9,7 +9,7 @@
 {% block content %}
 <h1>Create New Profile</h1>
 
-<!-- display the HTML form -->
+<!-- Display the HTML form -->
 <form action="{% url 'mini_fb:create_profile' %}" method="POST" class="form-style">
     {% csrf_token %}
     <h2 class="form-title">Please enter your information</h2>
