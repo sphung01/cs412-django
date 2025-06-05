@@ -5,8 +5,9 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Profile, StatusMessage, Image, StatusImage
+from .models import Profile, StatusMessage, Image, StatusImage, Friend
 admin.site.register(Profile) # Registers the Profile model
 admin.site.register(StatusMessage) # Registers the StatusMessage model
 admin.site.register(Image) # Registers the Image model
 admin.site.register(StatusImage) # Registers the StatusImage model
+admin.site.register(Friend) # Registers the Friend model

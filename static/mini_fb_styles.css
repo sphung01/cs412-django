@@ -61,7 +61,7 @@ article.featured {
 }
 
 article img, article.featured img {
-    width: 50%;
+    width: 25%;
     border: 4px solid #fff;
     border-radius: 8px;
 }
@@ -138,9 +138,45 @@ li:hover {
     padding: 5px;
 }
 
+.update-profile-button {
+    border: solid;
+    border-width: 5px;
+    padding: 5px;
+    margin-left: 100px;
+    margin-right: 100px;
+    color: black;
+}
+
+.update-profile-button:hover {
+    color:white;
+    background-color: black;
+}
+
 .img-caption {
     width: 40px;
     object-fit: cover; /* Optional: makes sure the image crops nicely */
+}
+
+img.profile-image {
+    width: 50%;
+    margin-left: 100px;
+}
+
+img.friend-image {
+    width: 20%;
+}
+
+.friends-list {
+    border: solid;
+    border-width: 5px;
+    padding: 10px;
+}
+
+.friend-container {
+    border: solid;
+    border-width: 5px;
+    margin: 25px;
+    color: black;
 }
 
 footer {

@@ -36,6 +36,34 @@ class Profile(models.Model):
         messages = StatusMessage.objects.filter(profile=self)
         return messages
     
+    def get_friends(self):
+        """
+            Returns the list of Friends other than the profile itself.
+        """
+
+        # This checks which Friend instance has the Profile object we
+        # are looking into. For example, we look to see if Gumball
+        # is in one of these instances by filtering. Whether he is
+        # profile1 or profile2.
+        friends = Friend.objects.filter(profile1=self) | Friend.objects.filter(profile2=self)
+
+        # We make an empty list 'profile_friends'
+        profile_friends = []
+
+        # For every friend we are checking...
+        for friend in friends:
+            # If this Profile model is profile1,
+            # we append the other one that is not this profile instance.
+            if friend.profile1 == self:
+                profile_friends.append(friend.profile2)
+            # Otherwise just append profile1
+            else:
+                profile_friends.append(friend.profile1)
+
+        # With that, we return the list of friends for this Profile instance.
+        return profile_friends
+
+    
     def get_absolute_url(self):
         """
             Return the URL to display one instance of this model.
@@ -96,4 +124,20 @@ class StatusImage(models.Model):
     status_message = models.ForeignKey("StatusMessage", on_delete=models.CASCADE)
     image = models.ForeignKey("Image", on_delete=models.CASCADE)
 
+class Friend(models.Model):
+    """
+        Encapsulates an idea of connecting two nodes within the
+        social network. For example, connecting two friends together.
+    """
 
+    # Here are the fields/attributes
+    profile1 = models.ForeignKey(Profile, related_name="profile1", on_delete=models.CASCADE)
+    profile2 = models.ForeignKey(Profile, related_name="profile2", on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        """
+            Returns a string representation of the Friend model
+        """
+
+        return f'{self.profile1.first_name} {self.profile1.last_name} & {self.profile2.first_name} {self.profile2.last_name}'
