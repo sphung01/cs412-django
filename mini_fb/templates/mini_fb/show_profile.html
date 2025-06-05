@@ -38,14 +38,14 @@
         <div>
             <h2>Comments: </h2>
             <!-- Performs a for loop on all messages -->
-            {% for status in profile.get_status_message %}
+            {% for st_msg in profile.get_status_message %}
                 <div class="comment-container">
                     <!-- Displays the message and timestamp message was sent -->
-                    <p>{{status.profile}}: {{status.message}} (Sent: {{status.timestamp}})</p>
+                    <p>{{st_msg.profile}}: {{st_msg.message}} (Sent: {{st_msg.timestamp}})</p>
                         
                     <!-- Displays an image with the optional caption -->
                     <div>
-                        {% for img_status in status.get_images %}
+                        {% for img_status in st_msg.get_images %}
                             {% if img_status.caption %}
                                 <p>{{img_status.caption}}</p>
                             {% endif %}
@@ -58,12 +58,12 @@
 
                         <!-- Allows user to update the message -->
                         <h4 class="update-button">
-                            <a href="{% url 'mini_fb:update_status' status.pk %}">Update</a>
+                            <a href="{% url 'mini_fb:update_status' st_msg.pk %}">Update</a>
                         </h4>
 
                         <!-- Allows user to delete the message -->
                         <h4 class="delete-button">
-                            <a href="{% url 'mini_fb:delete_status' status.pk %}">Delete</a>
+                            <a href="{% url 'mini_fb:delete_status' st_msg.pk %}">Delete</a>
                         </h4>
 
                     </div>
