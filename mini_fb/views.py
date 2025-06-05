@@ -7,8 +7,9 @@
 from django.shortcuts import render
 from .models import * 
 from .forms import * 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.urls import reverse
+from django.shortcuts import redirect
 import random
 import time
 
@@ -224,6 +225,58 @@ class UpdateStatusMessageView(UpdateView):
 
     # Find the template to update the StatusMessage object
     template_name = 'mini_fb/update_status_form.html'
+
+    def get_context_data(self, **kwargs):
+        """
+            Passes over one OR multiple contexts to the HTML template
+        """
+        context = super().get_context_data()
+
+        context['current_time'] = time.ctime()
+
+        return context
+
+class AddFriendView(View):
+    """
+        Creates a view when adding a friend on a specific Profile instance.
+        We will need to call the add friends method.
+    """
+
+    def dispatch(self, request, *args, **kwargs):
+        """
+            This will allow us to get the parameters from the
+            URL such as 'pk' (Profile we are looking into) and
+            'other_pk' (A Profile we are adding as a friend).
+        """
+
+        # We get the parameters of the URL
+        profile_id = kwargs.get('pk')
+        other_id = kwargs.get('other_pk')
+
+        # Use the keys to get the Profile objects
+        profile = Profile.objects.get(pk=profile_id)
+        other_profile = Profile.objects.get(pk=other_id)
+
+        # Then the profile we are looking into will add the other as friend
+        profile.add_friend(other_profile)
+
+        # We provide the HTTP response back to the user after adding
+        return redirect('mini_fb:profile', pk=profile_id)
+    
+class ShowFriendSuggestionsView(DetailView):
+    """
+        Displays a page that shows all of the profiles
+        suggested to be friends with.
+    """
+
+    # Retriving the Profile model
+    model = Profile
+
+    # Finding the HTML to friend suggestions
+    template_name = 'mini_fb/friend_suggestion.html'
+
+    # Pass the context to the HTML
+    context_object_name = 'profile'
 
     def get_context_data(self, **kwargs):
         """

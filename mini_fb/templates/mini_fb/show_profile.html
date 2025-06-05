@@ -33,6 +33,9 @@
 
             <div class="friends-list">
                 <h2>Friends</h2>
+                <a href="{% url 'mini_fb:friend_suggestions' profile.pk %}">
+                    <h3 class="friend-suggestion-button">Connect With Others</h3>
+                </a>
                 {% for friend in profile.get_friends %}
                     <a href="{% url 'mini_fb:profile' friend.pk %}">
                         <div class="friend-container">

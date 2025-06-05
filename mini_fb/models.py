@@ -63,7 +63,54 @@ class Profile(models.Model):
         # With that, we return the list of friends for this Profile instance.
         return profile_friends
 
+    def add_friend(self, other):
+        """
+            This helps create a Friend instance if two profiles
+            are not friends (self and other).
+        """
+
+        if self != other:
+            # Check if the friendship already exists
+            existing_friends1 = Friend.objects.filter(profile1=self, profile2=other)
+            existing_friends2 = Friend.objects.filter(profile1=other, profile2=self)
+
+            # Only add the friend if no such record exists
+            if not existing_friends1.exists() and not existing_friends2.exists():
+                print('They became friends!')
+                new_friend = Friend(profile1=self, profile2=other)
+                new_friend.save()
+            else:
+                print('Already friends')
+                return
+        else:
+            print('Cannot friend yourself')
+            return
     
+    def get_friend_suggestions(self):
+        """
+            This will return the list of Profiles that are not
+            friends with this instance.
+        """ 
+
+        # We will collect all profiles that exist
+        all_profiles = Profile.objects.all()
+
+        # Get list of Profiles that are friends with this instance
+        friends = self.get_friends()
+
+        # Create empty suggestion list
+        suggestion_list = []
+
+        # For every profile that exists
+        for profile in all_profiles:
+            # If the Profile is not in the friends list and not the profile we are looking at
+            if profile not in friends and profile != self:
+                # Add that Profile to the suggestion list
+                suggestion_list.append(profile)
+        
+        # Return the suggestion list
+        return suggestion_list
+
     def get_absolute_url(self):
         """
             Return the URL to display one instance of this model.

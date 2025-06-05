@@ -152,6 +152,34 @@ li:hover {
     background-color: black;
 }
 
+.friend-suggestion-button {
+    border: solid;
+    border-width: 5px;
+    padding: 5px;
+    margin-left: 50px;
+    margin-right: 50px;
+    color: black;
+}
+
+.friend-suggestion-button:hover {
+    color:white;
+    background-color: black;
+}
+
+.add-friend-button {
+    border: solid;
+    border-width: 5px;
+    padding: 5px;
+    margin-left: 100px;
+    margin-right: 100px;
+    color: black;
+}
+
+.add-friend-button:hover {
+    color:white;
+    background-color: black;
+}
+
 .img-caption {
     width: 40px;
     object-fit: cover; /* Optional: makes sure the image crops nicely */
@@ -166,6 +194,16 @@ img.friend-image {
     width: 20%;
 }
 
+.suggestion-profile-image {
+    width: 30%;
+    border: solid;
+    border-width: 5px;
+    border-radius: 8px;
+    padding: 10px;
+    color: black;
+}
+
+
 .friends-list {
     border: solid;
     border-width: 5px;
@@ -177,6 +215,11 @@ img.friend-image {
     border-width: 5px;
     margin: 25px;
     color: black;
+}
+
+.suggested-profile-container {
+    display: flex;
+    flex-direction: column;
 }
 
 footer {

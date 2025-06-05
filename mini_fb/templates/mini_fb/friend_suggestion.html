@@ -1,0 +1,45 @@
+<!--
+    File: mini_fb/templates/mini_fb/friend_suggestion.html
+    Author: Steven Phung (sphung01@bu.edu), 6/5/2025
+    Description: A page that displays all profiles suggested
+    to be friends with.
+-->
+
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+<main class="grid-container">
+
+    <!-- This scriptlet loops through the suggestion list -->
+    {% for suggested_profile in profile.get_friend_suggestions %}
+
+    <div class="suggested-profile-container">
+        <!-- If a profile does have an image in the database, display it -->
+        <div>
+            <h2>{{suggested_profile.first_name}} {{suggested_profile.last_name}}</h2>
+            <!-- If a image exists, add it -->
+            {% if suggested_profile.profile_image_file %}
+                <a href="{% url 'mini_fb:profile' suggested_profile.pk %}">
+                    <img src="{{suggested_profile.profile_image_file.url}}" 
+                        alt="{{suggested_profile.profile_image_file.url}}" 
+                        class="suggestion-profile-image">
+                </a>
+            {% endif %}
+            <!-- (END) -->
+        </div>
+        <!-- (END) -->
+            
+        <!-- This container displays first name and last name -->
+        <div>
+            <a href="{% url 'mini_fb:add_friend' profile.pk suggested_profile.pk %}">
+                <h3 class="add-friend-button">Add Friend</h3>
+            </a>
+        </div>
+        <!-- (END) -->
+
+    </div>
+
+    {% endfor %}
+    <!-- (END) -->
+
+</main>
+{% endblock %}
