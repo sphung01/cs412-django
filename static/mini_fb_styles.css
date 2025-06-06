@@ -329,6 +329,10 @@ img.friend-image {
 footer {
     color: white;
 }
+
+.news-feed-title {
+    color: black;
+}
 /* These styles help keep the containers and images maintained (END) */
 
 /* responsive styles: adapt to smaller screen sizes */
