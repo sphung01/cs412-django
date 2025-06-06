@@ -73,24 +73,29 @@
                     <div class="update-or-delete">
 
                         <!-- Allows user to update the message -->
-                        <h4 class="update-button">
-                            <a href="{% url 'mini_fb:update_status' st_msg.pk %}">Update</a>
-                        </h4>
+                        <a href="{% url 'mini_fb:update_status' st_msg.pk %}">
+                            <h4 class="update-delete-button">Update</h4>
+                        </a>
 
                         <!-- Allows user to delete the message -->
-                        <h4 class="delete-button">
-                            <a href="{% url 'mini_fb:delete_status' st_msg.pk %}">Delete</a>
-                        </h4>
-
+                        <a href="{% url 'mini_fb:delete_status' st_msg.pk %}">
+                            <h4 class="update-delete-button">Delete</h4>
+                        </a>
+                        
                     </div>
                 </div>
             {% endfor %}
             <!-- End of the loop -->
 
             <!-- Redirects user to a page where they can add new messages -->
-            <h4>
-                <a href="{% url 'mini_fb:create_status' profile.pk %}">Add Message</a>
-            </h4>
+            <a href="{% url 'mini_fb:create_status' profile.pk %}">
+                <h4 class="add-message-button">Add Message</h4>
+            </a>
+
+            <!-- Redirects user to news feed -->
+            <a href="{% url 'mini_fb:news_feed' profile.pk %}">
+                <h4 class="news-feed-button">Check News Feed</h4>
+            </a>
 
         </div>
         <!-- This container displays all comments on this profile (END) -->

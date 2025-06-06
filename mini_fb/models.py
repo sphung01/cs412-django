@@ -111,6 +111,29 @@ class Profile(models.Model):
         # Return the suggestion list
         return suggestion_list
 
+    def get_news_feed(self):
+        """
+            This will return the list of all StatusMessages of this
+            Profile object and Friends.
+        """
+
+        # We will create empty list that will hold
+        # friend Profiles and our own Profile (self).
+        profiles = []
+
+        # Then start appending.
+        for friend in self.get_friends():
+            profiles.append(friend)
+        profiles.append(self)
+
+        # We can filter by checking each profile in 'profiles' list.
+        # __in is a ORM Lookup that checks there is a value in the list.
+        # order_by allows us to sort the list during filter.
+        # With '-timestamp', this helps sort the messages from newest to oldest.
+        news_feed_list = StatusMessage.objects.filter(profile__in=profiles).order_by('-timestamp')
+
+        return news_feed_list       
+
     def get_absolute_url(self):
         """
             Return the URL to display one instance of this model.

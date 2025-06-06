@@ -7,15 +7,20 @@
 
 {% extends 'mini_fb/base.html' %}
 {% block content %}
+<h2 class="friend-suggestion-title">Friend Suggestions</h2>
+<a href="{% url 'mini_fb:profile' profile.pk %}">
+    <h4 class="return-profile-page">Go Back to Profile Page</h4>
+</a>
 <main class="grid-container">
-
+    
     <!-- This scriptlet loops through the suggestion list -->
     {% for suggested_profile in profile.get_friend_suggestions %}
-
     <div class="suggested-profile-container">
-        <!-- If a profile does have an image in the database, display it -->
         <div>
-            <h2>{{suggested_profile.first_name}} {{suggested_profile.last_name}}</h2>
+            <!-- Display full name -->
+            <a href="{% url 'mini_fb:profile' suggested_profile.pk %}">
+                <h2>{{suggested_profile.first_name}} {{suggested_profile.last_name}}</h2>
+            </a>
             <!-- If a image exists, add it -->
             {% if suggested_profile.profile_image_file %}
                 <a href="{% url 'mini_fb:profile' suggested_profile.pk %}">
@@ -28,7 +33,7 @@
         </div>
         <!-- (END) -->
             
-        <!-- This container displays first name and last name -->
+        <!-- A button that will add a friend -->
         <div>
             <a href="{% url 'mini_fb:add_friend' profile.pk suggested_profile.pk %}">
                 <h3 class="add-friend-button">Add Friend</h3>

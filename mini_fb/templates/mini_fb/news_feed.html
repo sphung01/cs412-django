@@ -1,0 +1,32 @@
+<!--
+    File: mini_fb/templates/mini_fb/news_feed.html
+    Author: Steven Phung (sphung01@bu.edu), 6/5/2025
+    Description: A page that displays all of the status messages
+    from this profile and their friends.
+-->
+
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+<main class="news-feed-style">
+    <a href="{% url 'mini_fb:profile' profile.pk %}">
+        <h4 class="profile-page-button">Go Back to Profile Page</h4>
+    </a>
+    {% for news in profile.get_news_feed %}
+        <div class="comment">
+            <div class="commenter-container">
+                    <img src="{{news.profile.profile_image_file.url}}" 
+                     alt="{{news.profile.profile_image_file.url}}" 
+                     class="news-feed-profile-image">
+                <a href="{% url 'mini_fb:profile' news.profile.pk %}">
+                    <h4>
+                        {{news.profile.first_name}} {{news.profile.last_name}} {{news.timestamp}}
+                    </h4>
+                </a>
+            </div>
+            <p>{{news.message}}</p>
+        </div>
+
+    {% endfor %}
+
+</main>
+{% endblock %}

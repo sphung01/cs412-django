@@ -13,14 +13,16 @@ from django.conf import settings
 Configures URLs for the 'mini_fb' app
 
 Routes:
-- /mini_fb/                               -> Takes the user to a page with all profiles showing
-- /mini_fb/show_all                       -> Same as default link above
-- /mini_fb/profile/<int:pk>               -> A page that shows a specific profile with their own primary key
-- /mini_fb/create_profile                 -> A page for the user to create new profile
-- /mini_fb/profile/<int:pk>/create_status -> A page to add new messages for specific profile
-- /mini_fb/profile/<int:pk>/update        -> A page to update the Profile instance
-- /mini_fb/status/<int:pk>/delete         -> A page to delete the StatusMessage instance
-- /mini_fb/status/<int:pk>/update         -> A page to update the StatusMessage instance
+- /mini_fb/                                           -> Takes the user to a page with all profiles showing
+- /mini_fb/show_all                                   -> Same as default link above
+- /mini_fb/profile/<int:pk>                           -> A page that shows a specific profile with their own primary key
+- /mini_fb/create_profile                             -> A page for the user to create new profile
+- /mini_fb/profile/<int:pk>/create_status             -> A page to add new messages for specific profile
+- /mini_fb/profile/<int:pk>/update                    -> A page to update the Profile instance
+- /mini_fb/status/<int:pk>/delete                     -> A page to delete the StatusMessage instance
+- /mini_fb/status/<int:pk>/update                     -> A page to update the StatusMessage instance
+- /mini_fb/profile/<int:pk>/add_friend/<int:other_pk> -> When the friend is added, this will redirect user back to the Profile page
+- /mini_fb/profile/<int:pk>/friend_suggestions        -> A page that displays all profiles that are suggested
 
 
 "static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)"
@@ -45,6 +47,7 @@ urlpatterns = [
     path('status/<int:pk>/delete', DeleteStatusMessageView.as_view(), name='delete_status'),
     path('status/<int:pk>/update', UpdateStatusMessageView.as_view(), name='update_status'),
     path('profile/<int:pk>/add_friend/<int:other_pk>', AddFriendView.as_view(), name='add_friend'),
-    path('profile/<int:pk>/friend_suggestions', ShowFriendSuggestionsView.as_view(), name='friend_suggestions')
+    path('profile/<int:pk>/friend_suggestions', ShowFriendSuggestionsView.as_view(), name='friend_suggestions'),
+    path('profile/<int:pk>/news_feed', ShowNewsFeedView.as_view(), name='news_feed'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

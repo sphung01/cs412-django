@@ -287,3 +287,27 @@ class ShowFriendSuggestionsView(DetailView):
         context['current_time'] = time.ctime()
 
         return context
+    
+class ShowNewsFeedView(DetailView):
+    """
+        This will display all of the status messages
+        from the profile itself and friends.
+    """
+
+    # We are using the Profile model to get the list of all the messages
+    model = Profile
+
+    # Find the template to display news feed
+    template_name = 'mini_fb/news_feed.html'
+
+    context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        """
+            Passes over one OR multiple contexts to the HTML template
+        """
+        context = super().get_context_data()
+
+        context['current_time'] = time.ctime()
+
+        return context
