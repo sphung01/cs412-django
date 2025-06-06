@@ -1,18 +1,24 @@
 <!--
     File: mini_fb/templates/mini_fb/news_feed.html
     Author: Steven Phung (sphung01@bu.edu), 6/5/2025
-    Description: A page that displays all of the status messages
+    Description: A news feed that displays all of the status messages
     from this profile and their friends.
 -->
 
 {% extends 'mini_fb/base.html' %}
 {% block content %}
 <main class="news-feed-style">
+
+    <!-- A button that will redirect the user back to the Profile Page -->
     <a href="{% url 'mini_fb:profile' profile.pk %}">
         <h4 class="profile-page-button">Go Back to Profile Page</h4>
     </a>
+
     {% for news in profile.get_news_feed %}
+        <!-- Displays a comment from each Profile -->
         <div class="comment">
+
+            <!-- Keeps the profile picture and info aligned -->
             <div class="commenter-container">
                     <img src="{{news.profile.profile_image_file.url}}" 
                      alt="{{news.profile.profile_image_file.url}}" 
@@ -23,7 +29,12 @@
                     </h4>
                 </a>
             </div>
+            <!-- (END) -->
+            
+            <!-- Displays comment -->
             <p>{{news.message}}</p>
+            <!-- (END) -->
+
             <!-- Displays an image with the optional caption -->
             <div>
                 {% for img_status in news.get_images %}
@@ -33,7 +44,10 @@
                     <img src='{{img_status.image_file.url}}' alt='{{img_status.image_file.url}}' class="img-caption">
                 {% endfor %}
             </div>
+            <!-- (END) -->
+
         </div>
+        <!-- (END) -->
 
     {% endfor %}
 

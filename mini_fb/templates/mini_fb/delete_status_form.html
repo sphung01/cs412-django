@@ -12,7 +12,10 @@
 <h1>Are you sure you want to delete this meesage?</h1>
 <h4 class="delete-message-box">"{{message}}"</h4>
 
-<!-- Display the HTML form -->
+<!--
+    This HTML form will give user a choice
+    to delete the message or cancel
+-->
 <form method="POST">
     {% csrf_token %}
     <input type='submit' value="Yes">

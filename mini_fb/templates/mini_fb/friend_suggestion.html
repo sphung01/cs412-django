@@ -8,9 +8,12 @@
 {% extends 'mini_fb/base.html' %}
 {% block content %}
 <h2 class="friend-suggestion-title">Friend Suggestions</h2>
+
+<!-- A button that will redirect the user back to the Profile Page -->
 <a href="{% url 'mini_fb:profile' profile.pk %}">
     <h4 class="return-profile-page">Go Back to Profile Page</h4>
 </a>
+
 <main class="grid-container">
     
     <!-- This scriptlet loops through the suggestion list -->
@@ -21,6 +24,8 @@
             <a href="{% url 'mini_fb:profile' suggested_profile.pk %}">
                 <h2>{{suggested_profile.first_name}} {{suggested_profile.last_name}}</h2>
             </a>
+            <!-- (END) -->
+
             <!-- If a image exists, add it -->
             {% if suggested_profile.profile_image_file %}
                 <a href="{% url 'mini_fb:profile' suggested_profile.pk %}">
@@ -30,6 +35,7 @@
                 </a>
             {% endif %}
             <!-- (END) -->
+             
         </div>
         <!-- (END) -->
             

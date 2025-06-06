@@ -10,7 +10,10 @@
 {% block content %}
 <h1>Update Profile</h1>
 
-<!-- display the HTML form -->
+<!--
+    This HTML form will give user a choice
+    to update profile or cancel
+-->
 <form action="{% url 'mini_fb:update_profile' profile.pk %}" method="POST" class="form-style">
     {% csrf_token %}
     <h2 class="form-title">Update your information</h2>

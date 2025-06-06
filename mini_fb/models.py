@@ -69,6 +69,7 @@ class Profile(models.Model):
             are not friends (self and other).
         """
 
+        # Check if they are not friending themselves
         if self != other:
             # Check if the friendship already exists
             existing_friends1 = Friend.objects.filter(profile1=self, profile2=other)

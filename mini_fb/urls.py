@@ -23,6 +23,7 @@ Routes:
 - /mini_fb/status/<int:pk>/update                     -> A page to update the StatusMessage instance
 - /mini_fb/profile/<int:pk>/add_friend/<int:other_pk> -> When the friend is added, this will redirect user back to the Profile page
 - /mini_fb/profile/<int:pk>/friend_suggestions        -> A page that displays all profiles that are suggested
+- /mini_fb/profile/<int:pk>/news_feed                 -> A page that displays news feed of all messages
 
 
 "static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)"
