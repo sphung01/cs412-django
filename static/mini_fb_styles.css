@@ -7,6 +7,7 @@
 
 /* This CSS was derived from NetNinja's multi-column grid example. */
 
+/* These styles are mostly for formatting */
 body {
     margin: 30px;
     background: blue;
@@ -137,7 +138,9 @@ li:hover {
     padding: 5px;
     margin: 5px;
 }
+/* These styles are mostly for formatting (END) */
 
+/* All button styles */
 .update-delete-button {
     border: solid;
     border-width: 5px;
@@ -247,15 +250,21 @@ li:hover {
     color:white;
     background-color: black;
 }
+/* All button styles (END) */
 
+/* These styles help keep the containers and images maintained */
 .img-caption {
-    width: 40px;
+    width: 300px;
     object-fit: cover; /* Optional: makes sure the image crops nicely */
 }
 
 img.profile-image {
     width: 50%;
     margin-left: 100px;
+
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 8px;
 }
 
 img.friend-image {
@@ -279,7 +288,6 @@ img.friend-image {
     padding: 10px;
     color: black;
 }
-
 
 .friends-list {
     border: solid;
@@ -321,6 +329,7 @@ img.friend-image {
 footer {
     color: white;
 }
+/* These styles help keep the containers and images maintained (END) */
 
 /* responsive styles: adapt to smaller screen sizes */
 /* 

@@ -24,6 +24,15 @@
                 </a>
             </div>
             <p>{{news.message}}</p>
+            <!-- Displays an image with the optional caption -->
+            <div>
+                {% for img_status in news.get_images %}
+                    {% if img_status.caption %}
+                        <p>{{img_status.caption}}</p>
+                    {% endif %}
+                    <img src='{{img_status.image_file.url}}' alt='{{img_status.image_file.url}}' class="img-caption">
+                {% endfor %}
+            </div>
         </div>
 
     {% endfor %}
