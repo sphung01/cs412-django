@@ -78,10 +78,10 @@ class Profile(models.Model):
             # Only add the friend if no such record exists
             if not existing_friends1.exists() and not existing_friends2.exists():
                 print('They became friends!')
-                new_friend = Friend(profile1=self, profile2=other)
-                new_friend.save()
+                new_friend = Friend(profile1=self, profile2=other) # Create Friend object
+                new_friend.save() # Saves to the database
             else:
-                print('Already friends')
+                print('Already friends') 
                 return
         else:
             print('Cannot friend yourself')
@@ -104,7 +104,7 @@ class Profile(models.Model):
 
         # For every profile that exists
         for profile in all_profiles:
-            # If the Profile is not in the friends list and not the profile we are looking at
+            # If the Profile is not in the friends list and Profile is not self
             if profile not in friends and profile != self:
                 # Add that Profile to the suggestion list
                 suggestion_list.append(profile)
