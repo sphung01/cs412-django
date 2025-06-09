@@ -1,0 +1,80 @@
+Given this model definition:
+class Article(models.Model):
+    '''Encapsulate the idea of an Article by some author.'''
+
+    # data attributes of a Article:
+    title = models.TextField(blank=False)
+    author = models.TextField(blank=False)
+    text = models.TextField(blank=False)
+    published = models.DateTimeField(auto_now=True)
+    image_file = models.ImageField()
+
+    def __str__(self):
+        '''Return a string representation of this Article object.'''
+        return f'{self.title} by {self.author}'
+
+
+class Comment(models.Model):
+    '''Encapsulate the idea of a Comment on an Article.'''
+
+    # data attributes of a Comment:
+    article = models.ForeignKey("Article", on_delete=models.CASCADE)
+    author = models.TextField(blank=False)
+    text = models.TextField(blank=False)
+    published = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        '''Return a string representation of this Comment object.'''
+        return f'{self.text}'
+
+This view definition:
+class ShowAllView(ListView):
+    '''Create a subclass of ListView to display all blog articles.'''
+
+    model = Article # retrieve objects of type Article from the database
+    template_name = 'blog/show_all.html'
+    context_object_name = 'articles' # how to find the data in the template file
+
+And this URL pattern defintion:
+urlpatterns = [
+    path('', ShowAllView.as_view(), name='show_all'), 
+]
+
+Q: Write a method to get all Comments on an Article
+
+A: 
+def get_all_comments(self):
+	return Comment.object.filter(article=self)
+	
+Q: Write the HTML source code to display the image as part of an Article
+
+A: 
+{% for article in articles %}
+	{% if article.image_file %}
+		<img src="{{article.image_file.url}}” alt="{{article.image_file.url}}”>
+	{% endif %}
+{% endfor %}
+
+
+Q: Write a subclass of UpdateView to update a Comment. Write the URL pattern for this view.
+
+A:
+class UpdateCommentView(UpdateView):
+	model = Comment
+	form_class = UpdateCommentForm
+	template_name = ‘blog/update_comment_form.html’
+
+urlpatterns = [
+	…
+    path(‘comment/<int:pk>/update’, UpdateCommentView.as_view(), name=‘update_comment’) 
+]
+
+
+Q: Write the code to retrieve all Comments on all Articles published by ‘John Lennon’, 
+where the Comments were published after 2025-06-05
+
+A:
+Comment.objects.filter(
+    article__author='John Lennon',
+    published__gt=datetime(2025, 6, 5)
+)
