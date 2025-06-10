@@ -10,6 +10,7 @@ from .forms import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.urls import reverse
 from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin ## NEW
 import random
 import time
 
@@ -87,7 +88,7 @@ class CreateProfileView(CreateView):
 
         return context
     
-class CreateStatusMessageView(CreateView):
+class CreateStatusMessageView(LoginRequiredMixin, CreateView):
     """
         This view will display a form where the user will submit their
         Profile and it'll be saved to the database.   
@@ -151,7 +152,7 @@ class CreateStatusMessageView(CreateView):
         # delegate the work to the superclass method form_valid:
         return super().form_valid(form)
     
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
     """
         This will allow a user to update the Profile with
         the use of the PUT operation.
@@ -176,7 +177,7 @@ class UpdateProfileView(UpdateView):
 
         return context
 
-class DeleteStatusMessageView(DeleteView):
+class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
     """
         This will allow the user to delete the Message instance and
         the server will remove from the database
@@ -208,7 +209,7 @@ class DeleteStatusMessageView(DeleteView):
 
         return context
 
-class UpdateStatusMessageView(UpdateView):
+class UpdateStatusMessageView(LoginRequiredMixin, UpdateView):
     """
         This will allow the user to update the Message instance and
         the server will remove from the database

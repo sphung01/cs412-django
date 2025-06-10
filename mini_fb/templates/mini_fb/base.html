@@ -27,13 +27,43 @@
                 <!-- Navigation Bar -->
                 <nav>
                     <ul>
+                        <!-- These are the links for non-login users -->
                         <a href="{% url 'mini_fb:show_all_profiles' %}">
                             <li>Show All</li>
                         </a>
                         <a href="{% url 'mini_fb:create_profile' %}">
                             <li>Create Profile</li>
                         </a>
+                        
+                        <!-- 
+                            If the user is logged in or authenticated,
+                            they have an option to click on the 'My Profile' link.
+                            Otherwise, don't show the 'My Profile' link and display
+                            the login button.
+                        -->
+                        {% if request.user.is_authenticated %}
+                            <a href="">
+                                <li>My Profile</li>
+                            </a>
+                        {% else %}
+                            <a href="">
+                                <li>Login</li>
+                            </a>
+                        {% endif %}
                     </ul>
+                    <!-- 
+                        Displays which user is logged in and a 'log out'
+                        button. Otherwise, displays 'Not logged in'
+                    -->
+                    {% if request.user.is_authenticated %}
+                    Logged in as: {{request.user}}
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-button">Log Out</button>
+                    </form>
+                    {% else %}
+                    Not logged in.
+                    {% endif %}
                 </nav>
                 <!-- (END) -->
 

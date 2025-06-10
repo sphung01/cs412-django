@@ -6,6 +6,7 @@
 
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Profile(models.Model):
@@ -19,6 +20,7 @@ class Profile(models.Model):
     city = models.CharField(max_length=250, blank=False)
     email_address = models.CharField(max_length=250, blank=False)
     profile_image_file = models.ImageField(blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE) #New
 
     # On the 'admin' database, we create a string that
     # represents the Profile object
