@@ -143,8 +143,18 @@ class CreateStatusMessageView(LoginRequiredMixin, CreateView):
         return reverse('login')
     
     def get_object(self):
+        """
+            Returns an object that is linked or connected with
+            the user.
+        """
+
+        # Stores the user FK
         logged_user = self.request.user
+
+        # Use the foreign key and match with the specific Profile object
         user_profile = Profile.objects.get(user=logged_user)
+
+        # Once we find the connection, we return the profile of that user
         return user_profile
 
     def get_context_data(self, **kwargs):
@@ -218,8 +228,18 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
         return reverse('login')
     
     def get_object(self):
+        """
+            Returns an object that is linked or connected with
+            the user.
+        """
+
+        # Stores the user FK
         logged_user = self.request.user
+
+        # Use the foreign key and match with the specific Profile object
         user_profile = Profile.objects.get(user=logged_user)
+
+        # Once we find the connection, we return the profile of that user
         return user_profile
 
     def get_context_data(self, **kwargs):
@@ -311,8 +331,18 @@ class AddFriendView(LoginRequiredMixin, View):
         return reverse('login')
     
     def get_object(self):
+        """
+            Returns an object that is linked or connected with
+            the user.
+        """
+
+        # Stores the user FK
         logged_user = self.request.user
+
+        # Use the foreign key and match with the specific Profile object
         user_profile = Profile.objects.get(user=logged_user)
+
+        # Once we find the connection, we return the profile of that user
         return user_profile
 
     def dispatch(self, request, *args, **kwargs):
@@ -356,8 +386,18 @@ class ShowFriendSuggestionsView(LoginRequiredMixin, DetailView):
     context_object_name = 'profile'
 
     def get_object(self):
+        """
+            Returns an object that is linked or connected with
+            the user.
+        """
+
+        # Stores the user FK
         logged_user = self.request.user
+
+        # Use the foreign key and match with the specific Profile object
         user_profile = Profile.objects.get(user=logged_user)
+
+        # Once we find the connection, we return the profile of that user
         return user_profile
 
     def get_context_data(self, **kwargs):
@@ -389,8 +429,18 @@ class ShowNewsFeedView(LoginRequiredMixin, DetailView):
     context_object_name = 'profile'
 
     def get_object(self):
+        """
+            Returns an object that is linked or connected with
+            the user.
+        """
+
+        # Stores the user FK
         logged_user = self.request.user
+
+        # Use the foreign key and match with the specific Profile object
         user_profile = Profile.objects.get(user=logged_user)
+
+        # Once we find the connection, we return the profile of that user
         return user_profile
 
     def get_context_data(self, **kwargs):
