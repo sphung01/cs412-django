@@ -14,7 +14,7 @@
     This HTML form will give user a choice
     to update profile or cancel
 -->
-<form action="{% url 'mini_fb:update_profile' profile.pk %}" method="POST" class="form-style">
+<form action="{% url 'mini_fb:update_profile' %}" method="POST" class="form-style">
     {% csrf_token %}
     <h2 class="form-title">Update your information</h2>
     <table class="form-table">

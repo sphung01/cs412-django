@@ -2,24 +2,35 @@
     File: mini_fb/templates/mini_fb/create_profile_form.html
     Author: Steven Phung (sphung01@bu.edu), 5/29/2025
     Description: A page that displays a form for the user
-    to submit their profile and add to the database.
+    to create new account and profile. Both info will then
+    be added to the database.
 -->
 
 {% extends 'mini_fb/base.html' %}
 {% block content %}
-<h1>Create New Profile</h1>
+<h1>Create New Mini Facebook Account!</h1>
 
 <!--
     This HTML form will allow the user to enter their
-    information to create their own profile
+    information to create their own user and profile
 -->
-<form action="{% url 'mini_fb:create_profile' %}" method="POST" class="form-style">
+<form action="{% url 'mini_fb:create_profile' %}" method="POST" class="form-style" enctype="multipart/form-data">
     {% csrf_token %}
     <h2 class="form-title">Please enter your information</h2>
+
+    <!-- A form to create new user -->
+    <h2>Create New User</h2>
     <table class="form-table">
-        {{form.as_table}}
+        {{ user_creation_form.as_table }}
     </table>
 
+    <!-- A form to create new Profile-->
+    <h2>Create New Profile</h2>
+    <table class="form-table">
+        {{ form.as_table }}
+    </table>
+
+    <!-- A submit button -->
     <input type="submit">
 </form>
 {% endblock %}

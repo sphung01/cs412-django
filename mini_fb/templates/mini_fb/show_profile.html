@@ -2,7 +2,10 @@
     File: mini_fb/templates/mini_fb/show_profile.html
     Author: Steven Phung (sphung01@bu.edu), 5/27/2025
     Description: A page that displays a specific profile
-    after the user clicks on the image.
+    after the user clicks on the image. NOTE: If the user is logged in,
+    the buttons only appear in their own profile. Everything else is read-only.
+    However, if the user is not logged in, every profile will still be read-only
+    to them. Buttons will not show.
 -->
 
 {% extends 'mini_fb/base.html' %}
@@ -27,10 +30,10 @@
 
             <!-- This will redirect user to a page where they can update/change info on this Profile -->
             {% if request.user.is_authenticated and request.user == profile.user %}
-            <!-- Only for user -->
-            <a href="{% url 'mini_fb:update_profile' %}">
-                <h4 class="update-profile-button">Update Profile</h4>
-            </a>
+                <!-- Only for user -->
+                <a href="{% url 'mini_fb:update_profile' %}">
+                    <h4 class="update-profile-button">Update Profile</h4>
+                </a>
             {% endif %}
             <!-- (END) -->
 
@@ -38,10 +41,10 @@
             <div class="friends-list">
                 <h2>Friends</h2>
                 {% if request.user.is_authenticated and request.user == profile.user %}
-                <!-- Only for user -->
-                <a href="{% url 'mini_fb:friend_suggestions' %}">
-                    <h3 class="friend-suggestion-button">Connect With Others</h3>
-                </a>
+                    <!-- Only for user -->
+                    <a href="{% url 'mini_fb:friend_suggestions' %}">
+                        <h3 class="friend-suggestion-button">Connect With Others</h3>
+                    </a>
                 {% endif %}
                 {% for friend in profile.get_friends %}
                     <a href="{% url 'mini_fb:profile' friend.pk %}">
@@ -83,17 +86,17 @@
                         <!-- Allows user to update the message -->
                         <!-- Only for user -->
                         {% if request.user.is_authenticated and request.user == profile.user %}
-                        <a href="{% url 'mini_fb:update_status' st_msg.pk %}">
-                            <h4 class="update-delete-button">Update</h4>
-                        </a>
+                            <a href="{% url 'mini_fb:update_status' st_msg.pk %}">
+                                <h4 class="update-delete-button">Update</h4>
+                            </a>
                         {% endif %}
 
                         <!-- Allows user to delete the message -->
                         <!-- Only for user -->
                         {% if request.user.is_authenticated and request.user == profile.user %}
-                        <a href="{% url 'mini_fb:delete_status' st_msg.pk %}">
-                            <h4 class="update-delete-button">Delete</h4>
-                        </a>
+                            <a href="{% url 'mini_fb:delete_status' st_msg.pk %}">
+                                <h4 class="update-delete-button">Delete</h4>
+                            </a>
                         {% endif %}
                     </div>
                 </div>
@@ -102,18 +105,18 @@
 
             <!-- Redirects user to a page where they can add new messages -->
             {% if request.user.is_authenticated and request.user == profile.user %}
-            <!-- Only for user -->
-            <a href="{% url 'mini_fb:create_status' %}">
-                <h4 class="add-message-button">Add Message</h4>
-            </a>
+                <!-- Only for user -->
+                <a href="{% url 'mini_fb:create_status' %}">
+                    <h4 class="add-message-button">Add Message</h4>
+                </a>
             {% endif %}
 
             <!-- Redirects user to news feed -->
             {% if request.user.is_authenticated and request.user == profile.user %}
-            <!-- Only for user -->
-            <a href="{% url 'mini_fb:news_feed' %}">
-                <h4 class="news-feed-button">Check News Feed</h4>
-            </a>
+                <!-- Only for user -->
+                <a href="{% url 'mini_fb:news_feed' %}">
+                    <h4 class="news-feed-button">Check News Feed</h4>
+                </a>
             {% endif %}
 
         </div>

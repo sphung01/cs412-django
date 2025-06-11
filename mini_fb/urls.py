@@ -25,6 +25,8 @@ Routes:
 - /mini_fb/profile/<int:pk>/add_friend/<int:other_pk> -> When the friend is added, this will redirect user back to the Profile page
 - /mini_fb/profile/<int:pk>/friend_suggestions        -> A page that displays all profiles that are suggested
 - /mini_fb/profile/<int:pk>/news_feed                 -> A page that displays news feed of all messages
+- /mini_fb/login                                      -> A login page to authenticate user
+- /mini_fb/logout                                     -> Logs user out and returns to 'show_all_profiles' page
 
 
 "static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)"

@@ -11,7 +11,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 import random
 import time
 
@@ -86,8 +87,42 @@ class CreateProfileView(CreateView):
         context = super().get_context_data()
 
         context['current_time'] = time.ctime()
+        context['user_creation_form'] = UserCreationForm()
 
         return context
+    
+    def form_valid(self, form):
+        '''
+            This method handles the form submission and saves the 
+            new object to the Django database.
+        '''
+        # Reconstruct the UserCreationForm instance 
+        # from the self.request.POST data
+        user_form = UserCreationForm(self.request.POST)
+
+
+        if user_form.is_valid():
+            # Call the save() method on the UserCreationForm instance. 
+            # This method call will return the 
+            # newly created User object. 
+            # Save it to a variable.
+            new_user = user_form.save()
+
+            # Log the User in
+            login(self.request, new_user)
+
+            # Attach the new User to the Profile being created
+            form.instance.user = new_user
+
+            print(f"CreateProfileView.form_valid: form.cleaned_data={form.cleaned_data}")
+
+            # Delegate the work to the superclass method form_valid:
+            return super().form_valid(form)
+        else:
+            # If the UserCreationForm is invalid, re-render the page with both forms
+            return self.render_to_response(
+                self.get_context_data(form=form, user_creation_form=user_form)
+            )
     
 class CreateStatusMessageView(LoginRequiredMixin, CreateView):
     """
@@ -118,7 +153,7 @@ class CreateStatusMessageView(LoginRequiredMixin, CreateView):
         """
         context = super().get_context_data(**kwargs)
 
-        pk = self.kwargs['pk']
+        pk = self.get_object().pk
         profile = Profile.objects.get(pk=pk)
 
         context['profile'] = profile
@@ -138,8 +173,8 @@ class CreateStatusMessageView(LoginRequiredMixin, CreateView):
         print(f"CreateStatusMessageView.form_valid: form.cleaned_data={form.cleaned_data}")
         
         # Retrieve the PK from the URL pattern
-        pk = self.kwargs['pk']
-        profile = Profile.objects.get(pk=pk)
+        # pk = self.kwargs['pk']
+        profile = self.get_object()
         # Attach this profile to the comment
         form.instance.profile = profile # set the FK
 
@@ -288,7 +323,7 @@ class AddFriendView(LoginRequiredMixin, View):
         """
 
         # We get the parameters of the URL
-        profile_id = kwargs.get('pk')
+        profile_id = self.get_object().pk
         other_id = kwargs.get('other_pk')
 
         # Use the keys to get the Profile objects

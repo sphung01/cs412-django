@@ -19,7 +19,7 @@ h1 {
 }
 
 h2, h3 {
-    color: #828b82;
+    color: black;
 }
 
 .delete-message-box {
@@ -50,6 +50,17 @@ header {
     text-align: center; /* Centered all profiles for good look */
     align-items: center;
     justify-content: center;
+}
+
+.logger-info {
+    color: black;
+    background-color: white;
+    width: 40%;
+    text-align: center; /* Centered all profiles for good look */
+    border-style: solid;
+    border-width: 5px;
+    border-color: black;
+    border-radius: 10px;
 }
 
 .news-feed-style {
@@ -96,7 +107,7 @@ a {
     text-decoration: none;
 }
 
-li:hover {
+nav li:hover {
     background-color: black;
 }
 
@@ -249,6 +260,12 @@ li:hover {
 .return-profile-page:hover {
     color:white;
     background-color: black;
+}
+
+.logout-button {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
 }
 /* All button styles (END) */
 

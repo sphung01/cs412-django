@@ -169,7 +169,7 @@ class StatusMessage(models.Model):
         """
             Return the URL to display one instance of this model.
         """
-        return reverse('mini_fb:profile', kwargs={'pk':self.profile.pk})
+        return reverse('mini_fb:profile', kwargs={'pk': self.profile.pk})
     
 class Image(models.Model):
     """

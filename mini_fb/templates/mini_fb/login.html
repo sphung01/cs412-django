@@ -10,11 +10,11 @@
 {% block content %}
 <main>
     <h1>Login to Mini Facebook</h1>
-    <form action="{% url 'mini_fb:login' %}" method="POST">
+    <form action="{% url 'mini_fb:login' %}" method="POST" class="form-style">
         {% csrf_token %}
         {{form}}
         <input type="submit" value="Login">
-        <!-- This basic login form works, but after login in
+        <!-- This basic login form works, but after login, it
         assumed the existance of a page at /registration/profile, which
         does not exist.  -->
         {% if request.GET.next %}
