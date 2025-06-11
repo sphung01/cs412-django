@@ -42,11 +42,11 @@
                             the login button.
                         -->
                         {% if request.user.is_authenticated %}
-                            <a href="">
+                            <a href="{% url 'mini_fb:profile' request.user.profile_set.first.pk %}">
                                 <li>My Profile</li>
                             </a>
                         {% else %}
-                            <a href="">
+                            <a href="{% url 'mini_fb:login' %}">
                                 <li>Login</li>
                             </a>
                         {% endif %}
@@ -57,7 +57,7 @@
                     -->
                     {% if request.user.is_authenticated %}
                     Logged in as: {{request.user}}
-                    <form method="post" action="">
+                    <form method="post" action="{% url 'mini_fb:logout' %}">
                         {% csrf_token %}
                         <button type="submit" class="logout-button">Log Out</button>
                     </form>

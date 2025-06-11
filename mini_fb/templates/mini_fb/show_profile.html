@@ -26,9 +26,9 @@
             <!-- (END) -->
 
             <!-- This will redirect user to a page where they can update/change info on this Profile -->
-            {% if request.user.is_authenticated %}
+            {% if request.user.is_authenticated and request.user == profile.user %}
             <!-- Only for user -->
-            <a href="{% url 'mini_fb:update_profile' profile.pk %}">
+            <a href="{% url 'mini_fb:update_profile' %}">
                 <h4 class="update-profile-button">Update Profile</h4>
             </a>
             {% endif %}
@@ -37,9 +37,9 @@
             <!-- Display a list of friends -->
             <div class="friends-list">
                 <h2>Friends</h2>
-                {% if request.user.is_authenticated %}
+                {% if request.user.is_authenticated and request.user == profile.user %}
                 <!-- Only for user -->
-                <a href="{% url 'mini_fb:friend_suggestions' profile.pk %}">
+                <a href="{% url 'mini_fb:friend_suggestions' %}">
                     <h3 class="friend-suggestion-button">Connect With Others</h3>
                 </a>
                 {% endif %}
@@ -82,7 +82,7 @@
 
                         <!-- Allows user to update the message -->
                         <!-- Only for user -->
-                        {% if request.user.is_authenticated %}
+                        {% if request.user.is_authenticated and request.user == profile.user %}
                         <a href="{% url 'mini_fb:update_status' st_msg.pk %}">
                             <h4 class="update-delete-button">Update</h4>
                         </a>
@@ -90,7 +90,7 @@
 
                         <!-- Allows user to delete the message -->
                         <!-- Only for user -->
-                        {% if request.user.is_authenticated %}
+                        {% if request.user.is_authenticated and request.user == profile.user %}
                         <a href="{% url 'mini_fb:delete_status' st_msg.pk %}">
                             <h4 class="update-delete-button">Delete</h4>
                         </a>
@@ -101,17 +101,17 @@
             <!-- End of the loop -->
 
             <!-- Redirects user to a page where they can add new messages -->
-            {% if request.user.is_authenticated %}
+            {% if request.user.is_authenticated and request.user == profile.user %}
             <!-- Only for user -->
-            <a href="{% url 'mini_fb:create_status' profile.pk %}">
+            <a href="{% url 'mini_fb:create_status' %}">
                 <h4 class="add-message-button">Add Message</h4>
             </a>
             {% endif %}
 
             <!-- Redirects user to news feed -->
-            {% if request.user.is_authenticated %}
+            {% if request.user.is_authenticated and request.user == profile.user %}
             <!-- Only for user -->
-            <a href="{% url 'mini_fb:news_feed' profile.pk %}">
+            <a href="{% url 'mini_fb:news_feed' %}">
                 <h4 class="news-feed-button">Check News Feed</h4>
             </a>
             {% endif %}
