@@ -46,11 +46,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hw', # Installed an app for example 1
-    'formdata', #Installed the 'formdata' app for example 2
-    'blog', #Installed the 'blog' app for example 3
+    'formdata', # Installed the 'formdata' app for example 2
+    'blog', # Installed the 'blog' app for example 3-7,
+    'marathon_analytics', # Installed the 'marathon_analytics' app for example 8,
     'quotes', # Installed an app of the "Quote of The Day" website (assignment 1)
-    'restaurant', #Installed an app for the "Krusty Krab" website (assignment 2)
-    'mini_fb', #Installed an app for the Mini Facebook website (assignment 3)
+    'restaurant', # Installed an app for the "Krusty Krab" website (assignment 2)
+    'mini_fb', # Installed an app for the Mini Facebook website (assignment 3-7)
 ]
 
 MIDDLEWARE = [
