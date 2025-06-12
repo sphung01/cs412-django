@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'quotes', # Installed an app of the "Quote of The Day" website (assignment 1)
     'restaurant', # Installed an app for the "Krusty Krab" website (assignment 2)
     'mini_fb', # Installed an app for the Mini Facebook website (assignment 3-7)
+    'voter_analytics', # Installed an app for the Voter Analytics website (assignment 8)
 ]
 
 MIDDLEWARE = [

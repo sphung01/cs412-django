@@ -60,7 +60,7 @@ def load_data():
     # delete existing records to prevent duplicates:
     Result.objects.all().delete()
     
-    filename = '/django/2023_chicago_results.csv'
+    filename = '/Users/itzsinnoh/Desktop/django/newton_voters.csv'
     f = open(filename)
     f.readline()  # discard headers
 
