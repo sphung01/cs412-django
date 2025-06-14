@@ -27,6 +27,8 @@ during the deployment.
 app_name = 'voter_analytics'
 
 urlpatterns = [
-    
+    path(r'', VotersListView.as_view(), name='home'),
+    path(r'voters', VotersListView.as_view(), name='voters_list'),
+    path(r'voter/<int:pk>', VoterDetailView.as_view(), name='voter')
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

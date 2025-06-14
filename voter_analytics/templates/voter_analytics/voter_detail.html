@@ -1,0 +1,88 @@
+{% extends 'voter_analytics/base.html' %}
+{% block content %}
+<main>
+    <h1>{{voter.first_name}} {{voter.last_name}}</h1>
+
+    <div>
+        <h3>Show voter's address on Google Maps</h3>
+        <a href="https://www.google.com/maps/search/{{ voter.street_number }}+{{ voter.street_name }}{% if voter.apartment_number %}+APT+{{ voter.apartment_number }}{% endif %}+{{ voter.zip_code }}" target="_blank">
+            <h3>
+                {{ voter.street_number }} 
+                {{ voter.street_name }}
+                {% if voter.apartment_number %}
+                    APT#{{ voter.apartment_number }},
+                {% endif %}
+                {{ voter.zip_code }}
+            </h3>
+        </a>
+    </div>
+
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Information</th>
+        </tr>
+        <tr>
+            <td>Street Address</td>
+            <td>
+                {{ voter.street_number }} 
+                {{ voter.street_name }}
+                {% if voter.apartment_number %}
+                    APT#{{ voter.apartment_number }},
+                {% endif %}
+                {{ voter.zip_code }}
+            </td>
+        </tr>
+        <tr>
+            <td>Date of Birth</td>
+            <td>{{voter.date_of_birth}}</td>
+        </tr>
+        <tr>
+            <td>Voter Registration Date</td>
+            <td>{{voter.date_of_registration}}</td>
+        </tr>
+        <tr>
+            <td>Party Affiliation</td>
+            <td>{{voter.party_affiliation}}</td>
+        </tr>
+        <tr>
+            <td>Precinct Number</td>
+            <td>{{voter.precinct_number}}</td>
+        </tr>
+        <tr>
+            <td>Voter Score</td>
+            <td>{{voter.voter_score}}</td>
+        </tr>
+    </table>
+
+    <div>
+        <h2>Participated in these events?</h2>
+        <table>
+            <tr>
+                <th>Elections</th>
+                <th>Voted? (True or False)</th>
+            </tr>
+            <tr>
+                <td>V20State</td>
+                <td>{{voter.v20state}}</td>
+            </tr>
+            <tr>
+                <td>V21Town</td>
+                <td>{{voter.v21town}}</td>
+            </tr>
+            <tr>
+                <td>V21Primary</td>
+                <td>{{voter.v21primary}}</td>
+            </tr>
+            <tr>
+                <td>V22General</td>
+                <td>{{voter.v22general}}</td>
+            </tr>
+            <tr>
+                <td>V23Town</td>
+                <td>{{voter.v23town}}</td>
+            </tr>
+        </table>
+    </div>
+</main>
+{% endblock %}

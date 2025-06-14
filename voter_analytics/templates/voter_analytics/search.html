@@ -1,0 +1,89 @@
+<h1>Search Filter Form</h1>
+
+<div>
+    <table>
+        <form action="">
+        
+            <tr>
+                <th>Party Affiliation:</th>
+                <td>
+                    <select name="party">
+                        <option value="">-- All --</option>
+                        <option value="U ">U</option>
+                        <option value="D ">D</option>
+                        <option value="R ">R</option>
+                        <option value="CC">CC</option>
+                        <option value="L ">L</option>
+                        <option value="T ">T</option>
+                        <option value="O ">O</option>
+                        <option value="G ">G</option>
+                        <option value="J ">J</option>
+                        <option value="Q ">Q</option>
+                        <option value="FF">FF</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th>Date of Birth:</th>
+                <td>
+                    From
+                    <select name="year_start">
+                        <option value="">-- All --</option>
+                        {% for year in calender_year %}
+                            <option value="{{ year }}">{{ year }}</option>
+                        {% endfor %}
+                    </select>
+                    To
+                    <select name="year_end">
+                        <option value="">-- All --</option>
+                        {% for year in calender_year %}
+                            <option value="{{ year }}">{{ year }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th>Voter Score:</th>
+                <td>
+                    <select name="voter_score">
+                        <option value="">-- All --</option>
+                        {% for score in voter_scores %}
+                            <option value="{{ score }}">{{ score }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <th>Voted In Specific Elections:</th>
+                <td>
+                    <label>
+                        <input type="checkbox" name="v20state" value="true">2020 State
+                    </label>
+                    <label>
+                        <input type="checkbox" name="v21town" value="true">2021 Town
+                    </label>
+                    <label>
+                        <input type="checkbox" name="v21primary" value="true">2021 Primary
+                    </label>
+                    <label>
+                        <input type="checkbox" name="v22general" value="true">2022 General
+                    </label>
+                    <label>
+                        <input type="checkbox" name="v23town" value="true">2023 Town
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td><input type="submit"></td>
+                <td></td>
+            </tr>
+
+
+            
+        </form>
+    </table>
+</div>

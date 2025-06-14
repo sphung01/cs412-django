@@ -1,0 +1,56 @@
+{% extends 'voter_analytics/base.html' %}
+<h1>Showing all Voters</h1>
+
+{% block content %}
+<main>
+    <div>
+        {% include "voter_analytics/search.html" %}
+        {% if is_paginated %}
+        <ul>
+                <li>
+                    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                </li>
+            {% if page_obj.has_next %}
+                <li>
+                    <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                </li>
+            {% endif %}
+            {% if page_obj.has_previous %}
+                <li>
+                    <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+                </li>
+            {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+
+    <table>
+        <tr>
+            <th>Full Name (Last, First)</th>
+            <th>Street Address</th>
+            <th>Date of Birth</th>
+            <th>Party Affiliation</th>
+            <th>Voter Score</th>
+        </tr>
+
+        {% for v in voters %}
+        <tr>
+            <td>
+                <a href="{% url 'voter_analytics:voter' v.pk %}">{{ v.last_name }}, {{ v.first_name }}</a>
+            </td>
+            <td>
+                {{ v.street_number }} 
+                {{ v.street_name }}
+                {% if v.apartment_number %}
+                    APT#{{ v.apartment_number }},
+                {% endif %}
+                {{ v.zip_code }}
+            </td>
+            <td>{{ v.date_of_birth }}</td>
+            <td>{{ v.party_affiliation }}</td>
+            <td>{{ v.voter_score }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</main>
+{% endblock %}
