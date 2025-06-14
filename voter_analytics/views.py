@@ -1,8 +1,15 @@
+# File: voter_analytics/views.py
+# Author: Steven Phung (sphung01@bu.edu), 5/27/2025
+# Description: In this file, we create view functions
+# to send back a response to the client. Such as
+# displaying the appropriate template on the web.
+
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView ## NEW
 from .models import Voter
 import plotly
 import plotly.graph_objs as go
+import time
 
 # Create your views here.
 class VotersListView(ListView):
@@ -11,14 +18,26 @@ class VotersListView(ListView):
         Voters existing in the database.
     """
 
+    # Finds the path to the voters.html
     template_name = 'voter_analytics/voters.html'
+
+    # Retrieves the Voter model from database
     model = Voter
+
+    # Passes over the context to HTML
     context_object_name = 'voters'
+
+    # Sets each page to have 100 Voters
     paginate_by = 100
 
     def get_queryset(self):
-        
-        # Start with entire queryset
+        """
+            When a user submits a filter, the server uses the GET method
+            to obtain the info so that it is able to filter the Voters and
+            create a queryset. After everything has been processed, this method will
+            return all voters that fits the description.
+        """
+        # Start with entire queryset by ordering DoB
         voters = super().get_queryset().order_by('date_of_birth')
 
         # Filter results by these field(s):
@@ -48,28 +67,64 @@ class VotersListView(ListView):
             if voted_field in self.request.GET:
                 voters = voters.filter(**{voted_field: True})
 
-                
+        # Finally returns the voters queryset
         return voters
 
     def get_context_data(self, **kwargs):
+        """
+            Returns more contexts to HTML
+        """
         context = super().get_context_data()
-        context['voter_scores'] = range(6)  # 0 to 5 inclusive
-        context['calender_year'] = range(1913, 2026)
+        context['voter_scores'] = range(6) # from 0 to 5
+        context['calender_year'] = range(1913, 2026) # from year 1913 to 2025
+        context['current_time'] = time.ctime()
         return context
 
 class VoterDetailView(DetailView):
+    """
+        A view that displays a single Voter if clicked on.
+    """
+
+    # Finds the path to the voter_detail.html
     template_name = 'voter_analytics/voter_detail.html'
+
+    # Retrieves the Voter model from database
     model = Voter
+
+    # Passes over the context to HTML
     context_object_name = 'voter'
 
+    def get_context_data(self, **kwargs):
+        """
+            Returns more contexts to HTML
+        """
+        context = super().get_context_data()
+        context['current_time'] = time.ctime()
+        return context
+
 class VotersGraphListView(ListView):
+    """
+        A view that will display three graphs:
+        DoB (by year), Party Affiliation, and Elections.
+    """
+    # Finds the path to the graphs.html
     template_name = 'voter_analytics/graphs.html'
+
+    # Retrieves the Voter model from database
     model = Voter
+
+    # Passes over the context to HTML
     context_object_name = 'voters'
 
     def get_queryset(self):
-        
-        # Start with entire queryset
+        """
+            When a user submits a filter, the server uses the GET method
+            to obtain the info so that it is able to filter the Voters and
+            create a queryset. After everything has been processed, this method will
+            return all voters that fits the description.
+        """
+
+        # Start with entire queryset by ordering DoB
         voters = super().get_queryset().order_by('date_of_birth')
 
         # Filter results by these field(s):
@@ -99,9 +154,13 @@ class VotersGraphListView(ListView):
             if voted_field in self.request.GET:
                 voters = voters.filter(**{voted_field: True})
      
+        # Finally returns the voters queryset
         return voters
 
     def get_context_data(self, **kwargs):
+        """
+            Returns more contexts to HTML
+        """
         context = super().get_context_data(**kwargs)
 
         # Count voters by year of birth
@@ -118,7 +177,7 @@ class VotersGraphListView(ListView):
         x = [year for year, count in sorted_items]
         y = [count for year, count in sorted_items]
 
-        # Create Plotly Histogram (Bar Chart)
+        # Create Plotly Histogram (Bar Chart) for DoB by years
         fig = go.Bar(x=x, y=y)
         title=f'Voter Distribution by Year of Birth (n={self.get_queryset().count()})'
         graph_div_histogram = plotly.offline.plot({"data": [fig], 
@@ -129,7 +188,6 @@ class VotersGraphListView(ListView):
 
         # We will create a Pie Chart based on whichever Party Affiliation
         # each Voter is in.
-
         # First, we need to find the labels for X.
         x = ['U', 'D', 'R', 'CC', 'L', 'T', 'O', 'G', 'J', 'Q', 'FF']
 
@@ -196,6 +254,7 @@ class VotersGraphListView(ListView):
         context['birth_year_histogram'] = graph_div_histogram
         context['party_affiliation_pie_chart'] = graph_div_pie
         context['election_bar_chart'] = graph_div_bar
-        context['voter_scores'] = range(6)  # 0 to 5 inclusive
-        context['calender_year'] = range(1913, 2026)
+        context['voter_scores'] = range(6)  # From 0 to 5
+        context['calender_year'] = range(1913, 2026) # From 1913 to 2025
+        context['current_time'] = time.ctime()
         return context

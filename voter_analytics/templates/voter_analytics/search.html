@@ -1,8 +1,18 @@
-<h1>Search Filter Form</h1>
+<!--
+    File: voter_analytics/templates/voter_analytics/search.html
+    Author: Steven Phung (sphung01@bu.edu), 6/13/2025
+    Description: A template we can use to help filter Voters.
+    This is helpful for keeping the files organized and we
+    can simply use this for any other HTMLs.
+-->
 
-<div>
-    <table>
+<div class="search-filter-form">
+    <h1>Search Filter Form</h1>
+    <!-- We have a form that will allow user to filter the Voters -->
+    <table class="filter-table">
         <form action="">
+
+            <!-- A dropdown list for Party Affiliations -->
             <tr>
                 <th>Party Affiliation:</th>
                 <td>
@@ -23,9 +33,11 @@
                 </td>
             </tr>
 
+            <!-- A dropdown list to filter DoB by calender year -->
             <tr>
                 <th>Date of Birth:</th>
                 <td>
+                    <!-- Where to start from -->
                     From
                     <select name="year_start">
                         <option value="">-- All --</option>
@@ -33,6 +45,7 @@
                             <option value="{{ year }}">{{ year }}</option>
                         {% endfor %}
                     </select>
+                    <!-- Where to end at -->
                     To
                     <select name="year_end">
                         <option value="">-- All --</option>
@@ -43,6 +56,7 @@
                 </td>
             </tr>
 
+            <!-- A dropdown list to filter Voters based on voter score -->
             <tr>
                 <th>Voter Score:</th>
                 <td>
@@ -55,6 +69,7 @@
                 </td>
             </tr>
 
+            <!-- Checkboxes to filter Voters based on which election they have participated in -->
             <tr>
                 <th>Voted In Specific Elections:</th>
                 <td>
@@ -76,13 +91,8 @@
                 </td>
             </tr>
 
-            <tr>
-                <td><input type="submit"></td>
-                <td></td>
-            </tr>
-
-
-            
+            <!-- A submit/filter button -->
+            <input type="submit" value="Filter Voters!" class="filter-button">
         </form>
     </table>
 </div>

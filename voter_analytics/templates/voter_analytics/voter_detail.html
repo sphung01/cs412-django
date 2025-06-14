@@ -1,11 +1,24 @@
+<!--
+    File: voter_analytics/templates/voter_analytics/voter_detail.html
+    Author: Steven Phung (sphung01@bu.edu), 6/13/2025
+    Description: This page displays a single Voter with all of
+    the information or fields included in the Voter model.
+-->
+
 {% extends 'voter_analytics/base.html' %}
 {% block content %}
-<main>
+<main class="voter-page">
+
+    <!-- Displays the full name of the Voter -->
     <h1>{{voter.first_name}} {{voter.last_name}}</h1>
 
     <div>
+        <!-- Redirects user to a Google Maps page with the Voter's address. -->
         <h3>Show voter's address on Google Maps</h3>
-        <a href="https://www.google.com/maps/search/{{ voter.street_number }}+{{ voter.street_name }}{% if voter.apartment_number %}+APT+{{ voter.apartment_number }}{% endif %}+{{ voter.zip_code }}" target="_blank">
+        <a href="https://www.google.com/maps/search/{{ voter.street_number }}+
+        {{ voter.street_name }}{% if voter.apartment_number %}+
+        APT+{{ voter.apartment_number }}{% endif %}+
+        {{ voter.zip_code }}" target="_blank">
             <h3>
                 {{ voter.street_number }} 
                 {{ voter.street_name }}
@@ -13,11 +26,13 @@
                     APT#{{ voter.apartment_number }},
                 {% endif %}
                 {{ voter.zip_code }}
+                (Click Here!)
             </h3>
         </a>
     </div>
 
-    <table>
+    <!-- This table displays all of the information on this Voter -->
+    <table class="voter-info">
         <tr>
             <th>Category</th>
             <th>Information</th>
@@ -55,12 +70,13 @@
         </tr>
     </table>
 
+     <!-- Shows which elections the Voter has participated in -->
     <div>
         <h2>Participated in these events?</h2>
-        <table>
+        <table class="voter-info">
             <tr>
                 <th>Elections</th>
-                <th>Voted? (True or False)</th>
+                <th>Voted?</th>
             </tr>
             <tr>
                 <td>V20State</td>

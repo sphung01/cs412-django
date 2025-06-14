@@ -1,21 +1,41 @@
+<!--
+    File: voter_analytics/templates/voter_analytics/base.html
+    Author: Steven Phung (sphung01@bu.edu), 6/12/2025
+    Description: A base/layout for every existing page in the 'voter_analytics' app.
+-->
+
 {% load static %}
 <html>
     <head>
-        <title>Voter Analytics</title>
-        <link rel="stylesheet" href="">
+        <title>Voter Analytics Website</title>
+        <!-- Linked to the stylesheet or css file -->
+        <link rel="stylesheet" href="{% static 'voter_analytics_styles.css' %}">
     </head>
     <body>
         <header>
-            <h1>Voter Analytics</h1>
-            <nav>
+            <h1>Voter Analytics Website</h1>
+            <!-- This is the Navigation Bar -->
+            <nav class="navigation-bar">
+                <h3>Navigation Links</h3>
                 <ul>
+                    <!-- Link to the Home page -->
                     <li><a href="{% url 'voter_analytics:home' %}">Home</a></li>
+                </ul>
+                <ul>
+                    <!-- Link to the graph/analytic page -->
+                    <li><a href="{% url 'voter_analytics:graphs' %}">View Voter Analytics and Graphs</a></li>
                 </ul>
             </nav>
         </header>
     
+    <!-- Any content in this block will be displayed with the base -->
     {% block content %}
     {% endblock %}    
+
+    <!-- A footer at the bottom of the page -->
+    <footer>
+        <strong>Page was created by sphung01@bu.edu (The current time is {{current_time}}).</strong>
+    </footer>
   
     </body>
 </html>

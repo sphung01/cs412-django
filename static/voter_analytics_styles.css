@@ -1,0 +1,148 @@
+/* 
+    File: voter_analytics_styles.css
+    Author: Steven Phung (sphung01@bu.edu), 6/13/2025
+    Description: This file is responsible for styling
+    the website to increase user experience
+*/
+
+/* Styling to make the layout/base look nice */
+body {
+    font-family: 'Lucida Console', monospace;
+    margin: 0 auto;
+}
+
+header {
+    background-color: lightblue;
+}
+
+footer {
+    background-color: lightblue;
+}
+
+/* This is for styling the Navigation Bar */
+.navigation-bar {
+    width: 30%;
+    margin: 5px;
+    padding: 10px;
+    border-style: solid;
+    border-width: 5px;
+}
+
+.navigation-bar ul {
+    list-style-type: none;
+}
+
+.navigation-bar a {
+    text-decoration: none;
+    color:black;
+}
+
+.navigation-bar a:hover {
+    text-decoration: underline;
+    color:blue;
+}
+
+/* This is for styling the page navigation */
+.page-navigation ul {
+    list-style-type: none;
+}
+
+.page-navigation a {
+    text-decoration: none;
+    color:blue
+}
+
+.page-navigation a:hover {
+    text-decoration: underline;
+    color:green
+}
+
+/* A style for a page that displays all Voters */
+.all-voters-style {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.voters-table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+.voters-table th {
+    padding: 10px;
+}
+
+.voters-table tr:nth-child(odd) {
+    background-color: lightgray;
+}
+
+/* A style for the Search Filter Form */
+.search-filter-form {
+    border: 3px solid #ccc;        
+    padding: 20px;                 
+    margin: 50px auto;             
+    width: fit-content;            
+    background-color: #f9f9f9;    
+    border-radius: 8px;            
+}
+
+.filter-table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.filter-table th,
+.filter-table td {
+    padding: 8px 12px;
+    text-align: left;              /* More natural alignment */
+    vertical-align: middle;
+}
+
+.filter-button {
+    font-family: 'Lucida Console', monospace;
+    background-color: lightblue; /* green */
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.filter-button:hover {
+    background-color: black;
+    color: white;
+}
+
+/* Styling for the graphs page */
+.graphs-page-styles {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styling for the single Voter page */
+.voter-page {
+    text-align: center;
+}
+
+.voter-info {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.voter-info th td {
+    padding: 50px;
+}
+
+.voter-info tr:nth-child(odd) {
+    background-color: lightgray;
+}
+

@@ -1,17 +1,39 @@
+<!--
+    File: voter_analytics/templates/voter_analytics/graphs.html
+    Author: Steven Phung (sphung01@bu.edu), 6/13/2025
+    Description: This page displays multiple graphs of all
+    voters. Filters are included as well for more accurate
+    data.
+-->
+
 {% extends 'voter_analytics/base.html' %}
-<h1>Graph of All Voters</h1>
 
 {% block content %}
-<main>
+<main class="graphs-page-styles">
+    <h1>Graph of All Voters</h1>
+
+    <!-- Includes the search.html template for filtering -->
     <div>
         {% include "voter_analytics/search.html" %}
     </div>
+
+    <!-- A Histogram all Voters based on their birth year -->
     <div>
         {{ birth_year_histogram|safe }}
     </div>
+
+    <!-- 
+        A Pie Chart that represents the data of all
+        party affiliations each Voter is in.
+    -->
     <div>
         {{ party_affiliation_pie_chart|safe }}
     </div>
+
+    <!-- 
+        A Histogram that represents the data of all
+        elections each Voter participated in.
+    -->
     <div>
         {{ election_bar_chart|safe }}
     </div>

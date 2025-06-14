@@ -1,3 +1,9 @@
+# File: voter_analytics/models.py
+# Author: Steven Phung (sphung01@bu.edu), 6/12/2025
+# Description: This is where we define a structured
+# stored data of the model. Then we will migrate once
+# a model has been created or edited.
+
 from django.db import models
 
 # Create your models here.
