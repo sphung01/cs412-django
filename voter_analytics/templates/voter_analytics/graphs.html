@@ -1,0 +1,19 @@
+{% extends 'voter_analytics/base.html' %}
+<h1>Graph of All Voters</h1>
+
+{% block content %}
+<main>
+    <div>
+        {% include "voter_analytics/search.html" %}
+    </div>
+    <div>
+        {{ birth_year_histogram|safe }}
+    </div>
+    <div>
+        {{ party_affiliation_pie_chart|safe }}
+    </div>
+    <div>
+        {{ election_bar_chart|safe }}
+    </div>
+</main>
+{% endblock %}

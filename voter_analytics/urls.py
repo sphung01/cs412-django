@@ -12,7 +12,10 @@ from django.conf import settings
 Configures URLs for the 'voter_analytics' app
 
 Routes:
-
+- /voter_analytics/                                   -> Displays 100 voters on each page
+- /voter_analytics/voters                             -> Displays 100 voters on each page and with filter
+- /voter_analytics/voter/<int:pk>                     -> A page displays one voter that was clicked on
+- /voter_analytics/graphs                             -> A page that displays the graph of all of the voters
 
 "static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)"
 This line serves all of the static files (CSS, Javascript, Images) to the project
@@ -29,6 +32,7 @@ app_name = 'voter_analytics'
 urlpatterns = [
     path(r'', VotersListView.as_view(), name='home'),
     path(r'voters', VotersListView.as_view(), name='voters_list'),
-    path(r'voter/<int:pk>', VoterDetailView.as_view(), name='voter')
+    path(r'voter/<int:pk>', VoterDetailView.as_view(), name='voter'),
+    path(r'graphs', VotersGraphListView.as_view(), name='graphs'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
