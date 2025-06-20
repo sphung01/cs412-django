@@ -182,9 +182,7 @@ class VotersGraphListView(ListView):
         title=f'Voter Distribution by Year of Birth (n={self.get_queryset().count()})'
         graph_div_histogram = plotly.offline.plot({"data": [fig], 
                                          "layout_title_text": title,
-                                         }, auto_open=False, output_type="div",
-                                         
-                                         )
+                                         }, auto_open=False, output_type="div",)
 
         # We will create a Pie Chart based on whichever Party Affiliation
         # each Voter is in.

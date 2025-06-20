@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'restaurant', # Installed an app for the "Krusty Krab" website (assignment 2)
     'mini_fb', # Installed an app for the Mini Facebook website (assignment 3-7)
     'voter_analytics', # Installed an app for the Voter Analytics website (assignment 8)
+    'project', # Installed an app for Attendance System (Final Project)
 ]
 
 MIDDLEWARE = [
@@ -116,7 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

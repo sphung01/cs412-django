@@ -39,7 +39,8 @@ Routes:
 - /quotes/              -> Paths to the "quotes" website with URLs included
 - /restaurant/          -> Paths to the "restaurant" app with URLs included
 - /mini_fb/             -> Paths to the "mini_fb" app with URLs included
-- /voter_analytics/     -> Paths to the "voter_analytics" example with URLs included
+- /voter_analytics/     -> Paths to the "voter_analytics" website with URLs included
+- /project/             -> Paths to the "project" website with URLs included
 """
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -51,6 +52,7 @@ urlpatterns = [
     path("restaurant/", include("restaurant.urls")),
     path("mini_fb/", include("mini_fb.urls")),
     path("voter_analytics/", include("voter_analytics.urls")),
+    path("project/", include("project.urls")),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
