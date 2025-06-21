@@ -1,3 +1,26 @@
-<form>
-    {{ form }}
-</form>
+<!--
+    File: project/templates/project/login.html
+    Author: Steven Phung (sphung01@bu.edu), 6/10/2025
+    Description: A page that displays a form that will
+    allow a user to login their 'username' and 'password' 
+-->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<main>
+    <h1>Login to Your Account!</h1>
+    <form action="{% url 'project:login' %}" method="POST">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Login">
+        <!-- This basic login form works, but after login, it
+        assumed the existance of a page at /registration/profile, which
+        does not exist.  -->
+        {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{request.GET.next}}">
+        {% else %}
+            <input type="hidden" name="next" value="{% url 'project:home' %}">
+        {% endif %}
+    </form>
+</main>
+{% endblock %}

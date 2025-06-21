@@ -1,0 +1,113 @@
+/* 
+    File: project_styles.css
+    Author: Steven Phung (sphung01@bu.edu), 6/21/2025
+    Description: This file is responsible for styling
+    the website to increase user experience
+*/
+
+
+/* Styling for the base.html file */
+body {
+    font-family: 'Lucida Console', monospace;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #CC0000;
+    color: white;
+}
+
+.web-title {
+    margin: 20px;
+}
+
+.navigation ul {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem; /* space between menu items */
+    list-style-type: none;
+    margin: 20px;
+}
+
+.navigation li:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.logout-button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+.logout-button:hover {
+    text-decoration: underline;
+}
+
+.logger-info {
+    text-align: right;
+    margin: 20px;
+}
+
+/* This part right here is for styling the sign_up.html file */
+.sign-up-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.form-table-signup {
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+}
+
+/* make form fields and labels white */
+.form-table-signup textarea,
+.form-table-signup label {
+    color: white;
+}
+
+.sign-up-form-style {
+    background-color: #CC0000;
+    border-radius: 10px;
+    width: 40%;
+    padding: 10px;
+}
+
+.sign-up-form-style .helptext,
+.sign-up-form-style .errorlist {
+    color: white;
+}
+
+.create-user-button {
+    background: none;
+    border: none;
+    color: white;
+    font: inherit;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0;
+    background-color: black;
+    border-radius: 10px;
+
+}
+
+.create-user-button:hover {
+    background-color: white;
+    color: black;
+}

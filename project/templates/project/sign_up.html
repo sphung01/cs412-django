@@ -1,0 +1,33 @@
+<!--
+    File: project/templates/project/sign_up.html
+    Author: Steven Phung (sphung01@bu.edu), 5/29/2025
+    Description: A page that displays a form for the user
+    to create new account. Once submitted, their info
+    will be constructed into an instance and placed in
+    the database.
+-->
+{% extends 'project/base.html' %}
+{% block content %}
+<main class="sign-up-page">
+    <h1>Create Your New Account!</h1>
+    <form method="POST" action="{% url 'project:sign_up' %}" enctype="multipart/form-data" class="sign-up-form-style">
+        {% csrf_token %}
+        <!-- A form to create username and password -->
+        <div class="form-table-signup">
+            <table>
+                {{ user_creation_form.as_table }}
+            </table>    
+        </div>
+
+        <!-- A form to add in our info -->
+        <div class="form-table-signup">
+            <table>
+                {{ form.as_table }}
+            </table>
+        </div>
+
+        <!-- A submit button -->
+        <button type="submit" class="create-user-button">Create!</button>
+    </form>
+</main>
+{% endblock%}

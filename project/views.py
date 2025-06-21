@@ -1,8 +1,75 @@
 from django.shortcuts import render
+from .models import * 
+from .forms import * 
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
+from django.urls import reverse
+from django.shortcuts import redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+import random
+import time
 
 # Create your views here.
 def home(request):
-
     template = 'project/home.html'
-
     return render(request, template)
+
+class CreateUserView(CreateView):
+    """
+        This view will display a form where the user will submit their
+        account and it'll be saved to the database.   
+        (1) display the HTML form to user (GET)
+        (2) process the form submission and store the new Profile object (POST) 
+    """
+
+    # We will grab the CreateUserForm class from forms.py
+    form_class = CreateUserForm
+
+    # Then use a template where we will have the user sign up
+    template_name = 'project/sign_up.html'
+
+    # We also want to give the context by using UserCreationForm
+    # so that we can make a username and password
+    def get_context_data(self, **kwargs):
+        """
+            Within this method, we store values into the context and pass it
+            over to the template.
+        """
+        context = super().get_context_data()
+        context['user_creation_form'] = UserCreationForm() 
+        return context
+    
+
+    def form_valid(self, form):
+        '''
+            This method handles the form submission and saves the 
+            new object to the Django database.
+        '''
+        # Reconstruct the UserCreationForm instance 
+        # from the self.request.POST data
+        user_form = UserCreationForm(self.request.POST)
+
+        if user_form.is_valid():
+            # Call the save() method on the UserCreationForm instance. 
+            # This method call will return the 
+            # newly created User object. 
+            # Save it to a variable.
+            new_user = user_form.save()
+
+            # Log the User in
+            login(self.request, new_user)
+
+            # Attach the new User to the ProjectUser being created
+            form.instance.user = new_user
+
+            # Delegate the work to the superclass method form_valid:
+            return super().form_valid(form)
+        else:
+            # If the UserCreationForm is invalid, re-render the page with both forms
+            return self.render_to_response(
+                self.get_context_data(form=form, user_creation_form=user_form)
+            )
+
+class ShowUserProfileView(DetailView):
+    template_name

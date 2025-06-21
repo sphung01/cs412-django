@@ -7,12 +7,17 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from .views import * #Adds all the view functions that exist
+from django.contrib.auth import views as auth_views
 
 """
 Configures URLs for the 'mini_fb' app
 
 Routes:
-
+- /project/ -> The home page of the website
+- /project/login -> The login page for user to be authenticated
+- /project/logout -> Logs the user out and redirects to home page
+- /project/signup -> Allows the user to create new account
 
 
 "static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)"
@@ -29,5 +34,8 @@ app_name = 'project'
 
 urlpatterns = [
     path(r'', views.home, name="home"),
+    path('login/', auth_views.LoginView.as_view(template_name='project/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='project:home'), name='logout'),
+    path('signup/', CreateUserView.as_view(), name='sign_up'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

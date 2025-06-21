@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 # Create your models here.
 class ProjectUser(models.Model):
@@ -40,6 +41,12 @@ class ProjectUser(models.Model):
         """
         if self.role == "Teacher":
             return True
+        
+    def get_absolute_url(self):
+        """
+            Return the URL to display one instance of this model.
+        """
+        return reverse('project:home')
         
     def __str__(self):
         """
