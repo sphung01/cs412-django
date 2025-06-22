@@ -1,0 +1,19 @@
+<!--
+    File: project/templates/project/show_courses.html
+    Author: Steven Phung (sphung01@bu.edu), 6/21/2025
+    Description: A page that displays all the courses that
+    the user created if they have a role of a teacher
+-->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<main class="courses-page">
+    <h1>My Course List</h1>
+    <a>Create Course</a>
+    {% for course in courses %}
+        <div class="course-container">
+            <h3>Course Name: {{course.class_name}} Code: {{course.code}} Created At: {{course.created_at}}</h3>
+        </div>
+    {% endfor %}
+</main>
+{% endblock %}

@@ -20,7 +20,7 @@
                     <li><a href="{% url 'project:home' %}">Home</a></li>
                     <li><a href="{% url 'project:sign_up' %}">Sign Up</a></li>
                     {% if request.user.is_authenticated %}
-                        <li>My Profile</li>
+                        <li><a href="{% url 'project:account' request.user.projectuser_set.first.pk %}">My Account</a></li>
                         <li>
                             <form method="POST" action="{% url 'project:logout' %}">
                                 {% csrf_token %}

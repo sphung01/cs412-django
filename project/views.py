@@ -71,5 +71,20 @@ class CreateUserView(CreateView):
                 self.get_context_data(form=form, user_creation_form=user_form)
             )
 
-class ShowUserProfileView(DetailView):
-    template_name
+class ShowAccountView(DetailView):
+    """
+        This view class will display the information about the user
+    """
+    model = ProjectUser
+    template_name = 'project/show_my_account.html'
+    context_object_name = 'account'
+
+class ShowCoursesView(ListView):
+    model = Course
+    template_name = 'project/show_courses.html'
+    context_object_name = 'courses'
+
+    def get_queryset(self):
+        # Only show courses created by the current teacher
+        project_user = ProjectUser.objects.get(user=self.request.user)
+        return Course.objects.filter(teacher=project_user)

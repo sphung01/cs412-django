@@ -20,6 +20,7 @@ class ProjectUser(models.Model):
     # These are the attributes/fields
     first_name = models.CharField(max_length=250, blank=False)
     last_name = models.CharField(max_length=250, blank=False)
+    email = models.CharField(max_length=250, blank=False)
     role = models.CharField(max_length=10, choices=ROLES_TYPE, blank=False) # Role of the User
     student_id = models.CharField(max_length=10, blank=True) # An ID if the student
     profile_image = models.ImageField(blank=True) # Optional if User wants to add pfp
@@ -46,7 +47,7 @@ class ProjectUser(models.Model):
         """
             Return the URL to display one instance of this model.
         """
-        return reverse('project:home')
+        return reverse('project:account', kwargs={'pk':self.pk})
         
     def __str__(self):
         """
@@ -65,7 +66,7 @@ class Course(models.Model):
     teacher = models.ForeignKey(ProjectUser, on_delete=models.CASCADE, limit_choices_to={'role':'Teacher'})
 
     # A generated code or identifier for the Course
-    code = models.CharField(max_length=8, blank=False) 
+    code = models.CharField(max_length=8, blank=False, unique=True) 
     
     # The name of the Course
     class_name = models.CharField(max_length=50, blank=False)
@@ -102,7 +103,6 @@ class Enrollment(models.Model):
         """
 
         return f'Name: {self.student.first_name} {self.student.last_name} - Enrolled: {self.course.class_name}'
-
 
 class Attendance(models.Model):
     """

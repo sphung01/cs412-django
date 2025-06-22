@@ -9,4 +9,4 @@ class CreateUserForm(forms.ModelForm):
     class Meta:
         '''associate this form with a model from our database.'''
         model = ProjectUser
-        fields = ['first_name', 'last_name', 'role', 'student_id', 'profile_image']
+        fields = ['first_name', 'last_name', 'email', 'role', 'student_id', 'profile_image']

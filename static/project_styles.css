@@ -62,6 +62,25 @@ a {
     margin: 20px;
 }
 
+/* This part right here is for styling the home.html file */
+.home-page {
+    text-align: center;
+}
+
+.home-page a {
+    color: black;
+    background-color: #CC0000;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.home-page a:hover {
+    color: white;
+    background-color: black;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 /* This part right here is for styling the sign_up.html file */
 .sign-up-page {
     display: flex;
@@ -111,3 +130,63 @@ a {
     background-color: white;
     color: black;
 }
+
+/* This part right here is for styling the show_my_account.html file */
+.account-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* centers horizontally */
+    align-items: center;      /* centers vertically (if needed) */
+}
+
+.account-table {
+    border-collapse: collapse;
+    border-spacing: 30px 10px; /* 30px horizontal gap, 10px vertical */
+    border-style: solid;
+    border-color: black;
+    border-width: 5px;
+}
+
+.account-table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Light gray for even rows */
+}
+
+.account-table, tr, th{
+    text-align: left;
+    padding-right: 20px; /* adds space between columns */
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+/* This part right here is for styling the show_courses.html file */
+.courses-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centers children horizontally */
+    margin: 20px;
+}
+
+.courses-page a{
+    background-color: #CC0000;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.courses-page a:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.course-container {
+    background-color: #CC0000;
+    margin: 0, 300px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.course-container h3 {
+    padding: 10px;
+}
+

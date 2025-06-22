@@ -1,6 +1,16 @@
 {% extends 'project/base.html' %}
 {% block content %}
-<main>
-    Hello World
+<main class="home-page">
+    <h1>Welcome To The BU Attendance Web!</h1>
+    {% with request.user.projectuser_set.first as profile %}
+        {% if profile and profile.role == "Teacher" %}
+            <h3>
+                <a href="{% url 'project:courses' %}">Click Here to Start!</a>
+            </h3>
+        {% endif %}
+    {% endwith %}
+    <h3>
+        NOTE: This is not an official BU website :>
+    </h3>
 </main>
 {% endblock %}

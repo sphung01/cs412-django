@@ -37,5 +37,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='project/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='project:home'), name='logout'),
     path('signup/', CreateUserView.as_view(), name='sign_up'),
+    path('account/<int:pk>', ShowAccountView.as_view(), name='account'),
+    path('courses/', ShowCoursesView.as_view(), name='courses'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
