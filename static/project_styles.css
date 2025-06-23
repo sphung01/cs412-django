@@ -179,14 +179,28 @@ a {
     cursor: pointer;
 }
 
-.course-container {
+/* This part right here is for styling the course_detail.html file */
+.course-detail-page {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.course-detail-page a {
     background-color: #CC0000;
-    margin: 0, 300px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-}
-
-.course-container h3 {
     padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
 }
 
+.course-detail-page a:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.record-table tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Light gray for even rows */
+}

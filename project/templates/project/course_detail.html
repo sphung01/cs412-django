@@ -1,0 +1,47 @@
+<!--
+    File: project/templates/project/course_detail.html
+    Author: Steven Phung (sphung01@bu.edu), 6/21/2025
+    Description: A page that displays a course that was clicked on
+    by the user.
+-->
+
+{% extends 'project/base.html' %}
+{% block content %}
+<main class="course-detail-page">
+    <h1>Welcome to {{ course.class_name }}!</h1>
+
+    {% with request.user.projectuser_set.first as profile %}
+        {% if profile and profile.role == "Teacher" %}
+            <h2>Code For Enrollment: {{ course.code }}</h2>
+
+            <h3>Students Enrolled: {{ course.enrollment_set.count }}</h3>
+            <table class="record-table">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Time Student Joined</th>
+                </tr>
+                {% for enrollment in course.enrollment_set.all %}
+                    <tr>
+                        <td>{{ enrollment.student.first_name }}</td>
+                        <td>{{ enrollment.student.last_name }}</td>
+                        <td>{{ enrollment.joined_time }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <h3>Attendance Sessions: {{ course.attendance_set.count }}</h3>
+            <a>
+                Start New Attendance
+            </a>
+            {% for attendance in attendances %}
+                <a>
+                    Start: {{ attendance.start_time }} End: {{ attendance.end_time }} Code: {{ attendance.code }} Active: {{ attendance.is_active }}
+                </a>
+            {% endfor %}
+
+        {% endif %}
+    {% endwith %}
+
+</main>
+{% endblock %}

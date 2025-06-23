@@ -7,6 +7,14 @@
             <h3>
                 <a href="{% url 'project:courses' %}">Click Here to Start!</a>
             </h3>
+        {% elif profile and profile.role == "Student" %}
+            <h3>
+                <a href="{% url 'project:courses' %}">Click Here to Start!</a>
+            </h3>
+        {% else %}
+            <h3>
+                Please click on 'Sign Up' or 'Login' to begin session.
+            </h3>
         {% endif %}
     {% endwith %}
     <h3>

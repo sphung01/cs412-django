@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.utils import timezone
+from datetime import timedelta
+
 
 # Create your models here.
 class ProjectUser(models.Model):
@@ -113,9 +116,25 @@ class Attendance(models.Model):
     # These are the attributes/fields
     course = models.ForeignKey(Course, on_delete=models.CASCADE) # The Course the attendance belongs to
     code = models.CharField(max_length=8, blank=False) # A random generated code for students to enter
-    is_active = models.BooleanField() # To tell that the Attendance is active for students to prove their presence
-    start_time = models.DateTimeField(auto_now=True) # Start time of the code appearing
+    is_active = models.BooleanField(default=True) # To tell that the Attendance is active for students to prove their presence
+    start_time = models.DateTimeField(default=timezone.now) # Start time of the code appearing
     end_time = models.DateTimeField() # And expiration time for the code
+
+    def save(self, *args, **kwargs):
+        # Set end_time to 2 mins after start_time if not already set
+
+        # So if the expiration time does not exist,
+        # then we can add 2 minutes to the start time
+        if not self.end_time:
+            self.end_time = self.start_time + timedelta(minutes=2)
+        super().save(*args, **kwargs)
+
+    def is_expired(self):
+        """
+            Now if we check that the time now is later than the expiration
+            time, we return true that the session is over.
+        """
+        return timezone.now() > self.end_time
 
     def __str__(self):
         """

@@ -38,6 +38,9 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='project:home'), name='logout'),
     path('signup/', CreateUserView.as_view(), name='sign_up'),
     path('account/<int:pk>', ShowAccountView.as_view(), name='account'),
-    path('courses/', ShowCoursesView.as_view(), name='courses'),
+    path('courses/', ShowAllCoursesView.as_view(), name='courses'),
+    path('courses/<int:pk>/', ShowCourseViewPage.as_view(), name='course_detail'),
+    path('courses/join_class', CreateEnrollmentView.as_view(), name='join_class'),
+    path('courses/attendance_session/<int:pk>', CreateReportView.as_view(), name='attendance_session'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

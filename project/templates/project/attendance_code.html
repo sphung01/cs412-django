@@ -1,0 +1,11 @@
+{% extends 'project/base.html' %}
+{% block content %}
+<main>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <h1>Please Enter Code To Be Present In {{ enrollment.course.class_name }}</h1>
+        {{ form }}
+        <button type="submit">Submit Code</button>
+    </form>
+</main>
+{% endblock %}

@@ -79,7 +79,7 @@ class ShowAccountView(DetailView):
     template_name = 'project/show_my_account.html'
     context_object_name = 'account'
 
-class ShowCoursesView(ListView):
+class ShowAllCoursesView(ListView):
     model = Course
     template_name = 'project/show_courses.html'
     context_object_name = 'courses'
@@ -88,3 +88,45 @@ class ShowCoursesView(ListView):
         # Only show courses created by the current teacher
         project_user = ProjectUser.objects.get(user=self.request.user)
         return Course.objects.filter(teacher=project_user)
+    
+class ShowCourseViewPage(DetailView):
+    model = Course
+    template_name = 'project/course_detail.html'
+    context_object_name = 'course'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['attendances'] = self.object.attendance_set.order_by('-start_time')
+        return context
+
+class CreateEnrollmentView(CreateView):
+    model = Enrollment
+    template_name = 'project/join_class_code.html'
+    form_class = CreateEnrollmentForm
+
+    def form_valid(self, form):
+
+        code = self.request.POST.get('join_class_code')
+
+        try:
+            course = Course.objects.get(code=code)
+            student_profile = ProjectUser.objects.get(user=self.request.user)
+            if Enrollment.objects.filter(student=student_profile, course=course.pk).exists():
+                form.add_error(None, "You are already enrolled in this course.")
+                return self.form_invalid(form)
+            new_enrollment = Enrollment(student=student_profile, course=course)
+            new_enrollment.save()
+
+        except Course.DoesNotExist:
+            form.add_error('join_class_code', "No course found with this code.")
+            return self.form_invalid(form)
+
+
+        return super().form_valid(form)
+
+class CreateReportView(CreateView):
+    model = Enrollment
+    template_name = 'project/attendance_code.html'
+    form_class = CreateReportForm
+    context_object_name = 'enrollment'
+    
