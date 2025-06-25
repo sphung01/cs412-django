@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+import string
 import random
 import time
 
@@ -112,6 +113,23 @@ class ShowCourseViewPage(DetailView):
 class CreateCourseView(CreateView):
     form_class = CreateCourseForm
     template_name = 'project/create_course.html'
+
+    def generate_unique_course_code(self):
+        characters = string.ascii_uppercase + string.digits  # A-Z and 0-9
+        while True:
+            code = ''.join(random.choices(characters, k=6))
+            if not Course.objects.filter(code=code).exists():
+                return code
+
+    def form_valid(self, form):
+        teacher_profile = ProjectUser.objects.get(user=self.request.user)
+        generated_code = self.generate_unique_course_code()
+
+        # Inject missing fields into the unsaved form instance
+        form.instance.teacher = teacher_profile
+        form.instance.code = generated_code
+
+        return super().form_valid(form)
     
 class CreateEnrollmentView(CreateView):
     template_name = 'project/join_class_code.html'

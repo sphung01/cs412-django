@@ -258,3 +258,21 @@ a {
     color: white;
     cursor: pointer;
 }
+
+/* This part right here is for styling the create_course.html file */
+.create-course-page {
+    text-align: center;
+}
+
+.create-course-page a{
+    background-color: #CC0000;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.create-course-page a:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}

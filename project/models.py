@@ -82,6 +82,12 @@ class Course(models.Model):
             Returns a string representation of the Course object.
         """
         return f'Course: {self.class_name} Created at: {self.created_at}'
+
+    def get_absolute_url(self):
+        """
+            Return the URL to display one instance of this model.
+        """
+        return reverse('project:course_detail', kwargs={'pk':self.pk})
     
 class Enrollment(models.Model):
     """
