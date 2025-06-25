@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import * 
 from .forms import * 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View, TemplateView
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -89,6 +89,16 @@ class ShowAllCoursesView(ListView):
         project_user = ProjectUser.objects.get(user=self.request.user)
         return Course.objects.filter(teacher=project_user)
     
+class ShowAllEnrollmentsView(ListView):
+    model = Enrollment
+    template_name = 'project/show_enrollments.html'
+    context_object_name = 'enrollments'
+
+    def get_queryset(self):
+        # Only show courses created by the current teacher
+        project_user = ProjectUser.objects.get(user=self.request.user)
+        return Enrollment.objects.filter(student=project_user)
+    
 class ShowCourseViewPage(DetailView):
     model = Course
     template_name = 'project/course_detail.html'
@@ -99,8 +109,11 @@ class ShowCourseViewPage(DetailView):
         context['attendances'] = self.object.attendance_set.order_by('-start_time')
         return context
 
+class CreateCourseView(CreateView):
+    form_class = CreateCourseForm
+    template_name = 'project/create_course.html'
+    
 class CreateEnrollmentView(CreateView):
-    model = Enrollment
     template_name = 'project/join_class_code.html'
     form_class = CreateEnrollmentForm
 
@@ -125,8 +138,83 @@ class CreateEnrollmentView(CreateView):
         return super().form_valid(form)
 
 class CreateReportView(CreateView):
-    model = Enrollment
     template_name = 'project/attendance_code.html'
     form_class = CreateReportForm
-    context_object_name = 'enrollment'
+
+    def get_context_data(self, **kwargs):
+        """
+            Within this method, we store values into the context and pass it
+            over to the template.
+        """
+        context = super().get_context_data()
+        enrollment_id = self.kwargs['pk']
+        enrollment = Enrollment.objects.get(pk=enrollment_id)
+        context['enrollment'] = enrollment
+
+        return context
+
+    def form_valid(self, form):
+        """
+            This method handles the form submission and saves the 
+            new object to the Django database.
+            We need to add the foreign key (of the Profile) to the message
+            object before saving it to the database.
+        """
+
+        # We get the code that the user submitted
+        code = self.request.POST.get('attendance_code')
+        print(self.request.POST)
+
+        # Then we get that student object so that we know who did the attendance
+        student_profile = ProjectUser.objects.get(user=self.request.user)
+
+        # We will try to see if there is a attendance that matches the code entered
+        try:
+            # Search for the attendance object
+            attendance = Attendance.objects.get(code=code)
+            print(attendance)
+
+            # Get the object of that student
+            student_profile = ProjectUser.objects.get(user=self.request.user)
+
+            # If the Report object happens to exist, we give an error.
+            if Report.objects.filter(student=student_profile, attendance=attendance, status='Present').exists():
+                return redirect(reverse('project:invalid_code', kwargs={'pk': self.kwargs['pk']}))
+            
+            # If it was successful and the attendance is active, then create a new report on that student
+            if attendance.is_active == True:
+                new_report = Report(student=student_profile, attendance=attendance, status='Present')
+                new_report.save()
+                return redirect(reverse('project:valid_code', kwargs={'pk': self.kwargs['pk']}))
+            else:
+                print('Here?')
+                # Session is no longer active
+                return redirect(reverse('project:invalid_code', kwargs={'pk': self.kwargs['pk']}))
+        # If the object happens to not exist, that means the code was wrong
+        except Attendance.DoesNotExist:
+            return redirect(reverse('project:invalid_code', kwargs={'pk': self.kwargs['pk']}))
+
+
+        # except Course.DoesNotExist:
+        #     form.add_error('join_class_code', "No course found with this code.")
+        #     return self.form_invalid(form)
+
+class ShowValidCodePage(TemplateView):
+    template_name = 'project/valid_code.html'
+
+class ShowInvalidCodePage(TemplateView):
+    template_name = 'project/invalid_code.html'
+
+    def get_context_data(self, **kwargs):
+        """
+            Within this method, we store values into the context and pass it
+            over to the template.
+        """
+        context = super().get_context_data()
+        enrollment_id = self.kwargs['pk']
+        enrollment = Enrollment.objects.get(pk=enrollment_id)
+        context['enrollment'] = enrollment
+
+        return context
+
     

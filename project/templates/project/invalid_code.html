@@ -1,0 +1,7 @@
+{% extends 'project/base.html' %}
+{% block content %}
+<main class="home-page">
+    <h1>The code you entered is wrong, inactive or you are already present.</h1>
+    <a href="{% url 'project:take_attendance' enrollment.pk %}">Please Try Again</a>
+</main>
+{% endblock %}

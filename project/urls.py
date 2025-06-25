@@ -33,14 +33,18 @@ during the deployment.
 app_name = 'project'
 
 urlpatterns = [
-    path(r'', views.home, name="home"),
+    path('', views.home, name="home"),
     path('login/', auth_views.LoginView.as_view(template_name='project/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='project:home'), name='logout'),
     path('signup/', CreateUserView.as_view(), name='sign_up'),
     path('account/<int:pk>', ShowAccountView.as_view(), name='account'),
     path('courses/', ShowAllCoursesView.as_view(), name='courses'),
-    path('courses/<int:pk>/', ShowCourseViewPage.as_view(), name='course_detail'),
-    path('courses/join_class', CreateEnrollmentView.as_view(), name='join_class'),
-    path('courses/attendance_session/<int:pk>', CreateReportView.as_view(), name='attendance_session'),
+    path('courses/create_course', CreateCourseView.as_view(), name='create_course'),
+    path('courses/course/<int:pk>', ShowCourseViewPage.as_view(), name='course_detail'),
+    path('enrollments/', ShowAllEnrollmentsView.as_view(), name='enrollments'),
+    path('enrollments/join_class', CreateEnrollmentView.as_view(), name='join_class'),
+    path('enrollments/take_attendance/<int:pk>', CreateReportView.as_view(), name='take_attendance'),
+    path('enrollments/take_attendance/<int:pk>/valid_code', ShowValidCodePage.as_view(), name="valid_code"),
+    path('enrollments/take_attendance/<int:pk>/invalid_code', ShowInvalidCodePage.as_view(), name="invalid_code"),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,0 +1,7 @@
+{% extends 'project/base.html' %}
+{% block content %}
+<main class="home-page">
+    <h1>You are now present in that class! Congrats!</h1>
+    <a href="{% url 'project:enrollments' %}">Return to Enrollments Page</a>
+</main>
+{% endblock %}

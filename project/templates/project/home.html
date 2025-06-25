@@ -9,7 +9,7 @@
             </h3>
         {% elif profile and profile.role == "Student" %}
             <h3>
-                <a href="{% url 'project:courses' %}">Click Here to Start!</a>
+                <a href="{% url 'project:enrollments' %}">Click Here to Start!</a>
             </h3>
         {% else %}
             <h3>

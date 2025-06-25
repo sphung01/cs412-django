@@ -42,3 +42,9 @@ class CreateReportForm(forms.ModelForm):
 
         model = Report
         fields = ['attendance_code']
+
+class CreateCourseForm(forms.ModelForm):
+
+    class Meta:
+        model = Course
+        fields = ['class_name']

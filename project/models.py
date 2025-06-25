@@ -165,4 +165,4 @@ class Report(models.Model):
         """
             Returns a string representation of the Report object.
         """
-        return f'{self.student.first_name} {self.student.last_name} - {self.status}'
+        return f'{self.student.first_name} {self.student.last_name} - {self.status} Class: {self.attendance.course.class_name}'

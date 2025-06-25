@@ -204,3 +204,57 @@ a {
 .record-table tr:nth-child(odd) {
     background-color: #f2f2f2; /* Light gray for even rows */
 }
+
+/* This part right here is for styling the attendance_code.html file */
+.attendance-code-page {
+    text-align: center;
+}
+
+.attendance-code-page a{
+    background-color: #CC0000;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.attendance-code-page a:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.submit-code-button {
+    background: none;
+    border: none;
+    color: white;
+    font: inherit;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0;
+    background-color: #CC0000;
+    border-radius: 10px;
+
+}
+
+.submit-code-button:hover {
+    background-color: black;
+    color: white;
+}
+
+/* This part right here is for styling the join_class_page.html file */
+.join-class-page {
+    text-align: center;
+}
+
+.join-class-page a{
+    background-color: #CC0000;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.join-class-page a:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}

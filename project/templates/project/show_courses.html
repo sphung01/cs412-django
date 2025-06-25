@@ -9,26 +9,15 @@
 {% block content %}
 <main class="courses-page">
     {% with request.user.projectuser_set.first as profile %}
-
         {% if profile and profile.role == "Teacher" %}
             <h1>My Course List</h1>
-            <a>Create Class</a>
+            <a href="{% url 'project:create_course' %}">Create Class</a>
             {% for course in courses %}
                 <a href="{% url 'project:course_detail' course.pk %}">
                     <h3>Course Name: {{course.class_name}} Code: {{course.code}} Created At: {{course.created_at}}</h3>
                 </a>
             {% endfor %}
-
-        {% elif profile and profile.role == "Student" %}
-            <h1>All My Classes</h1>
-            <a href="{% url 'project:join_class' %}">Join Class</a>
-            {% for enrollment in profile.enrollment_set.all %}
-                <a href="{% url 'project:attendance_session' enrollment.pk %}">
-                    <h3>Course Name: {{ enrollment.course.class_name }} Joined At: {{ enrollment.joined_time }}</h3>
-                </a>
-            {% endfor %}
         {% endif %}
-
     {% endwith %}
 </main>
 {% endblock %}

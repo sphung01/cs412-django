@@ -1,11 +1,12 @@
 {% extends 'project/base.html' %}
 {% block content %}
-<main>
+<main class="join-class-page">
     <form method="POST" action="">
         {% csrf_token %}
         <h1>Please Enter Code To Join Class</h1>
         {{ form }}
-        <button type="submit">Submit Code</button>
+        <button type="submit" class="submit-code-button">Submit Code</button>
     </form>
+    <a href="{% url 'project:enrollments' %}">Go Back</a>
 </main>
 {% endblock %}
