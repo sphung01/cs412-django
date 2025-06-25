@@ -233,7 +233,6 @@ a {
     margin: 0;
     background-color: #CC0000;
     border-radius: 10px;
-
 }
 
 .submit-code-button:hover {
@@ -275,4 +274,26 @@ a {
     background-color: black;
     color: white;
     cursor: pointer;
+}
+
+/* This part right here is for styling the delete_course.html file */
+.delete-course-page {
+    text-align: center;
+}
+
+.delete-button {
+    background: none;
+    border: none;
+    color: white;
+    font: inherit;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0;
+    background-color: #CC0000;
+    border-radius: 10px;
+}
+
+.delete-button:hover {
+    background-color: black;
+    color: white;
 }

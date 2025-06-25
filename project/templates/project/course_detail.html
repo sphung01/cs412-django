@@ -15,6 +15,7 @@
             <h2>Code For Enrollment: {{ course.code }}</h2>
 
             <h3>Students Enrolled: {{ course.enrollment_set.count }}</h3>
+            <a href="{% url 'project:delete_course' course.pk %}">Delete Course</a>
             <table class="record-table">
                 <tr>
                     <th>First Name</th>

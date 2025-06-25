@@ -110,6 +110,19 @@ class ShowCourseViewPage(DetailView):
         context['attendances'] = self.object.attendance_set.order_by('-start_time')
         return context
 
+class DeleteCourseView(DeleteView):
+    model = Course
+    template_name = 'project/delete_course.html'
+    context_object_name = 'course'
+
+    def get_success_url(self):
+        """
+            Redirects user to a Profile page after
+            deleting the message.
+        """
+
+        return reverse('project:courses')
+
 class CreateCourseView(CreateView):
     form_class = CreateCourseForm
     template_name = 'project/create_course.html'
