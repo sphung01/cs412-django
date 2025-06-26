@@ -297,3 +297,60 @@ a {
     background-color: black;
     color: white;
 }
+
+/* This part right here is for styling the create_attendance.html file */
+.create-attendance-page {
+    text-align: center;
+}
+
+.begin-session-button {
+    background: none;
+    border: none;
+    color: white;
+    font: inherit;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0;
+    background-color: #CC0000;
+    border-radius: 10px;
+}
+
+.begin-session-button:hover {
+    background-color: black;
+    color: white;
+}
+
+.create-attendance-page a {
+    background-color: #CC0000;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.create-attendance-page a:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+/* This part right here is for styling the show_attendance_report.html file */
+.attendance-report-page {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.attendance-report-page a {
+    background-color: #CC0000;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.attendance-report-page a:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}

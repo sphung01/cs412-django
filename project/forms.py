@@ -48,3 +48,9 @@ class CreateCourseForm(forms.ModelForm):
     class Meta:
         model = Course
         fields = ['class_name']
+
+class CreateAttendanceForm(forms.Form):
+    duration_minutes = forms.IntegerField(
+        label = "How many minutes should the attendance be active?",
+        min_value = 1
+    )

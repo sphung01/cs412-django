@@ -132,7 +132,7 @@ class Attendance(models.Model):
         # So if the expiration time does not exist,
         # then we can add 2 minutes to the start time
         if not self.end_time:
-            self.end_time = self.start_time + timedelta(minutes=2)
+            self.end_time = self.start_time + timedelta(minutes=1)
         super().save(*args, **kwargs)
 
     def is_expired(self):

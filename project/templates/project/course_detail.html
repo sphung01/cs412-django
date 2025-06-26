@@ -32,11 +32,11 @@
             </table>
 
             <h3>Attendance Sessions: {{ course.attendance_set.count }}</h3>
-            <a>
+            <a href="{% url 'project:attendance_session' course.pk %}">
                 Start New Attendance
             </a>
             {% for attendance in attendances %}
-                <a>
+                <a href="{% url 'project:attendance_report' attendance.pk %}">
                     Start: {{ attendance.start_time }} End: {{ attendance.end_time }} Code: {{ attendance.code }} Active: {{ attendance.is_active }}
                 </a>
             {% endfor %}

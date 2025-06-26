@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import * 
 from .forms import * 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View, TemplateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View, TemplateView, FormView
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -203,7 +203,11 @@ class CreateReportView(CreateView):
         try:
             # Search for the attendance object
             attendance = Attendance.objects.get(code=code)
-            print(attendance)
+
+            # ⏰ Check if it's expired
+            if attendance.is_active and timezone.now() > attendance.end_time:
+                attendance.is_active = False
+                attendance.save()
 
             # Get the object of that student
             student_profile = ProjectUser.objects.get(user=self.request.user)
@@ -218,9 +222,9 @@ class CreateReportView(CreateView):
                 new_report.save()
                 return redirect(reverse('project:valid_code', kwargs={'pk': self.kwargs['pk']}))
             else:
-                print('Here?')
                 # Session is no longer active
                 return redirect(reverse('project:invalid_code', kwargs={'pk': self.kwargs['pk']}))
+            
         # If the object happens to not exist, that means the code was wrong
         except Attendance.DoesNotExist:
             return redirect(reverse('project:invalid_code', kwargs={'pk': self.kwargs['pk']}))
@@ -229,6 +233,42 @@ class CreateReportView(CreateView):
         # except Course.DoesNotExist:
         #     form.add_error('join_class_code', "No course found with this code.")
         #     return self.form_invalid(form)
+
+class CreateAttendanceView(FormView):
+    template_name = 'project/create_attendance.html'
+    form_class = CreateAttendanceForm
+
+    def generate_attendance_code(self):
+        characters = string.ascii_uppercase + string.digits  # A-Z and 0-9
+        code = ''.join(random.choices(characters, k=6))
+        return code
+
+    def get_context_data(self, **kwargs):
+        """
+            Within this method, we store values into the context and pass it
+            over to the template.
+        """
+        context = super().get_context_data()
+        course_id = self.kwargs['pk']
+        course = Course.objects.get(pk=course_id)
+        context['course'] = course
+
+        return context
+
+    def form_valid(self, form):
+        code = self.generate_attendance_code()
+        duration = form.cleaned_data["duration_minutes"]
+        end_time = timezone.now() + timedelta(minutes=duration)
+        course = Course.objects.get(pk=self.kwargs['pk'])
+
+        new_attendance = Attendance(course=course, 
+                                    code=code, 
+                                    start_time=timezone.now(),
+                                    end_time=end_time)
+        new_attendance.save()
+
+
+        return redirect(course.get_absolute_url())
 
 class ShowValidCodePage(TemplateView):
     template_name = 'project/valid_code.html'
@@ -248,4 +288,21 @@ class ShowInvalidCodePage(TemplateView):
 
         return context
 
-    
+class ShowAttendanceReportPage(TemplateView):
+    template_name = 'project/show_attendance_report.html'
+
+    def get_context_data(self, **kwargs):
+        """
+            Within this method, we store values into the context and pass it
+            over to the template.
+        """
+        context = super().get_context_data()
+        attendance_id = self.kwargs['pk']
+        attendance = Attendance.objects.get(pk=attendance_id)
+        reports = Report.objects.filter(attendance=attendance)
+        course = attendance.course
+        
+        
+        context['reports'] = reports
+        context['course'] = course
+        return context
