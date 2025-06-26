@@ -42,6 +42,11 @@
             <!-- Displays the number of sessions in this course -->
             <h3>Attendance Sessions: {{ course.attendance_set.count }}</h3>
 
+            {% if new_code %}
+                <h3>Enter Code To Be Present</h3>
+                <h1 class="display-code">{{ new_code }}</h1>
+            {% endif %}
+
             <!-- Links to another page to begin attendance session -->
             <a href="{% url 'project:attendance_session' course.pk %}">
                 Start New Attendance

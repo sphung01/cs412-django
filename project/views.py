@@ -180,6 +180,10 @@ class ShowCourseViewPage(LoginRequiredMixin, DetailView):
         """
         context = super().get_context_data(**kwargs)
         context['attendances'] = self.object.attendance_set.order_by('-start_time')
+
+        # Pop the session value if it exists, so it’s only shown once
+        code = self.request.session.pop('new_attendance_code', None)
+        context['new_code'] = code
         return context
 
 class DeleteCourseView(LoginRequiredMixin, DeleteView):
@@ -307,7 +311,7 @@ class CreateEnrollmentView(LoginRequiredMixin, CreateView):
             return self.form_invalid(form)
 
         # If everything is successful, redirect the user to the enrollments page
-        return reverse('project:enrollments')
+        return redirect('project:enrollments')
 
 class CreateReportView(LoginRequiredMixin, CreateView):
     """
@@ -438,6 +442,9 @@ class CreateAttendanceView(LoginRequiredMixin, FormView):
                                     start_time=timezone.now(),
                                     end_time=end_time)
         new_attendance.save()
+
+        # Store the code in session for temporary display
+        self.request.session['new_attendance_code'] = code
 
         # Once everything is successful, we redirect the user
         # back to the course detail page
