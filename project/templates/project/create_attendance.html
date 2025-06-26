@@ -1,12 +1,16 @@
 {% extends 'project/base.html' %}
 {% block content %}
 <main class="create-attendance-page">
-    <form method="POST">
-        {% csrf_token %}
-        <h1>Choose Duration Before Beginning Session</h1>
-        {{ form }}
-        <button type="submit" class="begin-session-button">Begin Session</button>
-    </form>
-    <a href="{% url 'project:course_detail' course.pk %}">Go Back</a>
+    {% with request.user.projectuser_set.first as profile %}
+        {% if profile and profile.role == "Teacher" %}
+            <form method="POST">
+                {% csrf_token %}
+                <h1>Choose Duration Before Beginning Session</h1>
+                {{ form }}
+                <button type="submit" class="begin-session-button">Begin Session</button>
+            </form>
+            <a href="{% url 'project:course_detail' course.pk %}">Go Back</a>
+        {% endif %}
+    {% endwith %}
 </main>
 {% endblock %}

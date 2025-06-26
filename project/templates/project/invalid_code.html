@@ -1,7 +1,11 @@
 {% extends 'project/base.html' %}
 {% block content %}
 <main class="home-page">
-    <h1>The code you entered is wrong, inactive or you are already present.</h1>
-    <a href="{% url 'project:take_attendance' enrollment.pk %}">Please Try Again</a>
+    {% with request.user.projectuser_set.first as profile %}
+        {% if profile and profile.role == "Student" %}
+            <h1>The code you entered is wrong, inactive or you are already present.</h1>
+            <a href="{% url 'project:take_attendance' enrollment.pk %}">Please Try Again</a>
+        {% endif %}
+    {% endwith %}
 </main>
 {% endblock %}

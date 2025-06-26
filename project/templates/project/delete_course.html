@@ -1,21 +1,24 @@
 {% extends 'project/base.html' %}
 {% block content %}
 <main class="delete-course-page">
-    <h1>Are you sure you want to delete {{ course.class_name }}</h1>
+    {% with request.user.projectuser_set.first as profile %}
+        {% if profile and profile.role == "Teacher" %}
+            <h1>Are you sure you want to delete {{ course.class_name }}</h1>
 
-    <!--
-        This HTML form will give user a choice
-        to delete the message or cancel
-    -->
-    <form method="POST">
-        {% csrf_token %}
-        <input type='submit' value="Yes" class="delete-button">
-    </form>
-
-    <!-- A cancel button to send the user back to the Profile page -->
-    <form action="{% url 'project:course_detail' course.pk %}" method="GET">
-        <input type="submit" value="No" class="delete-button">
-    </form>
-
+            <!--
+                This HTML form will give user a choice
+                to delete the message or cancel
+            -->
+            <form method="POST">
+                {% csrf_token %}
+                <input type='submit' value="Yes" class="delete-button">
+            </form>
+        
+            <!-- A cancel button to send the user back to the Profile page -->
+            <form action="{% url 'project:course_detail' course.pk %}" method="GET">
+                <input type="submit" value="No" class="delete-button">
+            </form>
+        {% endif %}
+    {% endwith %}
 </main>
 {% endblock %}

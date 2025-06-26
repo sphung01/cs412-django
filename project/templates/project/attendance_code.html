@@ -1,12 +1,16 @@
 {% extends 'project/base.html' %}
 {% block content %}
 <main class="attendance-code-page">
-    <form method="POST" action="">
-        {% csrf_token %}
-        <h1>Please Enter Code To Be Present In {{ enrollment.course.class_name }}</h1>
-        {{ form }}
-        <button type="submit" class="submit-code-button">Submit Code</button>
-    </form>
-    <a href="{% url 'project:enrollments' %}">Go Back</a>
+    {% with request.user.projectuser_set.first as profile %}
+        {% if profile and profile.role == "Student" %}
+            <form method="POST" action="">
+                {% csrf_token %}
+                <h1>Please Enter Code To Be Present In {{ enrollment.course.class_name }}</h1>
+                {{ form }}
+                <button type="submit" class="submit-code-button">Submit Code</button>
+            </form>
+            <a href="{% url 'project:enrollments' %}">Go Back</a>
+        {% endif %}
+    {% endwith %}
 </main>
 {% endblock %}

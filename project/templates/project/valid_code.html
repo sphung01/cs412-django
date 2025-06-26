@@ -1,7 +1,11 @@
 {% extends 'project/base.html' %}
 {% block content %}
 <main class="home-page">
-    <h1>You are now present in that class! Congrats!</h1>
-    <a href="{% url 'project:enrollments' %}">Return to Enrollments Page</a>
+    {% with request.user.projectuser_set.first as profile %}
+        {% if profile and profile.role == "Student" %}
+            <h1>You are now present in that class! Congrats!</h1>
+            <a href="{% url 'project:enrollments' %}">Return to Enrollments Page</a>
+        {% endif %}
+    {% endwith %}
 </main>
 {% endblock %}
