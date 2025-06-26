@@ -1,22 +1,29 @@
 <!--
     File: project/templates/project/course_detail.html
-    Author: Steven Phung (sphung01@bu.edu), 6/21/2025
-    Description: A page that displays a course that was clicked on
-    by the user.
+    Author: Steven Phung (sphung01@bu.edu), 6/25/2025
+    Description: A page that displays all the details of the course
+    such as the students that are enrolled and attendance sessions.
 -->
 
 {% extends 'project/base.html' %}
 {% block content %}
 <main class="course-detail-page">
-    <h1>Welcome to {{ course.class_name }}!</h1>
-    <a href="{% url 'project:courses' %}">Return To Course List</a>
-    <a href="{% url 'project:delete_course' course.pk %}">Delete Course</a>
-
+    <!-- Only the teacher can see this -->
     {% with request.user.projectuser_set.first as profile %}
         {% if profile and profile.role == "Teacher" %}
+            <h1>Welcome to {{ course.class_name }}!</h1>
+
+            <!-- The teacher can return to the course list page or delete the entire course -->
+            <a href="{% url 'project:courses' %}">Return To Course List</a>
+            <a href="{% url 'project:delete_course' course.pk %}">Delete Course</a>
+
+            <!-- Displays the code of this course -->
             <h2>Code For Enrollment: {{ course.code }}</h2>
 
+            <!-- Displays the number of students that are enrolled to this course -->
             <h3>Students Enrolled: {{ course.enrollment_set.count }}</h3>
+
+            <!-- A table of who is currently enrolled in the class -->
             <table class="record-table">
                 <tr>
                     <th>First Name</th>
@@ -32,11 +39,17 @@
                 {% endfor %}
             </table>
 
+            <!-- Displays the number of sessions in this course -->
             <h3>Attendance Sessions: {{ course.attendance_set.count }}</h3>
+
+            <!-- Links to another page to begin attendance session -->
             <a href="{% url 'project:attendance_session' course.pk %}">
                 Start New Attendance
             </a>
+
+            <!-- For loops every attendance that exists -->
             {% for attendance in attendances %}
+                <!-- Links to the report page of students that are present -->
                 <a href="{% url 'project:attendance_report' attendance.pk %}">
                     Start: {{ attendance.start_time }} End: {{ attendance.end_time }} Code: {{ attendance.code }} Active: {{ attendance.is_active }}
                 </a>

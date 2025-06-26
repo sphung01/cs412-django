@@ -1,3 +1,9 @@
+# File: project/models.py
+# Author: Steven Phung (sphung01@bu.edu), 6/25/2025
+# Description: This is where we define a structured
+# stored data of the model. Then we will migrate once
+# a model has been created
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse

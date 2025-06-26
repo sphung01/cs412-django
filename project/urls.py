@@ -18,6 +18,18 @@ Routes:
 - /project/login -> The login page for user to be authenticated
 - /project/logout -> Logs the user out and redirects to home page
 - /project/signup -> Allows the user to create new account
+- /project/account/<int:pk> -> Displays account details of that user
+- /project/courses/ -> Displays all courses the teacher has created
+- /project/courses/create_course -> A page to create a new course
+- /project/courses/course/<int:pk> -> A detail page of that course
+- /project/courses/attendance/<int:pk> -> A page that displays the report of all students present of this attendance
+- /project/courses/course/<int:pk>/attendance_session -> A page for the teacher to begin a session
+- /project/courses/course/<int:pk>/delete -> A page to allow the teacher to delete the course
+- /project/enrollments/ -> Displays all courses that the student is enrolled in
+- /project/enrollments/join_class -> A form for a student to join a class
+- /project/enrollments/take_attendance/<int:pk> -> Student enters a code to prove they are present in one of the classes
+- /project/enrollments/take_attendance/<int:pk>/valid_code -> If the code is right, the student is present
+- /project/enrollments/take_attendance/<int:pk>/invalid_code -> If the code is wrong, the student needs to retry
 
 
 "static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)"

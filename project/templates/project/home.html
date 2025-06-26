@@ -1,17 +1,27 @@
+<!--
+    File: project/templates/project/home.html
+    Author: Steven Phung (sphung01@bu.edu), 6/25/2025
+    Description: This page is for both the student and teacher. However,
+    the button will bring them to their own appropriate page.
+-->
+
 {% extends 'project/base.html' %}
 {% block content %}
 <main class="home-page">
     <h1>Welcome To The BU Attendance Web!</h1>
     {% with request.user.projectuser_set.first as profile %}
+        <!-- If the user is a teacher, then they get a link to their course list -->
         {% if profile and profile.role == "Teacher" %}
             <h3>
                 <a href="{% url 'project:courses' %}">Click Here to Start!</a>
             </h3>
+        <!-- If the user is a student, then they get a link to their enrollment page -->
         {% elif profile and profile.role == "Student" %}
             <h3>
                 <a href="{% url 'project:enrollments' %}">Click Here to Start!</a>
             </h3>
         {% else %}
+        <!-- If the user is not signed in, they get this message -->
             <h3>
                 Please click on 'Sign Up' or 'Login' to begin session.
             </h3>

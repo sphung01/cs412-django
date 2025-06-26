@@ -15,12 +15,18 @@
     <body>
         <header>
             <h1 class="web-title">BU Attendance Web</h1>
+
+            <!-- A navigation bar -->
             <nav class="navigation">
                 <ul>
+                    <!-- Links to the home page -->
                     <li><a href="{% url 'project:home' %}">Home</a></li>
+                    <!-- Links to the sign up page -->
                     <li><a href="{% url 'project:sign_up' %}">Sign Up</a></li>
                     {% if request.user.is_authenticated %}
+                        <!-- Links to the account page of the user -->
                         <li><a href="{% url 'project:account' request.user.projectuser_set.first.pk %}">My Account</a></li>
+                        <!-- Allows the user to log out from the website -->
                         <li>
                             <form method="POST" action="{% url 'project:logout' %}">
                                 {% csrf_token %}
@@ -28,17 +34,21 @@
                             </form>
                         </li>
                     {% else %}
+                        <!-- This will show up if no one is logged in -->
                         <li><a href="{% url 'project:login' %}">Login</a></li>
                     {% endif %}
                 </ul>
+                <!-- If a user is authenticated, then we get to see who is logged in -->
                 {% if request.user.is_authenticated %}
                     <h3 class="logger-info">Logged in as: {{request.user}}</h3>
+                <!-- Otherwise, we show that no one is logged in -->
                 {% else %}
                     <h3 class="logger-info">Currently Not Logged In</h3>
                 {% endif %}
             </nav>
         </header>
 
+        <!-- All the content that will show up with this base.html-->
         {% block content %}
         {% endblock %}
 

@@ -1,6 +1,14 @@
+<!--
+    File: project/templates/project/delete_course.html
+    Author: Steven Phung (sphung01@bu.edu), 6/25/2025
+    Description: A page for the teacher to delete the existing
+    course and then returns to course list if confirmed
+-->
+
 {% extends 'project/base.html' %}
 {% block content %}
 <main class="delete-course-page">
+    <!-- Only teacher can see this -->
     {% with request.user.projectuser_set.first as profile %}
         {% if profile and profile.role == "Teacher" %}
             <h1>Are you sure you want to delete {{ course.class_name }}</h1>

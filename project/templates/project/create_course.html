@@ -1,14 +1,24 @@
+<!--
+    File: project/templates/project/create_course.html
+    Author: Steven Phung (sphung01@bu.edu), 6/25/2025
+    Description: This page is where the teacher can create
+    a new course by simply entering in a name.
+-->
+
 {% extends 'project/base.html' %}
 {% block content %}
 <main class="create-course-page">
+    <!-- Only teachers can see this -->
     {% with request.user.projectuser_set.first as profile %}
         {% if profile and profile.role == "Teacher" %}
+            <!-- This form is where the teacher can create a course -->
             <form method="POST">
                 {% csrf_token %}
                 <h1>Please Add a Name To Your Class/Course</h1>
                 {{ form }}
                 <button type="submit" class="submit-code-button">Submit</button>
             </form>
+            <!-- Returns the user to the course list page -->
             <a href="{% url 'project:courses' %}">Go Back</a>
         {% endif %}
     {% endwith %}

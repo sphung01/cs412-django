@@ -1,14 +1,25 @@
+<!--
+    File: project/templates/project/create_attendance.html
+    Author: Steven Phung (sphung01@bu.edu), 6/25/2025
+    Description: This page is where the teacher will begin the
+    attendance session and choose the duration of how long it
+    should be active for.
+-->
+
 {% extends 'project/base.html' %}
 {% block content %}
 <main class="create-attendance-page">
+    <!-- Only the teacher can see -->
     {% with request.user.projectuser_set.first as profile %}
         {% if profile and profile.role == "Teacher" %}
+            <!-- A form to begin a attendance session -->
             <form method="POST">
                 {% csrf_token %}
                 <h1>Choose Duration Before Beginning Session</h1>
                 {{ form }}
                 <button type="submit" class="begin-session-button">Begin Session</button>
             </form>
+            <!-- Redirects the user back to the course detail page -->
             <a href="{% url 'project:course_detail' course.pk %}">Go Back</a>
         {% endif %}
     {% endwith %}

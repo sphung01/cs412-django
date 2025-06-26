@@ -1,18 +1,18 @@
 <!--
     File: project/templates/project/login.html
-    Author: Steven Phung (sphung01@bu.edu), 6/10/2025
+    Author: Steven Phung (sphung01@bu.edu), 6/25/2025
     Description: A page that displays a form that will
     allow a user to login their 'username' and 'password' 
 -->
 
 {% extends 'project/base.html' %}
 {% block content %}
-<main>
+<main class="login-page">
     <h1>Login to Your Account!</h1>
-    <form action="{% url 'project:login' %}" method="POST">
+    <form action="{% url 'project:login' %}" method="POST" class="form-login">
         {% csrf_token %}
         {{form}}
-        <input type="submit" value="Login">
+        <input type="submit" value="Login" class="login-button">
         <!-- This basic login form works, but after login, it
         assumed the existance of a page at /registration/profile, which
         does not exist.  -->

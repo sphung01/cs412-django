@@ -1,9 +1,18 @@
+<!--
+    File: project/templates/project/valid_code.html
+    Author: Steven Phung (sphung01@bu.edu), 6/25/2025
+    Description: If the student entered a correct code, this page
+    will show a confirmation message and they are present.
+-->
+
 {% extends 'project/base.html' %}
 {% block content %}
 <main class="home-page">
+    <!-- Only students are allowed to see this -->
     {% with request.user.projectuser_set.first as profile %}
         {% if profile and profile.role == "Student" %}
             <h1>You are now present in that class! Congrats!</h1>
+            <!-- Returns student to enrollments page -->
             <a href="{% url 'project:enrollments' %}">Return to Enrollments Page</a>
         {% endif %}
     {% endwith %}

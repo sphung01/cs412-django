@@ -1,10 +1,20 @@
+<!--
+    File: project/templates/project/show_enrollments.html
+    Author: Steven Phung (sphung01@bu.edu), 6/21/2025
+    Description: A page that displays all the courses that
+    the student is currently enrolled in.
+-->
+
 {% extends 'project/base.html' %}
 {% block content %}
 <main class="courses-page">
+    <!-- Only students are able to see this -->
     {% with request.user.projectuser_set.first as profile %}
         {% if profile and profile.role == "Student" %}
             <h1>All My Classes</h1>
+            <!-- A link for the student to enroll in class -->
             <a href="{% url 'project:join_class' %}">Join Class</a>
+            <!-- Displays all of the enrollment instances that exist -->
             {% for enrollment in enrollments %}
                 <a href="{% url 'project:take_attendance' enrollment.pk %}">
                     <h3>Course Name: {{ enrollment.course.class_name }} Joined At: {{ enrollment.joined_time }}</h3>

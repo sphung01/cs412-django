@@ -8,10 +8,13 @@
 {% extends 'project/base.html' %}
 {% block content %}
 <main class="courses-page">
+    <!-- Only the teacher can see this -->
     {% with request.user.projectuser_set.first as profile %}
         {% if profile and profile.role == "Teacher" %}
             <h1>My Course List</h1>
+            <!-- A link for the teacher to create a course -->
             <a href="{% url 'project:create_course' %}">Create Course</a>
+            <!-- Displays all of the course instances that exist -->
             {% for course in courses %}
                 <a href="{% url 'project:course_detail' course.pk %}">
                     <h3>Course Name: {{course.class_name}} Code: {{course.code}} Created At: {{course.created_at}}</h3>

@@ -1,14 +1,24 @@
+<!--
+    File: project/templates/project/attendance_code.html
+    Author: Steven Phung (sphung01@bu.edu), 6/25/2025
+    Description: In this page, the student enter a code to be present
+    for that specific attendance session.
+-->
+
 {% extends 'project/base.html' %}
 {% block content %}
 <main class="attendance-code-page">
+    <!-- Only a student can see this -->
     {% with request.user.projectuser_set.first as profile %}
         {% if profile and profile.role == "Student" %}
             <form method="POST" action="">
                 {% csrf_token %}
+                <!-- This is where the student will submit their code for presence -->
                 <h1>Please Enter Code To Be Present In {{ enrollment.course.class_name }}</h1>
                 {{ form }}
                 <button type="submit" class="submit-code-button">Submit Code</button>
             </form>
+            <!-- Returns the student back to the enrollments page -->
             <a href="{% url 'project:enrollments' %}">Go Back</a>
         {% endif %}
     {% endwith %}

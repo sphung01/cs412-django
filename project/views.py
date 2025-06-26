@@ -1,3 +1,9 @@
+# File: project/views.py
+# Author: Steven Phung (sphung01@bu.edu), 6/25/2025
+# Description: In this file, we create view functions
+# to send back a response to the client. Such as
+# displaying the appropriate template on the web
+
 from django.shortcuts import render
 from .models import * 
 from .forms import * 
@@ -9,11 +15,17 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 import string
 import random
-import time
 
 # Create your views here.
 def home(request):
+    """
+        Displays the home page of the website
+    """
+
+    # Find the template
     template = 'project/home.html'
+
+    # Then we finally render
     return render(request, template)
 
 class CreateUserView(CreateView):
@@ -76,27 +88,58 @@ class ShowAccountView(DetailView):
     """
         This view class will display the information about the user
     """
+
+    # Retrieve the ProjectUser model from database
     model = ProjectUser
+
+    # Find the template to show account page
     template_name = 'project/show_my_account.html'
+
+    # Passes the context to the template
     context_object_name = 'account'
 
 class ShowAllCoursesView(LoginRequiredMixin, ListView):
+    """
+        This will display all of the Courses that exist
+        with that user.
+    """
+
+    # Get the Course model from the database
     model = Course
+
+    # Find the template to show courses
     template_name = 'project/show_courses.html'
+
+    # Passes the context to the template
     context_object_name = 'courses'
 
     def get_login_url(self) -> str:
-        '''return the URL required for login'''
+        """
+            Return the URL required for login
+        """
         return reverse('project:login')
 
     def get_queryset(self):
+        """
+            Returns a queryset based on what is being filtered
+        """
         # Only show courses created by the current teacher
         project_user = ProjectUser.objects.get(user=self.request.user)
         return Course.objects.filter(teacher=project_user)
     
 class ShowAllEnrollmentsView(LoginRequiredMixin, ListView):
+    """
+        Displays all of the courses that the student
+        is currently enrolled in
+    """
+
+    # Get the Enrollment model from the database
     model = Enrollment
+
+    # Find the template that will show all the enrollments
     template_name = 'project/show_enrollments.html'
+
+    # Passes over the context to the template
     context_object_name = 'enrollments'
 
     def get_login_url(self) -> str:
@@ -104,13 +147,26 @@ class ShowAllEnrollmentsView(LoginRequiredMixin, ListView):
         return reverse('project:login')
 
     def get_queryset(self):
+        """
+            Returns a queryset based on what is being filtered
+        """
         # Only show courses created by the current teacher
         project_user = ProjectUser.objects.get(user=self.request.user)
         return Enrollment.objects.filter(student=project_user)
     
 class ShowCourseViewPage(LoginRequiredMixin, DetailView):
+    """
+        Shows a single course page with all of it's
+        details
+    """
+
+    # Get the Course model from the database
     model = Course
+
+    # Find the template
     template_name = 'project/course_detail.html'
+
+    # Pass the context to the template
     context_object_name = 'course'
 
     def get_login_url(self) -> str:
@@ -118,13 +174,27 @@ class ShowCourseViewPage(LoginRequiredMixin, DetailView):
         return reverse('project:login')
 
     def get_context_data(self, **kwargs):
+        """
+            Within this method, we store values into the context and pass it
+            over to the template.
+        """
         context = super().get_context_data(**kwargs)
         context['attendances'] = self.object.attendance_set.order_by('-start_time')
         return context
 
 class DeleteCourseView(LoginRequiredMixin, DeleteView):
+    """
+        A view or form where the teacher is able to
+        delete the entire course
+    """
+
+    # Get the Course model from the database
     model = Course
+
+    # Find the template
     template_name = 'project/delete_course.html'
+
+    # Pass the context over to the template
     context_object_name = 'course'
 
     def get_login_url(self) -> str:
@@ -133,8 +203,8 @@ class DeleteCourseView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         """
-            Redirects user to a Profile page after
-            deleting the message.
+            Redirects user to the course list page after
+            deleting the course instance.
         """
 
         return reverse('project:courses')
@@ -190,7 +260,7 @@ class CreateEnrollmentView(LoginRequiredMixin, CreateView):
             return self.form_invalid(form)
 
 
-        return super().form_valid(form)
+        return reverse('project:enrollments')
 
 class CreateReportView(LoginRequiredMixin, CreateView):
     template_name = 'project/attendance_code.html'

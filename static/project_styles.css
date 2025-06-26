@@ -354,3 +354,33 @@ a {
     color: white;
     cursor: pointer;
 }
+
+/* This part right here is for styling the login.html file */
+.login-page {
+    text-align: center;
+}
+
+.login-button {
+    background: none;
+    border: none;
+    color: white;
+    font: inherit;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.login-button:hover {
+    background-color: white;
+    color: black;
+}
+
+.form-login {
+    background-color: #CC0000;
+    padding: 25px;
+    margin-left: 400px;
+    margin-right: 400px;
+    border-radius: 10px;
+}

@@ -1,9 +1,21 @@
+<!--
+    File: project/templates/project/show_attendance_report.html
+    Author: Steven Phung (sphung01@bu.edu), 6/25/2025
+    Description: A page that displays all of the students
+    that reported to be present for this attendance session. 
+-->
+
 {% extends 'project/base.html' %}
 {% block content %}
 <main class="attendance-report-page">
+    <!-- Only the teacher is able to see this -->
     {% with request.user.projectuser_set.first as profile %}
         {% if profile and profile.role == "Teacher" %}
             <h1>Attendance Report</h1>
+            <!-- Displays the number of students that reported to be present -->
+            <h2>Students Present: {{ reports.count }}</h2>
+
+            <!-- A table that shows all student info and their status -->
             <table class="record-table">
                 <tr>
                     <th>First Name</th>
@@ -20,6 +32,7 @@
                 </tr>
                 {% endfor %}
             </table>
+            <!-- Returns the user back to the course detail page -->
             <a href="{% url 'project:course_detail' course.pk %}">Go Back</a>
         {% endif %}
     {% endwith %}
