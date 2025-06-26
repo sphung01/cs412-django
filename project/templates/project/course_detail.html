@@ -9,13 +9,14 @@
 {% block content %}
 <main class="course-detail-page">
     <h1>Welcome to {{ course.class_name }}!</h1>
+    <a href="{% url 'project:courses' %}">Return To Course List</a>
+    <a href="{% url 'project:delete_course' course.pk %}">Delete Course</a>
 
     {% with request.user.projectuser_set.first as profile %}
         {% if profile and profile.role == "Teacher" %}
             <h2>Code For Enrollment: {{ course.code }}</h2>
 
             <h3>Students Enrolled: {{ course.enrollment_set.count }}</h3>
-            <a href="{% url 'project:delete_course' course.pk %}">Delete Course</a>
             <table class="record-table">
                 <tr>
                     <th>First Name</th>

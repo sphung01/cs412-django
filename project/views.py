@@ -80,40 +80,56 @@ class ShowAccountView(DetailView):
     template_name = 'project/show_my_account.html'
     context_object_name = 'account'
 
-class ShowAllCoursesView(ListView):
+class ShowAllCoursesView(LoginRequiredMixin, ListView):
     model = Course
     template_name = 'project/show_courses.html'
     context_object_name = 'courses'
+
+    def get_login_url(self) -> str:
+        '''return the URL required for login'''
+        return reverse('project:login')
 
     def get_queryset(self):
         # Only show courses created by the current teacher
         project_user = ProjectUser.objects.get(user=self.request.user)
         return Course.objects.filter(teacher=project_user)
     
-class ShowAllEnrollmentsView(ListView):
+class ShowAllEnrollmentsView(LoginRequiredMixin, ListView):
     model = Enrollment
     template_name = 'project/show_enrollments.html'
     context_object_name = 'enrollments'
+
+    def get_login_url(self) -> str:
+        '''return the URL required for login'''
+        return reverse('project:login')
 
     def get_queryset(self):
         # Only show courses created by the current teacher
         project_user = ProjectUser.objects.get(user=self.request.user)
         return Enrollment.objects.filter(student=project_user)
     
-class ShowCourseViewPage(DetailView):
+class ShowCourseViewPage(LoginRequiredMixin, DetailView):
     model = Course
     template_name = 'project/course_detail.html'
     context_object_name = 'course'
+
+    def get_login_url(self) -> str:
+        '''return the URL required for login'''
+        return reverse('project:login')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['attendances'] = self.object.attendance_set.order_by('-start_time')
         return context
 
-class DeleteCourseView(DeleteView):
+class DeleteCourseView(LoginRequiredMixin, DeleteView):
     model = Course
     template_name = 'project/delete_course.html'
     context_object_name = 'course'
+
+    def get_login_url(self) -> str:
+        '''return the URL required for login'''
+        return reverse('project:login')
 
     def get_success_url(self):
         """
@@ -123,9 +139,13 @@ class DeleteCourseView(DeleteView):
 
         return reverse('project:courses')
 
-class CreateCourseView(CreateView):
+class CreateCourseView(LoginRequiredMixin, CreateView):
     form_class = CreateCourseForm
     template_name = 'project/create_course.html'
+
+    def get_login_url(self) -> str:
+        '''return the URL required for login'''
+        return reverse('project:login')
 
     def generate_unique_course_code(self):
         characters = string.ascii_uppercase + string.digits  # A-Z and 0-9
@@ -144,9 +164,13 @@ class CreateCourseView(CreateView):
 
         return super().form_valid(form)
     
-class CreateEnrollmentView(CreateView):
+class CreateEnrollmentView(LoginRequiredMixin, CreateView):
     template_name = 'project/join_class_code.html'
     form_class = CreateEnrollmentForm
+
+    def get_login_url(self) -> str:
+        '''return the URL required for login'''
+        return reverse('project:login')
 
     def form_valid(self, form):
 
@@ -168,9 +192,13 @@ class CreateEnrollmentView(CreateView):
 
         return super().form_valid(form)
 
-class CreateReportView(CreateView):
+class CreateReportView(LoginRequiredMixin, CreateView):
     template_name = 'project/attendance_code.html'
     form_class = CreateReportForm
+
+    def get_login_url(self) -> str:
+        '''return the URL required for login'''
+        return reverse('project:login')
 
     def get_context_data(self, **kwargs):
         """
@@ -234,9 +262,13 @@ class CreateReportView(CreateView):
         #     form.add_error('join_class_code', "No course found with this code.")
         #     return self.form_invalid(form)
 
-class CreateAttendanceView(FormView):
+class CreateAttendanceView(LoginRequiredMixin, FormView):
     template_name = 'project/create_attendance.html'
     form_class = CreateAttendanceForm
+
+    def get_login_url(self) -> str:
+        '''return the URL required for login'''
+        return reverse('project:login')
 
     def generate_attendance_code(self):
         characters = string.ascii_uppercase + string.digits  # A-Z and 0-9
@@ -270,11 +302,19 @@ class CreateAttendanceView(FormView):
 
         return redirect(course.get_absolute_url())
 
-class ShowValidCodePage(TemplateView):
+class ShowValidCodePage(LoginRequiredMixin, TemplateView):
     template_name = 'project/valid_code.html'
 
-class ShowInvalidCodePage(TemplateView):
+    def get_login_url(self) -> str:
+        '''return the URL required for login'''
+        return reverse('project:login')
+
+class ShowInvalidCodePage(LoginRequiredMixin, TemplateView):
     template_name = 'project/invalid_code.html'
+
+    def get_login_url(self) -> str:
+        '''return the URL required for login'''
+        return reverse('project:login')
 
     def get_context_data(self, **kwargs):
         """
@@ -288,8 +328,12 @@ class ShowInvalidCodePage(TemplateView):
 
         return context
 
-class ShowAttendanceReportPage(TemplateView):
+class ShowAttendanceReportPage(LoginRequiredMixin, TemplateView):
     template_name = 'project/show_attendance_report.html'
+
+    def get_login_url(self) -> str:
+        '''return the URL required for login'''
+        return reverse('project:login')
 
     def get_context_data(self, **kwargs):
         """
