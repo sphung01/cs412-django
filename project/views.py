@@ -7,7 +7,7 @@
 from django.shortcuts import render
 from .models import * 
 from .forms import * 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View, TemplateView, FormView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView, FormView
 from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -210,7 +210,15 @@ class DeleteCourseView(LoginRequiredMixin, DeleteView):
         return reverse('project:courses')
 
 class CreateCourseView(LoginRequiredMixin, CreateView):
+    """
+        A view where the teacher can create a new course
+        to add to their list.
+    """
+
+    # We need to find a form class to work with
     form_class = CreateCourseForm
+
+    # Find a template where we can submit the form
     template_name = 'project/create_course.html'
 
     def get_login_url(self) -> str:
@@ -218,24 +226,48 @@ class CreateCourseView(LoginRequiredMixin, CreateView):
         return reverse('project:login')
 
     def generate_unique_course_code(self):
+        """
+            This method will generate a 6-character code once
+            the Course instance is created. Every code generated will be
+            unique so that it won't cause too many problems.
+        """
         characters = string.ascii_uppercase + string.digits  # A-Z and 0-9
         while True:
+            # Will continue to randomize until the code is unique
             code = ''.join(random.choices(characters, k=6))
             if not Course.objects.filter(code=code).exists():
                 return code
 
     def form_valid(self, form):
+        '''
+            This method handles the form submission and saves the 
+            new object to the Django database.
+        '''
+
+        # We need to find a ProjectUser that is linked to the 
+        # authenticated user.
         teacher_profile = ProjectUser.objects.get(user=self.request.user)
+
+        # Calls for a generated code
         generated_code = self.generate_unique_course_code()
 
         # Inject missing fields into the unsaved form instance
         form.instance.teacher = teacher_profile
         form.instance.code = generated_code
 
+        # Delegate the work to the superclass method form_valid:
         return super().form_valid(form)
     
 class CreateEnrollmentView(LoginRequiredMixin, CreateView):
+    """
+        A view to create a new Enrollment object once student
+        enters the right class code
+    """
+
+    # Find the template
     template_name = 'project/join_class_code.html'
+
+    # Utilize a form class from forms.py
     form_class = CreateEnrollmentForm
 
     def get_login_url(self) -> str:
@@ -243,27 +275,50 @@ class CreateEnrollmentView(LoginRequiredMixin, CreateView):
         return reverse('project:login')
 
     def form_valid(self, form):
+        '''
+            This method handles the form submission and saves the 
+            new object to the Django database.
+        '''
 
+        # Gets the submitted code from the user
         code = self.request.POST.get('join_class_code')
 
         try:
+            # We will try to find a course with the matching code
             course = Course.objects.get(code=code)
+
+            # Find the ProjectUser of that student that entered the code
             student_profile = ProjectUser.objects.get(user=self.request.user)
+
+            # If the Enrollment object exists, that means the student already joined.
             if Enrollment.objects.filter(student=student_profile, course=course.pk).exists():
+                # So return an invalid message
                 form.add_error(None, "You are already enrolled in this course.")
                 return self.form_invalid(form)
+            
+            # Create the Enrollment object and save to database
             new_enrollment = Enrollment(student=student_profile, course=course)
             new_enrollment.save()
 
         except Course.DoesNotExist:
+            # We'll catch the error where if the code does not match, the Course
+            # object does not exist.
             form.add_error('join_class_code', "No course found with this code.")
             return self.form_invalid(form)
 
-
+        # If everything is successful, redirect the user to the enrollments page
         return reverse('project:enrollments')
 
 class CreateReportView(LoginRequiredMixin, CreateView):
+    """
+        Creates a new Report object if the student enters the right code
+        to be present in class.
+    """
+
+    # Find the template to enter the attendance code
     template_name = 'project/attendance_code.html'
+
+    # We will use the CreateReportForm class from forms.py
     form_class = CreateReportForm
 
     def get_login_url(self) -> str:
@@ -302,7 +357,7 @@ class CreateReportView(LoginRequiredMixin, CreateView):
             # Search for the attendance object
             attendance = Attendance.objects.get(code=code)
 
-            # ⏰ Check if it's expired
+            # Check if it's expired
             if attendance.is_active and timezone.now() > attendance.end_time:
                 attendance.is_active = False
                 attendance.save()
@@ -327,13 +382,15 @@ class CreateReportView(LoginRequiredMixin, CreateView):
         except Attendance.DoesNotExist:
             return redirect(reverse('project:invalid_code', kwargs={'pk': self.kwargs['pk']}))
 
-
-        # except Course.DoesNotExist:
-        #     form.add_error('join_class_code', "No course found with this code.")
-        #     return self.form_invalid(form)
-
 class CreateAttendanceView(LoginRequiredMixin, FormView):
+    """
+        A view for the teacher to begin a new attendance session
+    """
+
+    # Find the template to that create attendance form
     template_name = 'project/create_attendance.html'
+
+    # We will use the CreateAttendanceForm for the teacher to fill in
     form_class = CreateAttendanceForm
 
     def get_login_url(self) -> str:
@@ -341,9 +398,15 @@ class CreateAttendanceView(LoginRequiredMixin, FormView):
         return reverse('project:login')
 
     def generate_attendance_code(self):
+        """
+            Generates new code for the attendacne session
+        """
         characters = string.ascii_uppercase + string.digits  # A-Z and 0-9
-        code = ''.join(random.choices(characters, k=6))
-        return code
+        while True:
+            # Will continue to randomize until the code is unique
+            code = ''.join(random.choices(characters, k=6))
+            if not Attendance.objects.filter(code=code).exists():
+                return code
 
     def get_context_data(self, **kwargs):
         """
@@ -358,21 +421,36 @@ class CreateAttendanceView(LoginRequiredMixin, FormView):
         return context
 
     def form_valid(self, form):
+        '''
+            This method handles the form submission and saves the 
+            new object to the Django database.
+        '''
+
+        # We will store the fields
         code = self.generate_attendance_code()
         duration = form.cleaned_data["duration_minutes"]
         end_time = timezone.now() + timedelta(minutes=duration)
         course = Course.objects.get(pk=self.kwargs['pk'])
 
+        # Then create a new Attendance object and save it to database
         new_attendance = Attendance(course=course, 
                                     code=code, 
                                     start_time=timezone.now(),
                                     end_time=end_time)
         new_attendance.save()
 
-
+        # Once everything is successful, we redirect the user
+        # back to the course detail page
         return redirect(course.get_absolute_url())
 
 class ShowValidCodePage(LoginRequiredMixin, TemplateView):
+    """
+        A TemplateView that will just display a message
+        letting the student know that they are present
+        in the class.
+    """
+
+    # Find the template
     template_name = 'project/valid_code.html'
 
     def get_login_url(self) -> str:
@@ -380,6 +458,13 @@ class ShowValidCodePage(LoginRequiredMixin, TemplateView):
         return reverse('project:login')
 
 class ShowInvalidCodePage(LoginRequiredMixin, TemplateView):
+    """
+        A TemplateView that will just display a message
+        letting the student know that the code is wrong
+        or the session is inactive
+    """
+
+    # Find the template
     template_name = 'project/invalid_code.html'
 
     def get_login_url(self) -> str:
@@ -399,6 +484,10 @@ class ShowInvalidCodePage(LoginRequiredMixin, TemplateView):
         return context
 
 class ShowAttendanceReportPage(LoginRequiredMixin, TemplateView):
+    """
+        A TemplateView that displays all of the students that
+        have been reported present to this session
+    """
     template_name = 'project/show_attendance_report.html'
 
     def get_login_url(self) -> str:
@@ -410,6 +499,8 @@ class ShowAttendanceReportPage(LoginRequiredMixin, TemplateView):
             Within this method, we store values into the context and pass it
             over to the template.
         """
+
+        # We need to find all reports linked to a specific attendance session
         context = super().get_context_data()
         attendance_id = self.kwargs['pk']
         attendance = Attendance.objects.get(pk=attendance_id)
