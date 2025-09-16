@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'mini_fb', # Installed an app for the Mini Facebook website (assignment 3-7)
     'voter_analytics', # Installed an app for the Voter Analytics website (assignment 8)
     'project', # Installed an app for Attendance System (Final Project)
+    'mini_insta', # Installed an app for Mini Instagram
 ]
 
 MIDDLEWARE = [
