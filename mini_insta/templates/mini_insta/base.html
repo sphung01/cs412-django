@@ -1,0 +1,41 @@
+<!--
+    File: mini_fb/templates/mini_fb/base.html
+    Author: Steven Phung (sphung01@bu.edu), 5/27/2025
+    Description: A base/layout for every existing page in the 'mini_fb' app.
+-->
+
+{% load static %}
+<html>
+    <head>
+        <title>Mini Instagram</title>
+        <!-- Has access to the mini_fb_styles.css file -->
+        <link rel="stylesheet" href="{% static 'mini_insta_styles.css' %}">
+    </head>
+
+    <body>
+
+        <div>
+
+            <!-- Header of the website -->
+            <header>
+                <h1>Mini Instagram</h1>
+            </header>
+            <!-- (END) -->
+
+            <!-- The main content in each page -->
+
+            <!-- The block content will contain all of the HTML files and then display to user -->
+            {% block content %}
+            {% endblock %}
+            <!-- (END) -->
+
+            <!-- A footer at the bottom of the page -->
+            <footer>
+                <strong>Page was created by sphung01@bu.edu (The current time is {{current_time}}).</strong>
+            </footer>
+            <!-- (END) -->
+
+        </div>
+
+    </body>
+</html>

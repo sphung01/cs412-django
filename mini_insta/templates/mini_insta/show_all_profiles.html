@@ -1,0 +1,16 @@
+{% extends 'mini_insta/base.html' %}
+{% block content %}
+<main>
+    {% for profile in profiles %}
+        <div>
+            <img src="{{ profile.profile_image_url.url }}" alt="Missing an image">
+        </div>
+        <div>
+            <h2>{{profile.username}}</h2>
+            <h4>{{profile.display_name}}</h4>
+            <p>{{profile.bio_text}}</p>
+            <p>Account created at: {{profile.join_date}}</p>
+        </div>
+    {% endfor %}
+</main>
+{% endblock %}
