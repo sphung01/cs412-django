@@ -41,3 +41,32 @@ class ProfileListView(ListView):
         context['current_time'] = time.ctime()
 
         return context
+
+class ProfileDetailView(DetailView):
+    """
+        This will display ONE profile since that is what
+        DetailView is for
+    """
+
+    # Retrieves the objects of Profile type from database
+    model = Profile
+
+    # We need an appropriate template that will display a Profile
+    # depending on the primary key number
+    template_name = 'mini_insta/show_profile.html'
+
+    # We give a specific context name for the object
+    # grabbed from the database
+    context_object_name = 'profile'
+
+    # In this function, we can add as many
+    # contexts as we want for HTML to use
+    def get_context_data(self, **kwargs):
+        """
+            Passes over one OR multiple contexts to the HTML template
+        """
+        context = super().get_context_data()
+
+        context['current_time'] = time.ctime()
+
+        return context
