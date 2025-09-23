@@ -5,3 +5,17 @@
     BUT we are only showing one user. It also depends on what primary key we are
     looking into. Each profile has their own PK integer.
 -->
+
+{% extends 'mini_insta/base.html' %}
+{% block content %}
+<main>
+    <div>
+        <img src="{{ profile.profile_image_url.url }}" alt="Missing an image">
+    </div>
+    <div>
+        <h2>{{profile.username}}</h2>
+        <h4>{{profile.display_name}}</h4>
+        <p>{{profile.bio_text}}</p>
+    </div>
+</main>
+{% endblock %}

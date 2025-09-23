@@ -1,2 +1,54 @@
+body {
+   margin: 0 auto; 
+   height: 100%;  
+   background-color: #74A662;
+   color: white;
+   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Styling for base layout */
+.title {
+    font-family: cursive;
+}
+
+/* A page wrapper for the entire page */
+.page-wrapper {
+    max-width: 900px; /* Sets a maximum width */
+    width: 100%;     /* Allows it to shrink on smaller screens */
+    margin: 0 auto;  /* Centers the wrapper horizontally */
+    padding: 20px;   /* Adds internal spacing around content */
+    background-color: black;
+    min-height: 100vh; /* Prevents bleeding */
+}
+
+/* Styling for the user when showing all profiles */
+.show_all_main {
+    padding: 20px;
+}
+
+.show_all_container {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    gap: 10px; 
+    margin-bottom: 20px; /* space between each profile container */
+    border-style: groove;
+    border-width: 1px;
+    border-color: white;
+}
+
+.show_all_image {
+    width: 100px;
+    height: 100px;
+}
+
+.show_all_text {
+    text-align: left;
+    margin: 0;
+}
 

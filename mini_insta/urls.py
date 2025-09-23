@@ -14,5 +14,6 @@ app_name = 'mini_insta'
 urlpatterns = [
     path('', ProfileListView.as_view(), name="show_all_profiles"),
     path('show_all', ProfileListView.as_view(), name="show_all_profiles"),
+    path('profile/<int:pk>', ProfileDetailView.as_view(), name="show_profile"),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

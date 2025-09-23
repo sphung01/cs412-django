@@ -8,17 +8,17 @@
 
 {% extends 'mini_insta/base.html' %}
 {% block content %}
-<main>
+<main class="show_all_main">
     {% for profile in profiles %}
-        <div>
-            <img src="{{ profile.profile_image_url.url }}" alt="Missing an image">
-        </div>
-        <div>
-            <h2>{{profile.username}}</h2>
-            <h4>{{profile.display_name}}</h4>
-            <p>{{profile.bio_text}}</p>
-            <p>Account created at: {{profile.join_date}}</p>
-        </div>
+        <a href="{% url 'mini_insta:show_profile' profile.pk %}" class="show_all_link">
+            <div class="show_all_container">
+                <img src="{{ profile.profile_image_url.url }}" alt="Missing an image" class="show_all_image">
+                <div class="show_all_text">
+                    <h2>{{profile.username}}</h2>
+                    <h4>{{profile.display_name}}</h4>
+                </div>
+            </div>
+        </a>
     {% endfor %}
 </main>
 {% endblock %}
