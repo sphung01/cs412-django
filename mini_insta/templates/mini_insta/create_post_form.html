@@ -16,8 +16,18 @@
 <form action="{% url 'mini_insta:create_post' profile.pk %}" method="POST" class="form-style" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
+
+        <h2>Add Photos</h2>
+        <!-- Allows user to add one OR multiple files -->
+        <div>
+            <input type="file" name="files" multiple>
+        </div>
+
         {{ form.as_table }}
+
     </table>
+
+    
 
 
     <input type="submit">

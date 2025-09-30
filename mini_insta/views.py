@@ -93,6 +93,40 @@ class CreatePostView(CreateView):
 
     template_name = 'mini_insta/create_post_form.html'
 
+    def form_valid(self, form):
+        '''This method handles the form submission and saves the 
+        new object to the Django database.
+        We need to add the foreign key (of the Profile) to the message
+        object before saving it to the database.
+        '''
+        
+        # Retrieve the PK from the URL pattern
+        pk = self.kwargs['pk']
+        profile = Profile.objects.get(pk=pk)
+
+        # Attach this profile to the post
+        form.instance.profile = profile # set the FK
+
+        # Save the post to database
+        post = form.save()
+
+        # Read the file from the form:
+        files = self.request.FILES.getlist('files')
+
+        # Now we will loop through the files
+        # And save those files into the a photo instance
+        # Then we lock that photo to that create post
+        for file in files:
+            photo = Photo(post=post, image_url=file)
+            photo.save()
+
+        # delegate the work to the superclass method form_valid:
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        # redirect to the detail view of the newly created post
+        return reverse("mini_insta:show_post", kwargs={"pk": self.object.pk})
+
     def get_context_data(self, **kwargs):
         """
             Passes over one OR multiple contexts to the HTML template
