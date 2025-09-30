@@ -40,12 +40,20 @@ a {
     border-style: groove;
     border-width: 1px;
     border-color: white;
+    border-radius: 20px;
 }
+
+.show_all_container:hover {
+    background-color: lightgray;
+    color: black;
+}
+
 
 .show_all_image {
     width: 100px;
     height: 100px;
 }
+
 
 .show_all_text {
     text-align: left;

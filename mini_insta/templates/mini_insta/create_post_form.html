@@ -1,0 +1,30 @@
+<!--
+    File: mini_fb/templates/mini_insta/create_post_form.html
+    Author: Steven Phung (sphung01@bu.edu), 9/30/2025
+    Description: A page that displays a form for the user
+    to create a post
+-->
+
+{% extends 'mini_insta/base.html' %}
+{% block content %}
+<h1>Create a Post</h1>
+
+<!--
+    This HTML form will allow the user to enter their
+    information to create their own status message
+-->
+<form action="{% url 'mini_insta:create_post' profile.pk %}" method="POST" class="form-style" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+
+
+    <input type="submit">
+</form>
+
+<!-- A cancel button to send the user back to the Profile page -->
+<form action="{% url 'mini_insta:show_profile' profile.pk %}" method="GET">
+    <input type="submit" value="Cancel">
+</form>
+{% endblock %}

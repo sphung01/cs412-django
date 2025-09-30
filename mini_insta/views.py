@@ -6,6 +6,7 @@
 
 from django.shortcuts import render
 from .models import * 
+from .forms import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.urls import reverse
 from django.shortcuts import redirect
@@ -82,3 +83,26 @@ class PostDetailView(DetailView):
     template_name = 'mini_insta/show_post.html'
 
     context_object_name = 'post'
+
+class CreatePostView(CreateView):
+    """
+        Displays form for user to create new post
+    """
+
+    form_class = CreatePostForm
+
+    template_name = 'mini_insta/create_post_form.html'
+
+    def get_context_data(self, **kwargs):
+        """
+            Passes over one OR multiple contexts to the HTML template
+        """
+        context = super().get_context_data(**kwargs)
+
+        pk = self.kwargs['pk']
+        profile = Profile.objects.get(pk=pk)
+
+        context['profile'] = profile
+
+
+        return context
