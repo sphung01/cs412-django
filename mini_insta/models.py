@@ -23,6 +23,17 @@ class Profile(models.Model):
     # The time the Profile was created
     join_date = models.DateTimeField(auto_now=True)
 
+    # A method to return all post instances for each profile
+    def get_all_posts(self):
+        """
+            Returns all the post instances for a given Profile
+        """
+
+        # This will allow us to get filter posts for specific profiles
+        # With this, we can get the querysets of the posts
+        posts = Post.objects.filter(profile=self)
+        return posts
+
     # We use __str__ to represent an object in the model
     def __str__(self):
         """
@@ -49,6 +60,17 @@ class Post(models.Model):
 
     # We have a timestamp to display the time the user posted
     timestamp = models.DateTimeField(auto_now=True)
+
+    # A method to return all Photo instances for each Post
+    def get_all_photos(self):
+        """
+            Returns all the photo instances for a given Post
+        """
+
+        # This will allow us to get filter photos for specific posts
+        # With this, we can get the querysets of the photos
+        photos = Photo.objects.filter(post=self)
+        return photos
 
     # We use __str__ to represent an object in the model
     def __str__(self):

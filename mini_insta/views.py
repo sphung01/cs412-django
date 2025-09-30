@@ -70,3 +70,15 @@ class ProfileDetailView(DetailView):
         context['current_time'] = time.ctime()
 
         return context
+    
+class PostDetailView(DetailView):
+    """
+        This will display ONE post from a specific profile
+    """
+
+    # Retrieves the objects of Post type from database
+    model = Post
+
+    template_name = 'mini_insta/show_post.html'
+
+    context_object_name = 'post'

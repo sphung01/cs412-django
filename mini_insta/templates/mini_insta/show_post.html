@@ -1,0 +1,26 @@
+<!--
+    File: mini_insta/templates/mini_insta/show_post.html
+    Author: Steven Phung (sphung01@bu.edu), 9/17/2025
+    Description: This page displays a singular post
+-->
+
+
+{% extends 'mini_insta/base.html' %}
+{% load static %}
+{% block content %}
+<main>
+    <div>
+        {% if post.get_all_photos %}
+            {% for photo in post.get_all_photos %}
+                <img src="{{ photo.image_url.url }}" class="post_photo">
+            {% endfor %}
+        {% else %}
+            <img src="{% static 'no_image.png' %}" alt="No photo available" class="post_photo">
+        {% endif %}
+    </div>
+    <div>
+        <p>{{ post.caption }}</p>
+        <p>Posted at: {{ post.timestamp }}</p>
+    </div>
+</main>
+{% endblock %}

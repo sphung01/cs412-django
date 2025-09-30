@@ -52,3 +52,8 @@ a {
     margin: 0;
 }
 
+/* Styling for the user when showing one profile */
+.post_photo {
+    width: 200px;
+    height: 200px;
+}

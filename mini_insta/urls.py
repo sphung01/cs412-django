@@ -15,5 +15,7 @@ urlpatterns = [
     path('', ProfileListView.as_view(), name="show_all_profiles"),
     path('show_all', ProfileListView.as_view(), name="show_all_profiles"),
     path('profile/<int:pk>', ProfileDetailView.as_view(), name="show_profile"),
+    path('post/<int:pk>', PostDetailView.as_view(), name='show_post'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

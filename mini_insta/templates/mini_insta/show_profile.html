@@ -6,7 +6,9 @@
     looking into. Each profile has their own PK integer.
 -->
 
+
 {% extends 'mini_insta/base.html' %}
+{% load static %}
 {% block content %}
 <main>
     <div>
@@ -16,6 +18,21 @@
         <h2>{{profile.username}}</h2>
         <h4>{{profile.display_name}}</h4>
         <p>{{profile.bio_text}}</p>
+    </div>
+    <div>
+        {% for post in profile.get_all_posts %}
+            {% with post.get_all_photos.first as first_photo %}
+                {% if first_photo %}
+                    <a href="{% url 'mini_insta:show_post' post.pk %}"> 
+                        <img src="{{ first_photo.image_url.url }}" alt="Photo" class="post_photo">
+                    </a>
+                {% else %}
+                    <a href="{% url 'mini_insta:show_post' post.pk %}">
+                        <img src="{% static 'no_image.png' %}" alt="No photo available" class="post_photo">
+                    </a>
+                {% endif %}
+            {% endwith %}
+        {% endfor %}
     </div>
 </main>
 {% endblock %}
