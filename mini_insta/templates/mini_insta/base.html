@@ -26,6 +26,9 @@
 
             <nav>
                 <a href="{% url 'mini_insta:show_all_profiles' %}">Show All</a>
+                {% if profile %}
+                    <a href="{% url 'mini_insta:create_post' profile.pk %}">Create Post</a>
+                {% endif %}
             </nav>
 
             <!-- The main content in each page -->
