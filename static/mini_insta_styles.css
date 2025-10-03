@@ -6,6 +6,10 @@ body {
    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+main {
+    min-height: 100vh; /* Prevents bleeding */
+}
+
 /* Styling for the navigation bar */
 nav {
     width: 100%;
@@ -48,9 +52,12 @@ a {
     max-width: 900px; /* Sets a maximum width */
     width: 100%;     /* Allows it to shrink on smaller screens */
     margin: 0 auto;  /* Centers the wrapper horizontally */
-    padding: 20px;   /* Adds internal spacing around content */
+    padding: 0 auto;   /* Adds internal spacing around content */
     background-color: black;
     min-height: 100vh; /* Prevents bleeding */
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Styling for the user when showing all profiles */
@@ -93,16 +100,45 @@ a {
     height: 200px;
 }
 
+.profile-and-stats-styling {
+    display: flex;
+    flex-direction: row;
+    gap: 200px;
+}
+
 .profile_picture_style {
     border: solid;
     border-width: 1px;
     border-radius: 200px;
     width: 200px;
     height: 200px;
+    margin-left: 150px;
 }
 
 .profile_stats_style {
     display: flex;
     flex-direction: row;
     gap: 20px;
+}
+
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 equal-width columns */
+    gap: 5px; /* small gap between photos */
+    padding: 20px;
+}
+
+.post_first_photo {
+    width: 100%;          /* fills its grid cell */
+    height: 100%;
+    aspect-ratio: 1 / 1;  /* makes it a square */
+    object-fit: cover;    /* crops to fit nicely */
+    display: block;
+}
+
+.post_photo {
+    width: 50%;          /* fills its grid cell */
+    height: 50%;
+    aspect-ratio: 1 / 1;  /* makes it a square */
+    object-fit: cover;    /* crops to fit nicely */
 }
