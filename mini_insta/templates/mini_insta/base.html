@@ -18,18 +18,16 @@
 
             <!-- Header of the website -->
             <header>
-                <a href="{% url 'mini_insta:show_all_profiles' %}">
-                    <h1 class="title">Mini Instagram</h1>
-                </a>
-            </header>
-            <!-- (END) -->
-
-            <nav>
-                <a href="{% url 'mini_insta:show_all_profiles' %}">Show All</a>
                 {% if profile %}
-                    <a href="{% url 'mini_insta:create_post' profile.pk %}">Create Post</a>
+                    <h1>{{ profile.username }}</h1>
+                {% else %}
+                    <a href="{% url 'mini_insta:show_all_profiles' %}">
+                        <h1 class="title">Mini Instagram</h1>
+                    </a>
                 {% endif %}
-            </nav>
+            </header>
+            <hr>
+            <!-- (END) -->
 
             <!-- The main content in each page -->
 
@@ -37,6 +35,17 @@
             {% block content %}
             {% endblock %}
             <!-- (END) -->
+
+            <nav>
+                <a href="{% url 'mini_insta:show_all_profiles' %}">
+                    <img src="{% static 'people_icon.png' %}" class="people_icon_style"/>
+                </a>
+                {% if profile %}
+                    <a href="{% url 'mini_insta:create_post' profile.pk %}">
+                        <img src="{% static 'add_post_icon.png' %}" class="add_post_icon_style"/>
+                    </a>
+                {% endif %}
+            </nav>
 
         </div>
 

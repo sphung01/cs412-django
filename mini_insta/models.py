@@ -76,7 +76,7 @@ class Post(models.Model):
     def __str__(self):
         """
             Returns a string representation of the Post object.
-        """
+        """ 
 
         return f'Posted by {self.profile.username} at {self.timestamp}'
     

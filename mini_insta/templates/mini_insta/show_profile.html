@@ -12,10 +12,26 @@
 {% block content %}
 <main>
     <div>
-        <img src="{{ profile.profile_image_url.url }}" alt="Missing an image">
+        <img src="{{ profile.profile_image_url.url }}" alt="Missing an image" class="profile_picture_style">
     </div>
     <div>
-        <h2>{{profile.username}}</h2>
+        <h3>{{profile.display_name}}</h3>
+    </div>
+    <div class="profile_stats_style">
+        <div>
+            <strong>0</strong>
+            <p>Posts</p>
+        </div>
+        <div>
+            <strong>0</strong>
+            <p>Followers</p>
+        </div>
+        <div>
+            <strong>0</strong>
+            <p>Following</p>
+        </div>
+    </div>
+    <div class="profile_info_style">
         <h4>{{profile.display_name}}</h4>
         <p>{{profile.bio_text}}</p>
     </div>
