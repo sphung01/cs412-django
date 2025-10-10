@@ -44,6 +44,13 @@
     <div class="profile_info_style">
         <p>{{profile.bio_text}}</p>
     </div>
+
+    <div>
+        <a href="{% url 'mini_insta:update_profile' profile.pk %}">
+            <button type="button" class="edit-profile-button">Edit Profile</button>
+        </a>
+    </div>
+
     <div class="post-grid">
         {% for post in profile.get_all_posts %}
             {% with post.get_all_photos.first as first_photo %}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Profile(models.Model):
@@ -33,6 +34,9 @@ class Profile(models.Model):
         # With this, we can get the querysets of the posts
         posts = Post.objects.filter(profile=self)
         return posts
+    
+    def get_absolute_url(self):
+        return reverse('mini_insta:show_profile', kwargs={'pk':self.pk})
 
     # We use __str__ to represent an object in the model
     def __str__(self):

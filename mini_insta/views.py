@@ -140,3 +140,12 @@ class CreatePostView(CreateView):
 
 
         return context
+    
+class UpdateProfileView(UpdateView):
+    form_class = UpdateProfileForm
+
+    template_name = 'mini_insta/update_profile_form.html'
+
+    model = Profile
+
+    context_object_name = 'profile'
