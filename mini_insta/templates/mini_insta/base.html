@@ -20,6 +20,8 @@
             <header>
                 {% if profile %}
                     <h1>{{ profile.username }}</h1>
+                {% elif post %}
+                    <h1>{{ post.profile.username }}</h1>
                 {% else %}
                     <a href="{% url 'mini_insta:show_all_profiles' %}">
                         <h1 class="title">Mini Instagram</h1>

@@ -1,0 +1,31 @@
+<!--
+    File: mini_fb/templates/mini_insta/create_post_form.html
+    Author: Steven Phung (sphung01@bu.edu), 9/30/2025
+    Description: A page that displays a form for the user
+    to create a post
+-->
+
+{% extends 'mini_insta/base.html' %}
+{% block content %}
+<h1>Delete The Post?</h1>
+
+<form action="{% url 'mini_insta:delete_post' post.pk %}" method="POST" class="form-style">
+    {% csrf_token %}
+
+    <table>
+        Caption: {{ post.caption }}
+
+        There are {{ post.get_all_photos.count }} photos in this post
+    </table>
+
+    <div>
+        <input type="submit" value="Yes">
+
+        <a href="{% url 'mini_insta:show_profile' post.profile.pk %}">
+            <button type="button">No</button>
+        </a>
+    </div>
+
+</form>
+
+{% endblock %}

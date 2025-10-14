@@ -71,7 +71,16 @@ class ProfileDetailView(DetailView):
         context['current_time'] = time.ctime()
 
         return context
-    
+
+class UpdateProfileView(UpdateView):
+    form_class = UpdateProfileForm
+
+    template_name = 'mini_insta/update_profile_form.html'
+
+    model = Profile
+
+    context_object_name = 'profile' 
+  
 class PostDetailView(DetailView):
     """
         This will display ONE post from a specific profile
@@ -141,11 +150,25 @@ class CreatePostView(CreateView):
 
         return context
     
-class UpdateProfileView(UpdateView):
-    form_class = UpdateProfileForm
+class DeletePostView(DeleteView):
 
-    template_name = 'mini_insta/update_profile_form.html'
+    model = Post
 
-    model = Profile
+    template_name = 'mini_insta/delete_post_form.html'
 
-    context_object_name = 'profile'
+    # Passes over the context to HTML
+    context_object_name = 'post'
+
+    def get_success_url(self):
+
+        return reverse("mini_insta:show_profile", kwargs={"pk": self.object.profile.pk})
+    
+class UpdatePostView(UpdateView):
+
+    model = Post
+
+    form_class = UpdatePostForm
+
+    template_name = 'mini_insta/update_post_form.html'
+
+    context_object_name = 'post'

@@ -83,6 +83,12 @@ class Post(models.Model):
         """ 
 
         return f'Posted by {self.profile.username} at {self.timestamp}'
+
+    def get_absolute_url(self):
+        """
+            Return the URL to display one instance of this model.
+        """
+        return reverse('mini_insta:show_post', kwargs={'pk': self.pk})
     
 class Photo(models.Model):
     """

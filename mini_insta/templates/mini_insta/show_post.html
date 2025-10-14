@@ -10,6 +10,14 @@
 {% block content %}
 <main>
     <div>
+        <a href="{% url 'mini_insta:update_post' post.pk %}">
+            <button type="button">Update Post</button>
+        </a>
+        <a href="{% url 'mini_insta:delete_post' post.pk %}">
+            <button type="button">Delete Post</button>
+        </a>
+    </div>
+    <div>
         {% if post.get_all_photos %}
             {% for photo in post.get_all_photos %}
                 <img src="{{ photo.image_url.url }}" class="post_photo">
