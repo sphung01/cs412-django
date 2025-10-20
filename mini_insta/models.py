@@ -30,10 +30,32 @@ class Profile(models.Model):
             Returns all the post instances for a given Profile
         """
 
-        # This will allow us to get filter posts for specific profiles
-        # With this, we can get the querysets of the posts
         posts = Post.objects.filter(profile=self)
         return posts
+    
+    def get_followers(self):
+        followers = Follow.objects.filter(profile=self)
+
+        profile_followers = []
+
+        for follower in followers:
+
+            profile_followers.append(follower.follower_profile)
+
+        
+        return profile_followers
+    
+    def get_num_followers(self):
+
+        return len(self.get_followers())
+    
+    def get_following(self):
+        following = Follow.objects.filter(follower_profile=self)
+        profiles_following = [f.profile for f in following]
+        return profiles_following
+    
+    def get_num_following(self):
+        return len(self.get_following())
     
     def get_absolute_url(self):
         return reverse('mini_insta:show_profile', kwargs={'pk':self.pk})
@@ -46,6 +68,14 @@ class Profile(models.Model):
 
         return f'{self.username} was created at {self.join_date}'
     
+class Follow(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="profile")
+    follower_profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="follower_profile")
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.follower_profile.username} followed {self.profile.username} at {self.timestamp}'
+
 class Post(models.Model):
     """
         This class create Post objects and takes in the foreign key
@@ -75,6 +105,14 @@ class Post(models.Model):
         # With this, we can get the querysets of the photos
         photos = Photo.objects.filter(post=self)
         return photos
+    
+    def get_all_comments(self):
+        comments = Comment.objects.filter(post=self)
+        return comments
+    
+    def get_likes(self):
+        likes = Like.objects.filter(post=self)
+        return likes
 
     # We use __str__ to represent an object in the model
     def __str__(self):
@@ -116,3 +154,20 @@ class Photo(models.Model):
         """
 
         return f'Photo for post by {self.post.profile.username} at {self.timestamp}'
+    
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now=True)
+    text = models.TextField(blank=False)
+
+    def __str__(self):
+        return f'Comment: "{self.text}" by {self.profile.username} at {self.timestamp}'
+    
+class Like(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'{self.post} liked by {self.profile.username} at {self.timestamp}'

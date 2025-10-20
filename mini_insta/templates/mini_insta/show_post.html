@@ -30,5 +30,13 @@
         <p>{{ post.caption }}</p>
         <p>Posted at: {{ post.timestamp }}</p>
     </div>
+    <div>
+        <h2>{{ post.get_likes.count }} Likes</h2>
+        {% for comment in post.get_all_comments %}
+            <p>
+                <strong>{{ comment.profile.username }}</strong> {{ comment.text }}
+            </p>
+        {% endfor%}
+    </div>
 </main>
 {% endblock %}
