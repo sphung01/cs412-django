@@ -57,6 +57,17 @@ class Profile(models.Model):
     def get_num_following(self):
         return len(self.get_following())
     
+    def get_post_feed(self):
+        profiles = []
+
+        for profile in self.get_following():
+            profiles.append(profile)
+        profile.append(self)
+
+        post_feed_list = Post.objects.filter(profile__in=profiles).order_by('-timestamp')
+
+        return post_feed_list
+    
     def get_absolute_url(self):
         return reverse('mini_insta:show_profile', kwargs={'pk':self.pk})
 

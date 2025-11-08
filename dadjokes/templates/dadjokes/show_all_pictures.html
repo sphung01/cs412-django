@@ -1,0 +1,4 @@
+{% for picture in pictures %}
+    <img src="{{ picture.image_url }}">
+    <p>Contributed by {{ picture.name }}</p>
+{% endfor %}

@@ -19,6 +19,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 import socket
+import rest_framework
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +40,7 @@ ALLOWED_HOSTS = ['*', 'cs-webapps.bu.edu']
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,6 +57,7 @@ INSTALLED_APPS = [
     'voter_analytics', # Installed an app for the Voter Analytics website (assignment 8)
     'project', # Installed an app for Attendance System (Final Project)
     'mini_insta', # Installed an app for Mini Instagram
+    'dadjokes',
 ]
 
 MIDDLEWARE = [
